@@ -7,10 +7,10 @@ Page({
   data: {
     dataList:[
       {
-        image: '../../assets/images/demo.jpg',
+        image: '../../assets/images/demo2.jpg',
         desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
         userName: '菠萝油',
-        userImage: '../../assets/images/demo.jpg',
+        userImage: '../../assets/images/demo3.jpg',
         contentNumber: 1300
       },
       {
@@ -32,6 +32,13 @@ Page({
         desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
         userName: '菠萝油',
         userImage: '../../assets/images/demo3.jpg',
+        contentNumber: 1300
+      },
+      {
+        image: '../../assets/images/demo3.jpg',
+        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
+        userName: '菠萝油',
+        userImage: '../../assets/images/demo2.jpg',
         contentNumber: 1300
       }
     ]
