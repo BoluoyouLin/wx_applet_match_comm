@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/square/square",
     "pages/index/index"
   ],
   "window": {
@@ -8,5 +9,25 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/square/square",
+      "text": "广场",
+      "iconPath": "assets/icons/home.png",
+      "selectedIconPath": "assets/icons/homeAfter.png"
+    },{
+      "pagePath": "pages/index/index",
+      "text": "",
+      "iconPath": "assets/icons/add.png",
+      "selectedIconPath": "assets/icons/addAfter.png"
+    },
+    {
+      "pagePath": "pages/index/index",
+      "text": "个人",
+      "iconPath": "assets/icons/person.png",
+      "selectedIconPath": "assets/icons/personAfter.png"
+    }
+    ]
   }
 }

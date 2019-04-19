@@ -1,0 +1,29 @@
+<view class='all'>
+  <!-- 浏览模块 -->
+  <view>
+    <navigator class='view-item' wx:for='{{dataList}}' wx:key='{{index}}'>
+    <!-- 图片 -->
+      <view class='view-image'>
+        <image src='{{item.image}}' mode='widthFix'></image>
+      </view>
+      <!-- 内容 -->
+      <view class='view-content'>
+        <!-- 描述 -->
+        <view class='content-desc'>{{item.desc}}</view>
+        <!-- 用户信息 -->
+        <view class='content-bottom'>
+          <view class='content-user-info'>
+            <image src='{{item.userImage}}'></image>
+            <text>{{item.userName}}</text>
+          </view> 
+          <view class='content-info'>
+            <image src='../../assets/icons/dizan.png'></image>
+            <text>{{contentNumber}}</text>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <!-- 底部导航栏 -->
+  <view></view>
+</view>
