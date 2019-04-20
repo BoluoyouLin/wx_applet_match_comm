@@ -1,0 +1,11 @@
+<view class='analyse-page'>
+  <view class='desc' animation='{{animationData}}'>{{desc}}</view>
+  <view class='progress'>
+    <progress stroke-width='10' percent='{{value}}' 
+     activeColor='{{activeColor}}'
+     backgroundColor='#808080'
+     border-radius='2rpx'
+     bindactiveend='changeColor'
+    ></progress>
+  </view>
+</view>

@@ -1,9 +1,13 @@
+
 {
   "pages": [
     
+    "pages/square/square",
+    "pages/picture/picture",
+    "pages/analyse/analyse",
+    "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
     "pages/userinfo/index/index",
-    "pages/index/index",
     "pages/sharing/sharingDetail/sharingDetail"
    
     
@@ -17,3 +21,4 @@
     
   }
 }
+
