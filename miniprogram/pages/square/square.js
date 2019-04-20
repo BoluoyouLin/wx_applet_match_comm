@@ -42,14 +42,18 @@ Page({
         userImage: '../../assets/images/demo2.jpg',
         contentNumber: 1300
       }
-    ]
+    ],
+    tabbar: {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let that = this
+    that.setData({tabbar: app.globalData.tabbar})
+    let temp = `that.data.tabbar.list[0].current`
+    that.setData({ [temp]: 1})
   },
 
   /**

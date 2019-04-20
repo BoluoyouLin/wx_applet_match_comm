@@ -13,7 +13,7 @@
     </view>
   </view>
   <import src="../../components/tabbar/tabbar.wxml" />
-  <template is='tabbar'></template>
+  <template is='tabbar' data='{{...tabbar,...current}}'></template>
 </view>
  <!-- 模版 -->
   <template name='view-item'>
