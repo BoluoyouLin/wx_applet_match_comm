@@ -4,7 +4,7 @@
     <progress stroke-width='10' percent='{{value}}' 
      activeColor='{{activeColor}}'
      backgroundColor='#808080'
-     border-radius='10rpx'
+     border-radius='2rpx'
      bindactiveend='changeColor'
     ></progress>
   </view>

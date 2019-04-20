@@ -18,49 +18,18 @@
 }
 
 .page-bottom {
+  display: flex;
+  align-items: center;
   width: 100%;
-  text-align: center;
   padding: 120rpx 0;
 }
 
-/* 相机下的选项 */
-.spot {
-  display: inline-block;
-  width: 15rpx;
-  height: 15rpx;
-  background-color: #333333;
-  border-radius: 50%;
+.photograph {
+  margin-left: 15%; 
+  margin-top: 20rpx;
+  color: #00baad;
 }
 
-.option-bar {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.options {
-  display: inline-block;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  width: 100rpx;
-}
- 
-/* 隐藏下方的滚动条 */
-.options::-webkit-scrollbar {
-  background-color: transparent;
-}
- 
-.options {
-  -ms-overflow-style: none;
-}
- 
-.options {
-  overflow: -moz-scrollbars-none;
-}
-
-.option text {
-  width: 20%;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
+.photo-button {
+  margin-left: 15%;
 }

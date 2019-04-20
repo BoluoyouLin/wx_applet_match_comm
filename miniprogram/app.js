@@ -31,12 +31,9 @@ App({
     wx.navigateTo({
       url: path,
       success(res) {
-        wx.navigateTo({
-          url: 'path',
-        })
       },
       fail(res) {
-        console.log(res, "fail")
+        console.log("fail")
       }
     })
   },

@@ -19,6 +19,9 @@ Page({
     that.setData({ activeColor: '#00baad',desc: '分析成功'})
   },
   
+  /**
+   * 加载描述动画
+   */
   descAnimationLoad() {
     let that = this;
     let animation = wx.createAnimation({
@@ -30,6 +33,9 @@ Page({
     console.log(that.data.animationData)
   },
 
+  /**
+   * 加载完成动画
+   */
   descAnimationFinish() {
     let that = this;
     let animation = wx.createAnimation({

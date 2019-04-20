@@ -1,8 +1,8 @@
 /* pages/analyse/analyse.wxss */
 
 .analyse-page {
-  width: 90%;
-  padding: 400rpx 5%;
+  width: 80%;
+  padding: 400rpx 10%;
 }
 
 .desc {

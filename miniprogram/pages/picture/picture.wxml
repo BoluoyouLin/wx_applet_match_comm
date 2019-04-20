@@ -6,17 +6,13 @@
       binderror="error"
       style="width: 100%; height:700rpx;"
     ></camera>
-    <view class='option-bar'>
-      <view class='spot'></view>
-      <view class='options'>
-        <view>照相</view>
-        <view>相册</view>
-      </view>
-    </view>
   </view>
   <view class='page-bottom'>
-    <view class='outside' bindtap='takePhoto'>
+    <view class='photograph'>相册</view>
+    <view class='photo-button'>
+      <view class='outside' bindtap='takePhoto'>
       <view class='inside'></view>
+    </view>
     </view>
   </view>
 </view>

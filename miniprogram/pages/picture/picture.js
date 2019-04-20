@@ -8,6 +8,10 @@ Page({
     src: '',
   },
 
+
+  /**
+   * 拍照
+   */
   takePhoto() {
     let that = this;
     const ctx = wx.createCameraContext()
@@ -16,6 +20,9 @@ Page({
       success: (res) => {
         that.setData({
           src: res.tempImagePath
+        });
+        wx.redirectTo({
+          url: '../analyse/analyse',
         })
       }
     })
