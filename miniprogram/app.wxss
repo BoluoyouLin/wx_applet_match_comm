@@ -1,7 +1,10 @@
 /**app.wxss**/
+@import './styles/weui.wxss';
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  
 } 

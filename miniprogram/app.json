@@ -1,12 +1,17 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/sharing/analyzeResult/analyzeResult",
+    "pages/userinfo/index/index",
+    "pages/index/index",
+    "pages/sharing/sharingDetail/sharingDetail"
+   
+    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "2019-->wx_match-->火锅串串",
     "navigationBarTextStyle": "black"
   }
 }
