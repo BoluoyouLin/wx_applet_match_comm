@@ -1,0 +1,61 @@
+/* pages/sharing/analyzeResult/analyzeResult.wxss */
+
+#ar-container view{
+  /* width:100%; */
+  /* height: 40px; */
+}
+
+#ar-swrap{
+  width: 100%;
+  padding: 20rpx;
+  box-sizing:border-box;
+}
+
+.ar-cell{
+
+
+}
+
+.ar-cell-bd{
+  /* width: 90%; */
+  font-size: 28rpx;
+}
+
+#ar-title{
+
+  border-bottom:1px solid rgb(221, 221, 221)
+}
+
+#ar-title >view >input{
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  height: 68rpx;
+}
+
+#ar-content{
+  margin-top: 20rpx;
+}
+
+#ar-content >view>textarea{
+   padding-left: 20rpx;
+  padding-right: 20rpx;
+  height: 240rpx;
+}
+
+.weui-uploader__file{
+  width: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
+  height: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-repeat:no-repeat; /** 不重复*/
+  background-position: center center;
+  background-size: cover;
+}
+
+.weui-uploader__input-box{
+  width: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
+  height: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
+
+}
+
