@@ -18,44 +18,104 @@
 
 .ar-cell-bd{
   /* width: 90%; */
-  font-size: 28rpx;
+  font-size: 32rpx;
+  font-family:"SimSun";
 }
 
 #ar-title{
 
-  border-bottom:1px solid rgb(221, 221, 221)
+  border-bottom:0.5px solid rgb(221, 221, 221)
 }
 
-#ar-title >view >input{
+/* #ar-title >view >input{
   padding-left: 20rpx;
   padding-right: 20rpx;
   height: 68rpx;
-}
+  font-size: 34rpx
+} */
 
 #ar-content{
   margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+#ar-title >view>textarea{
+  /* padding-left: 20rpx;
+  padding-right: 20rpx; */
+  padding:15rpx 25rpx 10rpx 25rpx;
+  height: 50rpx;
+  font-size: 32rpx;
 }
 
 #ar-content >view>textarea{
-   padding-left: 20rpx;
-  padding-right: 20rpx;
-  height: 240rpx;
+   /* padding-left: 20rpx;
+  padding-right: 20rpx; */
+  padding:10rpx 25rpx 10rpx 25rpx;
+  height: 200rpx;
+  font-size: 32rpx;
+}
+
+#ar-uploader{
+  padding:20rpx;
 }
 
 .weui-uploader__file{
-  width: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
-  height: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
+  width: calc(( 100vw - 9px * 3 - 68rpx ) / 3);
+  height: calc(( 100vw - 9px * 3 - 68rpx ) / 3);
   display: flex;
   flex-direction: column;
   align-items: center;
   background-repeat:no-repeat; /** 不重复*/
   background-position: center center;
   background-size: cover;
+  margin-right:9rpx;
+  margin-left:9rpx;
+  margin-bottom:18rpx;
+
 }
 
 .weui-uploader__input-box{
-  width: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
-  height: calc(( 100vw - 9px * 3 - 40rpx ) / 3);
+  width: calc(( 100vw - 9px * 3 - 68rpx ) / 3);
+  height: calc(( 100vw - 9px * 3 - 68rpx ) / 3);
+  margin-right:9rpx;
+  margin-left:9rpx;
+  margin-bottom:18rpx;
+}
+
+#ar-table{
+   margin-top: 60rpx;
 
 }
 
+#ar-table-title{
+  text-align: center;
+  font-size: 30rpx;
+  color: rgb(80, 80, 80);
+  margin-bottom: 20rpx;
+}
+
+.ar-table-tr{
+  display: flex;
+  flex-direction:row;
+  width:95%;
+  margin:auto auto;
+}
+
+.ar-table-tr  :nth-child(1){
+  width: 40%;
+  
+}
+
+.ar-table-tr  :nth-child(2){
+  width: 60%;
+ 
+}
+
+
+.ar-table-th{
+  font-size: 26rpx;
+  padding: 20rpx 10rpx 20rpx 10rpx;
+  text-align: center;
+  border:1rpx solid rgb(238, 238, 238);
+  color: rgb(122, 150, 140)
+}
