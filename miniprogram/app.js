@@ -18,7 +18,7 @@ App({
    */
   pagePath: function(index) {
     switch (index) {
-      case 0: return '../index/index'; break;
+      case 0: return '../picture/picture'; break;
       case 1: return ''; break;
     }
   },
@@ -31,7 +31,9 @@ App({
     wx.navigateTo({
       url: path,
       success(res) {
-        console.log(res, "success")
+        wx.navigateTo({
+          url: 'path',
+        })
       },
       fail(res) {
         console.log(res, "fail")

@@ -6,11 +6,12 @@
       binderror="error"
       style="width: 100%; height:700rpx;"
     ></camera>
-    <view class='scroll'>
-      <scroll-view class='nav' scroll-x>
-        <text>照片</text>
-        <text>相册</text>
-      </scroll-view>
+    <view class='option-bar'>
+      <view class='spot'></view>
+      <view class='options'>
+        <view>照相</view>
+        <view>相册</view>
+      </view>
     </view>
   </view>
   <view class='page-bottom'>

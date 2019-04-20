@@ -1,0 +1,22 @@
+/* pages/analyse/analyse.wxss */
+
+.analyse-page {
+  width: 90%;
+  padding: 400rpx 5%;
+}
+
+.desc {
+  color: #00baad;
+  font-size: 28rpx;
+  width: 100%;
+  text-align: center;
+  margin: 20rpx 0;
+}
+
+.progress {
+  width: 100%;
+}
+
+.progress progress{
+  border-radius: 10rpx;
+}
