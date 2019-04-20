@@ -12,6 +12,8 @@
       </block>
     </view>
   </view>
+  <import src="../../components/tabbar/tabbar.wxml" />
+  <template is='tabbar'></template>
 </view>
  <!-- 模版 -->
   <template name='view-item'>
@@ -31,7 +33,7 @@
             <text>{{userName}}</text>
           </view> 
           <view class='content-info'>
-            <image src='../../assets/icons/dizan.png'></image>
+            <image src='../../assets/icons/like.png'></image>
             <text>{{contentNumber}}</text>
           </view>
         </view>

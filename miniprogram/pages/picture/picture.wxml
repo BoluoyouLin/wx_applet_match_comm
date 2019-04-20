@@ -1,0 +1,21 @@
+<view class='picture-page'>
+  <view>
+    <camera
+      device-position="back"
+      flash="off"
+      binderror="error"
+      style="width: 100%; height:700rpx;"
+    ></camera>
+    <view class='scroll'>
+      <scroll-view class='nav' scroll-x>
+        <text>照片</text>
+        <text>相册</text>
+      </scroll-view>
+    </view>
+  </view>
+  <view class='page-bottom'>
+    <view class='outside' bindtap='takePhoto'>
+      <view class='inside'></view>
+    </view>
+  </view>
+</view>

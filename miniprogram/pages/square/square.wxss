@@ -12,20 +12,21 @@
 .view-left,.view-right{
   display: inline-block;
   vertical-align: top;
-  width: 49%;
+  width: 48%;
 }
 
 .view-right{
   float: right;
+  margin-left: 20rpx;
 }
 
 .view-item{
   width: 100%; 
-  border-radius: 15rpx;
+  border-radius: 10rpx;
   border: 1rpx solid #e0e0e0;
   padding-bottom: 15rpx;
   margin-bottom: 20rpx;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .view-image{
@@ -47,6 +48,7 @@
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
+  color: #505050;
 }
 
 .content-bottom{
@@ -73,6 +75,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: ##64505050;
 }
 
 .content-info{
@@ -89,5 +92,5 @@
 .content-info text{
   font-size: 25rpx;
   margin-left: 5rpx;
-  color: #999;
+  color: #818181;
 }

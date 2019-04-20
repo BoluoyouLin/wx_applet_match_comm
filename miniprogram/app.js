@@ -11,5 +11,48 @@ App({
     }
 
     this.globalData = {}
-  }
+  },
+
+  /**
+   * 页面路径
+   */
+  pagePath: function(index) {
+    switch (index) {
+      case 0: return '../index/index'; break;
+      case 1: return ''; break;
+    }
+  },
+  /**
+   * 跳转界面
+   */
+  navigateToPage: function(index) {
+    let that = this;
+    let path = that.pagePath(index);
+    wx.navigateTo({
+      url: path,
+      success(res) {
+        console.log(res, "success")
+      },
+      fail(res) {
+        console.log(res, "fail")
+      }
+    })
+  },
+
+  /**
+   * 显示操作菜单
+   */
+  showMenu: function() {
+    let that = this;
+    wx.showActionSheet({
+      itemList: ['拍照分析', '分享'],
+      itemColor: '#00baad',
+      success(res) {
+        that.navigateToPage(res.tapIndex)
+      },
+      fail(res) {
+        console.log('取消')
+      }
+    })
+  },
 })

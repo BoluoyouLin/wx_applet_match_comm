@@ -1,0 +1,24 @@
+/* pages/picture/picture.wxss */
+
+.outside {
+  display: inline-block;
+  width: 175rpx;
+  height: 175rpx;
+  border: 1rpx solid #333333;
+  border-radius: 50%;
+}
+
+.inside {
+  display: inline-block;
+  margin: 10rpx;
+  width: 155rpx;
+  height: 155rpx;
+  border-radius: 50%;
+  background-color: #333333;
+}
+
+.page-bottom{
+  width: 100%;
+  text-align: center;
+  padding: 150rpx 0;
+}
