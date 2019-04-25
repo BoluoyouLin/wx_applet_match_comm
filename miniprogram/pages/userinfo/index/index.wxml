@@ -141,6 +141,5 @@
       <text>快速新建云函数</text>
     </navigator>
   </view> -->
-  <import src="../../../components/tabbar/tabbar.wxml" />
-  <template is='tabbar' data='{{...tabbar,...current}}'></template>
+
 </view>

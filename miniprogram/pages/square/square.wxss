@@ -22,7 +22,7 @@
 
 .view-item{
   width: 100%; 
-  border-radius: 20rpx;
+  border-radius: 10rpx;
   border: 1rpx solid #e0e0e0;
   padding-bottom: 15rpx;
   margin-bottom: 20rpx;
@@ -75,7 +75,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: ##64505050;
+  color: #64505050;
 }
 
 .content-info{

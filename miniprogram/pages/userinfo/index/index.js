@@ -12,12 +12,6 @@ Page({
   },
 
   onLoad: function() {
-    let that = this
-    that.setData({ tabbar: app.globalData.tabbar })
-    let temp1 = "tabbar.list[0].current"
-    let temp2 = "tabbar.list[2].current"
-    that.setData({ [temp1]: 0 , [temp2]: 1})
-    console.log(that.data.tabbar)
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -122,13 +116,6 @@ Page({
         console.error(e)
       }
     })
-  },
-
-  /**
-   * 跳转界面（仅限tabbar）
-   */
-  toPageByTabbar(e) {
-    app.toPageByTabbar(e);
   },
 
 })

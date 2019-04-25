@@ -1,8 +1,5 @@
 //app.js
 App({
-  /** 全局数据 */
-  globalData: {},
-
   onLaunch: function () {
     
     if (!wx.cloud) {
@@ -13,40 +10,7 @@ App({
       })
     }
 
-    this.globalData = {
-      tabbar: {
-        list: [{
-        "class": "ordinary",
-        "current": 0,
-        "pagePath": "../../pages/square/square",
-        "iconPath": "../../assets/icons/home.png",
-        "selectedIconPath": "../../assets/icons/homeAfter.png",
-      },
-      {
-        "class": "add",
-        "current": 0,
-        "pagePath": "#",
-        "iconPath": "../../assets/icons/addAfter.png",
-        "selectedIconPath": "../../assets/icons/addAfter.png",
-      },
-      {
-        "class": "ordinary",
-        "current": 0,
-        "pagePath": "../../pages/userinfo/userinfo",
-        "iconPath": "../../assets/icons/person.png",
-        "selectedIconPath": "../../assets/icons/personAfter.png",
-      }
-      ]
-      }
-    }
-  },
-
-  /**
-   * 获得tabbar数据
-   */
-  getTabbarData: function() {
-    let that = this;
-    return that.globalData.tabbar
+    this.globalData = {}
   },
 
   /**
@@ -86,17 +50,8 @@ App({
         that.navigateToPage(res.tapIndex)
       },
       fail(res) {
+        console.log('取消')
       }
-    })
-  },
-
-  /**
-   * 跳转界面（仅限tabbar）
-   */
-  toPageByTabbar: function(e) {
-    let path = e.currentTarget.dataset.path
-    wx.navigateTo({
-      url: path,
     })
   },
 })

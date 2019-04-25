@@ -42,19 +42,14 @@ Page({
         userImage: '../../assets/images/demo2.jpg',
         contentNumber: 1300
       }
-    ],
-    tabbar: {},
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this
-    that.setData({tabbar: app.globalData.tabbar})
-    let temp1 = "tabbar.list[0].current"
-    let temp2 = "tabbar.list[2].current"
-    that.setData({ [temp1]: 1, [temp2]: 0 })
+  
   },
 
   /**
@@ -106,17 +101,7 @@ Page({
 
   },
 
-  /**
-   * 显示操作菜单
-   */
   showMenu(){
     app.showMenu();
-  },
-
-  /**
-   * 跳转界面（仅限tabbar）
-   */
-  toPageByTabbar(e){
-    app.toPageByTabbar(e);
   }
 })

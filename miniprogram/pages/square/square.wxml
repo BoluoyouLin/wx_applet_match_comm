@@ -12,8 +12,9 @@
       </block>
     </view>
   </view>
-  <import src="../../components/tabbar/tabbar.wxml" />
-  <template is='tabbar' data='{{...tabbar,...current}}'></template>
+  <!-- <import src="../../components/tabbar/tabbar.wxml" />
+  <template is='tabbar'></template> -->
+  <tabbar tabbar="{{tabbar}}"></tabbar>
 </view>
  <!-- 模版 -->
   <template name='view-item'>

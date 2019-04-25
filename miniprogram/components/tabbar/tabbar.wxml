@@ -1,9 +1,13 @@
 <template name='tabbar'>
   <view class='tabbar'>
-    <block wx:for='{{list}}' wx:key='{{index}}'>
-      <view class='tabbar-item' bindtap='{{item.class == "add"?"showMenu":"toPageByTabbar"}}' data-path='{{item.pagePath}}'>
-      <image src='{{item.current == 1?item.selectedIconPath:item.iconPath}}' id='{{item.class == "add"?"add":"ordinary"}}' mode='widthFix'></image>
-    </view>
-    </block>
+    <navigator class='tabbar-item'>
+      <image src='../../assets/icons/home.png' mode='widthFix'></image>
+    </navigator>
+    <li class='tabbar-item' bindtap='showMenu'>
+      <image src='../../assets/icons/add.png' mode='widthFix' id='add-icon'></image>
+    </li>
+    <navigator class='tabbar-item'>
+      <image src='../../assets/icons/person.png' mode='widthFix'></image>
+    </navigator>
   </view>
 </template>

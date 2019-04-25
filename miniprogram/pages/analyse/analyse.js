@@ -20,7 +20,7 @@ Page({
   },
   
   /**
-   * 加载中动画
+   * 加载描述动画
    */
   descAnimationLoad() {
     let that = this;
