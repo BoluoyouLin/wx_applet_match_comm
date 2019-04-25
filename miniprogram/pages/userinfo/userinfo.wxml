@@ -22,7 +22,7 @@
           <view>
             
             <text >yulia</text>
-            <image id="user_sex" src='../../../assets/images/女.png'></image>
+            <image id="user_sex" src='../../assets/images/女.png'></image>
           </view>
           <view>
             <text>狮子座</text>
@@ -34,7 +34,7 @@
     </view>
 
     <view id="data-adition">
-      <image src="../../../assets/images/edit.png"></image>
+      <image src="../../assets/images/edit.png"></image>
     </view>
 
   </view>
@@ -141,6 +141,6 @@
       <text>快速新建云函数</text>
     </navigator>
   </view> -->
-  <import src="../../../components/tabbar/tabbar.wxml" />
+  <import src="../../components/tabbar/tabbar.wxml" />
   <template is='tabbar' data='{{...tabbar,...current}}'></template>
 </view>

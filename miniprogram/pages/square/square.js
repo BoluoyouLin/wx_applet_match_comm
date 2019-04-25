@@ -52,8 +52,9 @@ Page({
   onLoad: function (options) {
     let that = this
     that.setData({tabbar: app.globalData.tabbar})
-    let temp = `that.data.tabbar.list[0].current`
-    that.setData({ [temp]: 1})
+    let temp1 = "tabbar.list[0].current"
+    let temp2 = "tabbar.list[2].current"
+    that.setData({ [temp1]: 1, [temp2]: 0 })
   },
 
   /**
@@ -105,7 +106,17 @@ Page({
 
   },
 
+  /**
+   * 显示操作菜单
+   */
   showMenu(){
     app.showMenu();
+  },
+
+  /**
+   * 跳转界面（仅限tabbar）
+   */
+  toPageByTabbar(e){
+    app.toPageByTabbar(e);
   }
 })

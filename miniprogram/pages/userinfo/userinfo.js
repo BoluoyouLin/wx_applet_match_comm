@@ -11,13 +11,12 @@ Page({
 
   },
 
-  onLoad: function() {
+  onLoad: function () {
     let that = this
     that.setData({ tabbar: app.globalData.tabbar })
     let temp1 = "tabbar.list[0].current"
     let temp2 = "tabbar.list[2].current"
-    that.setData({ [temp1]: 0 , [temp2]: 1})
-    console.log(that.data.tabbar)
+    that.setData({ [temp1]: 0, [temp2]: 1 })
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -43,7 +42,7 @@ Page({
     })
   },
 
-  onGetUserInfo: function(e) {
+  onGetUserInfo: function (e) {
     if (!this.logged && e.detail.userInfo) {
       this.setData({
         logged: true,
@@ -53,7 +52,7 @@ Page({
     }
   },
 
-  onGetOpenid: function() {
+  onGetOpenid: function () {
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
@@ -88,7 +87,7 @@ Page({
         })
 
         const filePath = res.tempFilePaths[0]
-        
+
         // 上传图片
         const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
         wx.cloud.uploadFile({
@@ -100,7 +99,7 @@ Page({
             app.globalData.fileID = res.fileID
             app.globalData.cloudPath = cloudPath
             app.globalData.imagePath = filePath
-            
+
             wx.navigateTo({
               url: '../storageConsole/storageConsole'
             })

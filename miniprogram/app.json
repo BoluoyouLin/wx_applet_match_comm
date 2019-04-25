@@ -8,6 +8,7 @@
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
     "pages/userinfo/index/index",
+    "pages/userinfo/userinfo",
     "pages/sharing/sharingDetail/sharingDetail"
    
     

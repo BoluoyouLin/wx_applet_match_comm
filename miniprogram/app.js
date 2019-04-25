@@ -26,14 +26,13 @@ App({
         "class": "add",
         "current": 0,
         "pagePath": "#",
-        "iconPath": "../../assets/icons/add.png",
+        "iconPath": "../../assets/icons/addAfter.png",
         "selectedIconPath": "../../assets/icons/addAfter.png",
-
       },
       {
         "class": "ordinary",
         "current": 0,
-        "pagePath": "../../pages/userinfo/index/index",
+        "pagePath": "../../pages/userinfo/userinfo",
         "iconPath": "../../assets/icons/person.png",
         "selectedIconPath": "../../assets/icons/personAfter.png",
       }
@@ -87,17 +86,15 @@ App({
         that.navigateToPage(res.tapIndex)
       },
       fail(res) {
-        console.log('取消')
       }
     })
   },
 
   /**
-   * 跳转界面
+   * 跳转界面（仅限tabbar）
    */
-  toPage: function() {
+  toPageByTabbar: function(e) {
     let path = e.currentTarget.dataset.path
-    console.log(path)
     wx.navigateTo({
       url: path,
     })

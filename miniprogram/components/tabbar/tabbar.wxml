@@ -1,7 +1,7 @@
 <template name='tabbar'>
   <view class='tabbar'>
     <block wx:for='{{list}}' wx:key='{{index}}'>
-      <view class='tabbar-item' bindtap='{{item.class == "add"?"showMenu":"toPage"}}' data-path='{{item.pagePath}}'>
+      <view class='tabbar-item' bindtap='{{item.class == "add"?"showMenu":"toPageByTabbar"}}' data-path='{{item.pagePath}}'>
       <image src='{{item.current == 1?item.selectedIconPath:item.iconPath}}' id='{{item.class == "add"?"add":"ordinary"}}' mode='widthFix'></image>
     </view>
     </block>
