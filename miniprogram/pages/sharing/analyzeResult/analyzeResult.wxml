@@ -26,7 +26,7 @@
               <ul class="weui-uploader__files" id="uploaderFiles">
                 <li class="weui-uploader__file" style="background-image:url('http://img5.imgtn.bdimg.com/it/u=1324113120,4149008103&fm=26&gp=0.jpg')"></li>
                 
-                <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">
+                <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url('http://img5.imgtn.bdimg.com/it/u=1324113120,4149008103&fm=26&gp=0.jpg')">
                     <view class="weui-uploader__file-content">
                         <i class="weui-icon-warn"></i>
                     </view>

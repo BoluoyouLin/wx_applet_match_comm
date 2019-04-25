@@ -1,6 +1,9 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "tabbar": "../../components/tabbarComponent/tabbar"
+  },
   "navigationBarBackgroundColor": "#999999",
   "navigationBarTitleText": "名字",
   "navigationBarTextStyle": "white"
+
 }
