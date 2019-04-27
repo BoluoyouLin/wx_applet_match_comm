@@ -114,7 +114,7 @@
 
       </view>
     </view>
-
+    <tabbar tabbar="{{tabbar}}"></tabbar>
   </view>
 <!-- 
   <!-- 上传图片

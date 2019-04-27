@@ -1,12 +1,12 @@
 
 {
   "pages": [
-    "pages/sharing/analyzeResult/analyzeResult",
+
     "pages/square/square",
     "pages/picture/picture",
     "pages/analyse/analyse",
     "pages/index/index",
-    
+    "pages/sharing/analyzeResult/analyzeResult",
     "pages/userinfo/index/index",
     "pages/sharing/sharingDetail/sharingDetail"
    
@@ -19,6 +19,26 @@
     "navigationBarTitleText": "2019-->wx_match-->火锅串串",
     "navigationBarTextStyle": "black"
     
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#979795",
+    "selectedColor": "#1c1c1b",
+    "list": [
+      {
+        "pagePath": "pages/square/square",
+        "text": "",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home.png"
+      },
+      {
+        "pagePath": "pages/userinfo/index/index",
+        "text": "",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home.png"
+      }
+    ]
   }
+
 }
 
