@@ -13,7 +13,7 @@ Component({
         "selectedColor": "#1c1c1b",
         "list": [
           {
-            "pagePath": "/pages/index/index",
+            "pagePath": "/pages/square/square",
             "iconPath": "icon/icon_home.png",
             "selectedIconPath": "icon/icon_home_HL.png",
             "text": "首页"
@@ -25,7 +25,7 @@ Component({
             "text": "发布"
           },
           {
-            "pagePath": "/pages/mine/mine",
+            "pagePath": "/pages/userinfo/index/index",
             "iconPath": "icon/icon_mine.png",
             "selectedIconPath": "icon/icon_mine_HL.png",
             "text": "我的"
@@ -39,6 +39,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    
     isIphoneX: app.globalData.systemInfo.model == "iPhone X" ? true : false,
   },
 
