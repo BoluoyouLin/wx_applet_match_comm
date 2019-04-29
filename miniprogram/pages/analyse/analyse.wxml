@@ -3,7 +3,7 @@
   <view class='progress'>
     <progress stroke-width='10' percent='{{value}}' 
      activeColor='{{activeColor}}'
-     backgroundColor='#808080'
+     backgroundColor='rgba(51, 51, 51, 0.1)'
      border-radius='2rpx'
      bindactiveend='changeColor'
     ></progress>

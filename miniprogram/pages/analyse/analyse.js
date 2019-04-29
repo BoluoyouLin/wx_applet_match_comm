@@ -6,7 +6,7 @@ Page({
    */
   data: {
     value: 0,
-    activeColor: '#000000',
+    activeColor: 'rgba(0, 186, 173, 1)',
     desc: '正在分析中，不要着急哦～～',
     animationData: ''
   },
@@ -16,7 +16,7 @@ Page({
   */
   changeColor() {
     let that = this;
-    that.setData({ activeColor: '#00baad',desc: '分析成功'})
+    that.setData({ desc: '分析成功!'})
   },
   
   /**

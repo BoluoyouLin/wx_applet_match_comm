@@ -6,7 +6,7 @@
 
 .view-block{
   text-align: justify;
-  padding: 0 10rpx;
+  padding: 0 5rpx;
 }
 
 .view-left,.view-right{

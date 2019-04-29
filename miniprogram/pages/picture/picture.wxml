@@ -1,18 +1,15 @@
 <view class='picture-page'>
   <view>
     <camera
-      device-position="back"
+      device-position="{{device}}"
       flash="off"
       binderror="error"
-      style="width: 100%; height:700rpx;"
+      style="width: 100%; height:850rpx;"
     ></camera>
   </view>
   <view class='page-bottom'>
     <view class='photograph'>相册</view>
-    <view class='photo-button'>
-      <view class='outside' bindtap='takePhoto'>
-      <view class='inside'></view>
-    </view>
-    </view>
+    <view class='photo-button' bindtap='takePhoto'></view>
+    <image src='../../assets/icons/camera.png' mode='widthFix' bindtap='changeCamera'></image>
   </view>
 </view>
