@@ -1,7 +1,5 @@
-
 {
   "pages": [
-
     "pages/square/square",
     "pages/picture/picture",
     "pages/analyse/analyse",
@@ -9,8 +7,6 @@
     "pages/sharing/analyzeResult/analyzeResult",
     "pages/userinfo/index/index",
     "pages/sharing/sharingDetail/sharingDetail"
-   
-    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -37,7 +33,6 @@
         "selectedIconPath": "assets/icons/home.png"
       }
     ]
-  }
-
+  },
+  "sitemapLocation": "sitemap.json"
 }
-
