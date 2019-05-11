@@ -1,14 +1,27 @@
+
+// 云函数入口文件
+// const cloud = require('wx-server-sdk')
+
+
+// // 云函数入口函数
+// exports.main = async (event, context) => {
+//   return {
+//     sum: event.a + event.b,//event里面放的都是一些用户传递过来的数据，参数a和参数b
+//     userInfo: event.userInfo //还可以直接获取到用户的openid，这些是腾讯给出来的，并不需要用户去授权，很安全。
+//   }
+// }
+
 //app.js
 App({
   onLaunch: function () {
     
-    // if (!wx.cloud) {
-    //   console.error('请使用 2.2.3 或以上的基础库以使用云能力')
-    // } else {
-    //   wx.cloud.init({
-    //     traceUser: true,
-    //   })
-    // }
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+    } else {
+      wx.cloud.init({
+        traceUser: true,
+      })
+    }
 
     //隐藏系统tabbar
     wx.hideTabBar();
@@ -55,7 +68,7 @@ App({
   pagePath: function(index) {
     switch (index) {
       case 0: return '../picture/picture'; break;
-      case 1: return ''; break;
+      case 1: return '../sharing/analyzeResult/analyzeResult'; break;
     }
   },
   /**
@@ -137,6 +150,7 @@ App({
   globalData: {
     systemInfo: null,//客户端设备信息
     userInfo: null,
+    userId:null,
     tabBar: {
       "backgroundColor": "#ffffff",
       "color": "#979795",

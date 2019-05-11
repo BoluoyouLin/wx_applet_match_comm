@@ -18,7 +18,7 @@
 
 
  <!-- 模版 -->
-  <template name='view-item'>
+  <template  name='view-item'>
     <navigator class='view-item' url='#'>
     <!-- 图片 -->
       <view class='view-image'>

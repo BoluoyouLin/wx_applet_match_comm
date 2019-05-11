@@ -18,17 +18,23 @@
       ></button>
       <view>
 
-        <view class="userinfo-nickname" id="userinfo-nickname" >
-          <view>
+      <view  >
+          <view id="bc-nameswrap">
             
-            <text >yulia</text>
-            <image id="user_sex" src='../../../assets/images/女.png'></image>
+            
+            <!-- inline-block  float：left -->
+            <view id="bc-name">
+              Yulia
+            </view>
+            <view id="bc-sex">
+              <image  src='../../../assets/images/女.png' ></image>
+            </view>
           </view>
-          <view>
-            <text>狮子座</text>
-            <text>23岁</text>
+
+          <view id="bc-id"> 
             <text>微光号：777777</text>
           </view>
+
         </view>
       </view>
     </view>
@@ -46,6 +52,7 @@
     <view>
       <view>个人简介</view>
       <view>这个人很神秘</view>
+      
     </view>
     
     <view>
@@ -53,7 +60,15 @@
       <view>佛系青年</view>
     </view>
     <view>
-      <view>已分享</view>
+      <view class="tag-title">
+        
+        <view class="tag-name">已分享</view>
+        <view class="tag-tag">
+          <image src='../../../assets/images/右.png'></image>
+        </view>
+        
+
+      </view>
       <view id="sharing-content">
         <view class="sharing-article">
           <image>图片</image>
@@ -85,7 +100,16 @@
 
 
     <view>
-      <view>未分享</view>
+    <view class="tag-title">
+        
+        <view class="tag-name">未分享</view>
+        <view class="tag-tag">
+          <image src='../../../assets/images/右.png' mode="aspectFit"></image>
+        </view>
+        
+
+      </view>
+      
       <view id="sharing-content">
         <view class="sharing-article">
           <image>图片</image>

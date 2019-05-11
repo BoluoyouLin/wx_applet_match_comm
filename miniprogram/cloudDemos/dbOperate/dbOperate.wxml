@@ -1,0 +1,4 @@
+<button bindtap='insertData'>新增数据</button>
+<button bindtap='updateData'>更新数据</button>
+<button bindtap='searchData'>查找数据</button>
+<button bindtap='deleteData'>删除数据</button>
