@@ -2,13 +2,13 @@
 
 <view class='container' id="ar-container">
     <view id="ar-swrap">
-      <view class="ar-cell" id="ar-title">
+      <!-- <view class="ar-cell" id="ar-title">
         <view  class="ar-cell-bd">
           <textarea placeholder='起个好听的名字'/>
           
         </view>
       
-      </view>
+      </view> -->
 
       <view class="ar-cell" id="ar-content"> 
         <view  class="ar-cell-bd">
@@ -16,10 +16,7 @@
         </view>
       </view>
 
-
       <view id="ar-uploader">
-<!--  -->
-
 
         <view class="weui-uploader">
           <view class="weui-uploader__bd">
@@ -36,11 +33,9 @@
                 </li>
               </ul>
 
-
               <view class="weui-uploader__input-box">
                   <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple/>
-              </view>
-              
+              </view>     
           </view>
         </view>
 
@@ -61,13 +56,31 @@
             <view class="ar-table-th">成分名称</view>
             <view class="ar-table-th">使用功效</view>
           </view>
+          <view class="ar-table-tr" style="background-color: rgb(244, 255, 255)">
+            <view class="ar-table-th">成分名称</view>
+            <view class="ar-table-th">使用功效</view>
+          </view>
         </view>
 
 
       <!--  -->
       </view>
 
-
+      <template is="ar-footer"></template>
     </view>
+    
 </view>
 
+<template name='ar-footer'>
+  <view class="ar-footer">
+    <view class="ar-footer-swrap">
+      <view class="ar-footer-left">
+        取消分享
+      </view>
+      <view class="ar-footer-right">
+        分享至广场
+      </view>
+    </view>
+  </view>
+
+</template>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "cloudDemos/dbOperate/dbOperate",
     "pages/square/square",
     "pages/picture/picture",
     "pages/analyse/analyse",
@@ -36,3 +37,4 @@
   },
   "sitemapLocation": "sitemap.json"
 }
+

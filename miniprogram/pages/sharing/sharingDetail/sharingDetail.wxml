@@ -1,2 +1,49 @@
-<!--pages/sharing/sharingDetail/sharingDetail.wxml-->
-<text>pages/sharing/sharingDetail/sharingDetail.wxml</text>
+<view>
+  <view>
+    <view>
+
+      <!-- 用户title -->
+      <view>
+        <!-- 头像 -->
+        <!-- 名字 -->
+      </view>
+      <view>
+        <!-- 关注 -->
+      </view>
+    </view>
+
+    <view>
+        
+      <!-- 内容content -->
+      <textarea>
+
+      </textarea>
+
+      <!-- 照片 -->
+      <view>
+        <image></image>
+        <image></image>
+        <image></image>
+      </view>
+
+      <!-- 分析结果 -->
+      <view>
+        
+      </view>
+
+    </view>
+  
+  </view>
+
+  <template is="sd-footer"></template>
+  
+</view>
+
+<template name="sd-footer">
+  <view>
+    <!-- 点赞 -->
+    <!-- 分享 -->
+    <!-- 收藏 -->
+    <!-- 评论 -->
+  </view>
+</template>

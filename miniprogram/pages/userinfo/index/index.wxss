@@ -7,13 +7,15 @@ page {
   justify-content: flex-start;
 }
 
+
 #userinfo_swrap{
   text-align: left;
+  font-family: Microsoft YaHei
 }
 
 #business-card{
   width: 100%;
-  height: 420rpx;
+  height: 440rpx;
 }
 
 #bc-background{
@@ -57,45 +59,41 @@ page {
 }
 
 #userinfo-avatar{
+  width:160rpx;
+  height:160rpx;
 
-}
-
-#userinfo-nickname{
-  background:none;
-  color: #fff;
 }
 
 #user_sex{
-  width: 40rpx;
-  height: 40rpx;
+  width: 36rpx;
+  height: 36rpx;
   padding:0;
- 
+  
 }
 
-#userinfo-nickname>view:nth-child(1){
-  font-size: 38rpx
+#user_sex >image{
+  width: 100%;
+  line-height: 36rpx;
+
 }
 
-#userinfo-nickname>view:nth-child(2){
-  font-size: 25rpx
-}
 
 #data-adition{
   position:absolute;
-  right: 0;
+  right: 52rpx;
   top:350rpx;
 }
 
 #data-adition>image{
-  width:90rpx;
-  height: 90rpx;
+  width:106rpx;
+  height: 106rpx;
 
 }
 
 #information-content{
   width: 100%;
   text-align: left;
-  padding:30rpx;
+  padding:34rpx;
   padding-left: 100rpx;
   font-size: 30rpx;
   background-color: rgba(255, 255, 255, 1)
@@ -106,13 +104,14 @@ page {
 }
 
 #information-content>view>view:first-child{
-  color: rgba(92, 186, 173, 1)
+  color: rgba(0, 186, 173, 1);
+  font-size: 36rpx;
 }
 
 #information-content>view>view:nth-child(2){
   color: rgba(166, 166, 166, 1);
   margin-bottom: 48rpx;
-  font-size: 26rpx;
+  font-size: 30rpx;
 }
 
 .userinfo-avatar {
@@ -122,23 +121,13 @@ page {
   border-radius: 50%;
   background-size: cover;
   background-color: white;
-  margin-left: 35rpx
+  margin-left: 30rpx
 }
 
 .userinfo-avatar:after {
   border: none;
 }
-
-.userinfo-nickname {
-  font-size: 32rpx;
-  color: #007aff;
-  background-color: white;
-  background-size: cover;
-}
-
-.userinfo-nickname::after {
-  border: none;
-}
+/* 2 */
 
 .content-title{
   width: 100%;
@@ -164,103 +153,70 @@ page {
 }
 
 .article-abstract>view:nth-child(1){
-  color: rgb(28, 28, 28);
-  font-size: 28rpx;
+  color: rgba(80, 80, 80, 1);
+  font-size: 30rpx;
   margin-top:10rpx;
 }
 
-.article-abstract >view{
+.article-abstract>view:nth-child(2){
+  color: rgba(166, 166, 166, 1);
+  font-size: 28rpx;
+
+}
+
+.article-abstract>view:nth-child(3){
+  color: rgba(129, 129, 129, 1);
+  font-size: 20rpx;
+  margin-top:4rpx;
+}
+
+/* .article-abstract >view{
   margin-bottom: 12rpx;
-}
-
-/* 
-.uploader, .tunnel {
-  height: auto;
-  padding: 0 0 0 40rpx;
-  flex-direction: column;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
-
-.uploader-text, .tunnel-text {
-  width: 100%;
-  line-height: 52px;
-  font-size: 34rpx;
-  color: #007aff;
-}
-
-.uploader-container {
-  width: 100%;
-  height: 400rpx;
-  padding: 20rpx 20rpx 20rpx 0;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.uploader-image {
-  width: 100%;
-  height: 360rpx;
-}
-
-.tunnel {
-  padding: 0 0 0 40rpx;
-}
-
-.tunnel-text {
-  position: relative;
-  color: #222;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.tunnel-text:first-child {
-  border-top: none;
-}
-
-.tunnel-switch {
-  position: absolute;
-  right: 20rpx;
-  top: -2rpx;
-}
-
-.disable {
-  color: #888;
-}
-
-.service {
-  position: fixed;
-  right: 40rpx;
-  bottom: 40rpx;
-  width: 140rpx;
-  height: 140rpx;
-  border-radius: 50%;
-  background: linear-gradient(#007aff, #0063ce);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  transition: all 300ms ease;
-}
-
-.service-button {
-  position: absolute;
-  top: 40rpx;
-}
-
-.service:active {
-  box-shadow: none;
-}
-
-.request-text {
-  padding: 20rpx 0;
-  font-size: 24rpx;
-  line-height: 36rpx;
-  word-break: break-all;
 } */
+
+.tag-title {
+  position: relative;
+  min-height: 50rpx;
+  margin-bottom: 40rpx;
+}
+
+.tag-name{
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+.tag-tag>image{
+  position:absolute;
+  top:0;
+  right:58rpx;
+  width:40rpx;
+  height:40rpx;
+
+}
+
+#bc-nameswrap{
+  display: flex;
+  flex-direction:row;
+}
+
+#bc-name{
+  font-size: 38rpx;
+  color:rgba(255, 255, 255, 1);
+}
+
+#bc-sex{
+  padding-top:5rpx;
+  margin-left:10px;
+
+}
+
+#bc-sex>image{
+  width:36rpx;
+  height:36rpx
+}
+
+#bc-id{
+  font-size: 30rpx;
+  color:rgba(255, 255, 255, 1);
+}
