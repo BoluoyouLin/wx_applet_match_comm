@@ -1,4 +1,9 @@
+<view>云数据库</view>
 <button bindtap='insertData'>新增数据</button>
 <button bindtap='updateData'>更新数据</button>
 <button bindtap='searchData'>查找数据</button>
 <button bindtap='deleteData'>删除数据</button>
+<view>云函数</view>
+<button  bindtap='sum'>调用云函数sum</button>
+<button bindtap='getOpenId'>获取当前用户openId</button>
+<button bindtap='batchData'>批量删除数据</button>

@@ -47,7 +47,8 @@ Page({
     testDB.collection("test")
     .where({
       name:'chenjy3'
-    }).get()
+    })
+    .get()
     .then(res=>{
       console.log(res)
     })
@@ -66,6 +67,45 @@ Page({
     .catch(err=>{
       console.log(err)
     })
+  },
+
+  sum:function(){
+    wx.cloud.callFunction({
+      name:'sum_demo', //对应得云函数名称
+      data:{
+        a:1,
+        b:6
+      }//对应云函数中的event
+    }).then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
+  },
+
+  getOpenId :function(){
+    console.log("进来了")
+    //从云函数获取openid
+    //再通过小程序存到云数据库
+    wx.cloud.callFunction({
+      name:'login'
+    }).then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
+  },
+
+  batchData:function(){
+    wx.cloud.callFunction({
+      name:'batch_data'
+    }).then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
+
+
   },
 
   /**
