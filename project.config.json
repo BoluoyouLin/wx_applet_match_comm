@@ -6,11 +6,12 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"appid": "wx8842d940f2a6abe1",
 	"projectname": "wx_applet_match_comm",
-	"libVersion": "2.2.5",
+	"libVersion": "2.7.0",
 	"condition": {
 		"search": {
 			"current": -1,

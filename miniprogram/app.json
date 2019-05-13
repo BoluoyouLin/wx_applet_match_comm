@@ -1,15 +1,15 @@
 
 {
   "pages": [
-    "cloudDemos/dbOperate/dbOperate",
+  
     "pages/square/square",
     "pages/picture/picture",
     "pages/analyse/analyse",
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
     "pages/userinfo/index/index",
-    "pages/sharing/sharingDetail/sharingDetail"
-   
+    "pages/sharing/sharingDetail/sharingDetail", 
+    "cloudDemos/dbOperate/dbOperate"
     
   ],
   "window": {

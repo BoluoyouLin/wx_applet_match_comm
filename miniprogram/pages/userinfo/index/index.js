@@ -3,12 +3,12 @@ const app = getApp()
 
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
+    // avatarUrl: './user-unlogin.png',
     userInfo: {},
     logged: false,
     takeSession: false,
     requestResult: '',
-
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
   onLoad: function() {
@@ -16,18 +16,22 @@ Page({
 
     app.editTabbar();
 
+    //获取全局用户登陆信息
+    // 获取全局的
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        logged: true
       })
-    } else if (this.data.canIUse) {
+    } 
+    //全局没登陆就重新调用用户登陆方法
+    else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
-          hasUserInfo: true
+          logged: true
         })
       }
     } else {
@@ -37,20 +41,26 @@ Page({
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
-            hasUserInfo: true
+            logged: true
           })
         }
       })
     }
   },
 
+
   onGetUserInfo: function(e) {
+    // console.log("进来了",e)
+    // console.log(this.data.logged,this.data.canIUse)
     if (!this.logged && e.detail.userInfo) {
+      app.globalData.userInfo = e.detail.userInfo
       this.setData({
         logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
         userInfo: e.detail.userInfo
       })
+      // console.log(this.data.userInfo)
+    }else{
+      console.log("用户信息获取失败")
     }
   },
 

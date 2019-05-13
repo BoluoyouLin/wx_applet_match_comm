@@ -2,27 +2,32 @@
 <view class="container" id="userinfo_swrap">
 
   <view id="business-card">
+    
     <!-- 背景 -->
     <view  id="bc-background">
           <image mode="aspectFit" bindtap="previewImg"></image>
     </view>
 
-    <!-- 用户 openid -->
+
     <view class="userinfo" id="userinfo">
+    
+      <!-- 头像 -->
+      <!-- 如果没登陆就点击登陆 -->
       <button 
-        open-type="getUserInfo" 
+      
+        open-type="getUserInfo"  
         bindgetuserinfo="onGetUserInfo"
         class="userinfo-avatar"
         id="userinfo-avatar"
-        style="background-image: url({{avatarUrl}})"
+        style="background-image: url({{userInfo.avatarUrl}})"
       ></button>
-      <view>
 
-      <view  >
-          <view id="bc-nameswrap">
-            
-            
-            <!-- inline-block  float：left -->
+      <!-- 右边信息 -->
+     
+      <view>
+        <!-- 已登陆显示信息 -->
+        <view  wx:if="{{logged}}" >
+          <view  id="bc-nameswrap">
             <view id="bc-name">
               Yulia
             </view>
@@ -30,11 +35,19 @@
               <image  src='../../../assets/images/女.png' ></image>
             </view>
           </view>
-
-          <view id="bc-id"> 
+          <view  id="bc-id"> 
             <text>微光号：777777</text>
           </view>
+        </view>
 
+        <!-- 未登录显示信息 -->
+        <view wx:else>
+          <view  id="bc-nameswrap">
+            <!-- inline-block  float：left -->
+            <view id="bc-name">
+              没登陆哟
+            </view>
+          </view>
         </view>
       </view>
     </view>
@@ -96,11 +109,11 @@
         </view>
 
       </view>
-    </view>
+    </view> 
 
 
     <view>
-    <view class="tag-title">
+      <view class="tag-title">
         
         <view class="tag-name">未分享</view>
         <view class="tag-tag">
@@ -125,7 +138,7 @@
             <view>天呐噜 | 这是什么神仙产品</view>
             <view>没有想到他的成分居然有这些功效</view>
             <view>点赞</view>
-          </view>
+          </view> 
         </view>
         <view class="sharing-article">
           <image>图片</image>
@@ -138,9 +151,12 @@
 
       </view>
     </view>
-    <tabbar tabbar="{{tabbar}}"></tabbar>
   </view>
-<!-- 
+  <tabbar tabbar="{{tabbar}}"></tabbar>
+      
+</view>
+
+
   <!-- 上传图片
   <view class="uploader">
     <view class="uploader-text" bindtap="doUpload">
@@ -166,4 +182,3 @@
     </navigator>
   </view> -->
 
-</view>

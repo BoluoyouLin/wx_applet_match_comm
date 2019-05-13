@@ -1,6 +1,13 @@
 
+import user_service from './assets/services/user_service.js'
+wx.cloud.init()
+
+const db = wx.cloud.database()
 //app.js
 App({
+
+  ...user_service.service, //解构
+
   onLaunch: function () {
     
     if (!wx.cloud) {
@@ -11,19 +18,20 @@ App({
       })
     }
 
+
+
     //隐藏系统tabbar
     wx.hideTabBar();
     //获取设备信息
     this.getSystemInfo();
-
 
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       }
-    })
-
+    }) 
+    //先登陆再获取用户信息，openid，等，不然会有弹出框
 
     // 获取用户信息
     wx.getSetting({
@@ -40,13 +48,19 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
+            },
+            fail:err=>{
+              cosnole.log(err)
             }
           })
         }
       }
     })
 
-   
+    
+    this.getIdColl()
+    // this.suerInUserColl()
+    
   },
 
   // ------------------------
@@ -91,11 +105,58 @@ App({
       }
     })
   },
+  
+  //获取id集合
+  getIdColl:function(){
+    //获取id集合
+    wx.cloud.callFunction({
+      name: 'login'
+    }).then(res => {
+      this.globalData.weId = res.result
+      console.log(res.result)
+      this.suerInUserColl()
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+
+  //判断当前用1 tg户是否已经在user集合中
+  //不再即添加
+  suerInUserColl(){
+    
+    
+    //已经获取到了当前用户得用户信息
+    console.log("这里", this.globalData.weId)
+    if (this.globalData.userInfo) {
+      let box=this.getUserByOpenid(this.globalData.weId.openid)
+      if (box.data.length!=0){
+        console.log("已存在")
+      }else{
+        let user={
+          avatar:this.globalData.userInfo.avatar,
+          label:'',
+          name: this.globalData.userInfo.nickName,
+          resume:'',
+          sex:'-1',
+          user_id:this.globalData.weId.openid
+        }
+        this.insertNewUser(user)
+      }
+       
+      
+    }
+    else {
+      console.error("未登录")
+    }
+    
+    
+  },
   // --------------------------
 
   onShow: function () {
     //隐藏系统tabbar
     wx.hideTabBar();
+
   },
 
   getSystemInfo: function() {
@@ -136,9 +197,10 @@ App({
   },
   
   globalData: {
+    weId:null,
     systemInfo: null,//客户端设备信息
-    userInfo: null,
-    userId:null,
+    userInfo: null,//用户信息-是否登陆
+    userId:null,//用户id
     tabBar: {
       "backgroundColor": "#ffffff",
       "color": "#979795",
@@ -165,4 +227,5 @@ App({
       ]
     }
   }
+  
 })
