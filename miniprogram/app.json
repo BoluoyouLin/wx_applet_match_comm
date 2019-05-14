@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/square/square",
+    "cloudDemos/dbOperate/dbOperate",
+    "pages/picture/picture",
+    "pages/analyse/analyse",
+    "pages/index/index",
+    "pages/sharing/analyzeResult/analyzeResult",
+    "pages/userinfo/index/index",
+    "pages/sharing/sharingDetail/sharingDetail"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#38373d",
+    "navigationBarTitleText": "tabBar"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#979795",
+    "selectedColor": "#1c1c1b",
+    "list": [
+      {
+        "pagePath": "pages/square/square",
+        "text": "",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home.png"
+      },
+      {
+        "pagePath": "pages/userinfo/index/index",
+        "text": "",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
