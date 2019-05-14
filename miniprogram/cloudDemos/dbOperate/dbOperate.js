@@ -44,17 +44,26 @@ Page({
   },
 
   searchData:function(){
+    console.log("进来了")
+    let result;
     testDB.collection("test")
     .where({
       name:'chenjy3'
     })
     .get()
     .then(res=>{
-      console.log(res)
+
+      console.log("1")
+      result=res
+      
+      consoel.log("2")
     })
     .catch(err=>{
       console.log(err)
     })
+    console.log("3")
+    console.log(result)
+    console.log("4")
   },
 
   deleteData:function(){

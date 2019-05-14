@@ -1,16 +1,14 @@
 {
   "pages": [
-  
+
     "pages/square/square",
-    "cloudDemos/dbOperate/dbOperate",
+"cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
     "pages/analyse/analyse",
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
     "pages/userinfo/index/index",
-    "pages/sharing/sharingDetail/sharingDetail", 
-    "cloudDemos/dbOperate/dbOperate"
-    
+    "pages/sharing/sharingDetail/sharingDetail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -24,19 +22,20 @@
     "color": "#979795",
     "selectedColor": "#1c1c1b",
     "list": [
-      {
-        "pagePath": "pages/square/square",
-        "text": "",
-        "iconPath": "assets/icons/home.png",
-        "selectedIconPath": "assets/icons/home.png"
-      },
-      {
-        "pagePath": "pages/userinfo/index/index",
-        "text": "",
-        "iconPath": "assets/icons/home.png",
-        "selectedIconPath": "assets/icons/home.png"
-      }
-    ]
+        {
+          "pagePath": "pages/square/square",
+          "iconPath": "assets/icons/icon_home.png",
+          "selectedIconPath": "assets/icons/icon_home_HL.png",
+          "text": "首页"
+        },
+        
+        {
+          "pagePath": "pages/userinfo/index/index",
+          "iconPath": "assets/icons/icon_mine.png",
+          "selectedIconPath": "assets/icons/icon_mine_HL.png",
+          "text": "我的"
+        }
+      ]
   },
   "sitemapLocation": "sitemap.json"
 }
