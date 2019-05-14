@@ -8,15 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabbar:{},
-    dataList:[],
-    cardList:[]
+    tabbar: {},
+    dataList: [],
+    cardList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(app.globalData)
     // 获取广场数据
     this.getSquareData()
@@ -53,97 +53,109 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     console.log(app.globalData)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   // 展示菜单
-  showMenu(){
+  showMenu() {
     app.showMenu();
   },
 
-  getSquareData(){
-    let result = this.getCardData()
-    result.then( res=>{
-      console.log(res,'11')
-    })
-    // console.log('getData',result)
+  //  获取广场展示数据
+  async getSquareData() {
+    let cardList = [] // 用于存储卡片数据
+      , userInfoList = [] // 用于存储用户信息
+      , cardImageList = [] // 用于存储卡片图片
+ 
+    // 获取卡片数据
+    cardList = await this.getCardData()
+    // cardResult.then( res=>{
+    //   cardList = res.data
+    //   for (let i = 0; i < cardList.length; i++){
+    //     // 根据userId获取用户信息
+    //     userInfoResult = this.getUserInfo(cardList[i].user_id)
+    //     userInfoResult.then( res => {
+    //       userInfoList.push(res.data[0])
+    //     })
+    //     // 根据cardId获取相应图片
+    //     imageResult = this.getImageByCard(cardList[i]._id)
+    //     imageResult.then(res => {
+    //       cardImageList.push(res.data[0])
+    //     })
+    //   }
+    //   console.log('images', cardImageList,'userinfo',userInfoList)
+    // })
   },
 
   // 获取card数据
-  async getCardData(){
-    return await db.collection('card').where({
-      is_shared:1
-    }).get()
+  getCardData() {
+    return new Promise((resolve, reject) => {
+      db.collection('card').where({
+          is_shared: 1
+        }).get()
+        .then(res => {
+          resolve(res.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    })
   },
 
   // 根据cardId获取对应图片
-  getImageByCard(cardId){
-    db.collection('picture').where({
+  async getImageByCard(cardId) {
+    return await db.collection('picture').where({
       card_id: cardId
     }).get()
-    .then( res => {
-      return res.data[0]
-    })
-    .catch( err => {
-      console.err()
-      return null;
-    })
   },
 
   // 根据userId获取用户信息
-  getUserInfo(userId){
-    db.collection('user').where({
+  async getUserInfo(userId) {
+    return await db.collection('user').where({
       user_id: userId
     }).get()
-    .then( res => {
-      return res
-    })
-    .catch( err => {
-      console.error(err,'err by getUserInfo')
-      return null;
-    })
   },
 })
