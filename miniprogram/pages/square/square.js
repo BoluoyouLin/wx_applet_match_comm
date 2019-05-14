@@ -1,4 +1,5 @@
 // miniprogram/pages/square.js
+import regeneratorRuntime from '../../regenerator-runtime/runtime.js';
 const app = getApp();
 const db = wx.cloud.database();
 Page({
@@ -8,43 +9,8 @@ Page({
    */
   data: {
     tabbar:{},
-    dataList:[
-      {
-        image: '../../assets/images/demo2.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo3.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo1.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo1.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo3.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo2.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo2.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo3.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo3.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo2.jpg',
-        contentNumber: 1300
-      }
-    ]
+    dataList:[],
+    cardList:[]
   },
 
   /**
@@ -52,7 +18,8 @@ Page({
    */
   onLoad: function (options) {
     console.log(app.globalData)
-    this.loadData();
+    // 获取广场数据
+    this.getSquareData()
     app.editTabbar();
 
     if (app.globalData.userInfo) {
@@ -87,7 +54,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
     console.log(app.globalData)
   },
 
@@ -138,56 +104,46 @@ Page({
     app.showMenu();
   },
 
+  getSquareData(){
+    let result = this.getCardData()
+    result.then( res=>{
+      console.log(res,'11')
+    })
+    // console.log('getData',result)
+  },
+
   // 获取card数据
-  loadData: function() {
-    db.collection('card').where({
+  async getCardData(){
+    return await db.collection('card').where({
       is_shared:1
     }).get()
-    .then(res => {
-      console.log(res)
-    }).catch(res => {
-      console.log(res)
-    })
   },
 
-  // 根据cardid获取对应图片
-  getImageByCard: function(cardId) {
+  // 根据cardId获取对应图片
+  getImageByCard(cardId){
     db.collection('picture').where({
-      card_id:cardId
-    }).get()
-    .then(res => {
-      console.log(res)
-    }).catch( err => {
-      console.error(err)
-    })
-  },
-
-  //根据userid获取用户昵称和头像
-  getUserInfo: function(userId) {
-    db.collection('user').where({
-      user_id:userId
+      card_id: cardId
     }).get()
     .then( res => {
-      console.log(res)
-    }).catch( err => {
-      console.error(err)
+      return res.data[0]
+    })
+    .catch( err => {
+      console.err()
+      return null;
     })
   },
 
-// 添加数据（我自己测试用的）by 林炜
-  addData: function() {
-    db.collection('card').add({
-      data: {
-        user_id:1,
-        content:'林炜',
-        like:0,
-        is_shared:1
-      }
-    }).then(res => {
-      console.log(res)
+  // 根据userId获取用户信息
+  getUserInfo(userId){
+    db.collection('user').where({
+      user_id: userId
+    }).get()
+    .then( res => {
+      return res
     })
-    .catch(res => {
-      console.log(res)
+    .catch( err => {
+      console.error(err,'err by getUserInfo')
+      return null;
     })
   },
 })
