@@ -6,6 +6,7 @@ Page({
    */
   data: {
     src: '',
+    device: 'back',
   },
 
 
@@ -26,6 +27,16 @@ Page({
         })
       }
     })
+  },
+
+  changeCamera() {
+    let that = this;
+    if (that.data.device === 'back') {
+      that.setData({ device:'front'})
+    }
+    else {
+      that.setData({ device: 'back' })
+    }
   },
 
   error(e) {

@@ -1,0 +1,266 @@
+/**index.wxss**/
+
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#userinfo_swrap{
+  text-align: left;
+}
+
+#business-card{
+  width: 100%;
+  height: 420rpx;
+}
+
+#bc-background{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#bc-background >image{
+    width: 100%;
+    height: 100%;
+    background-image: url('http://img5.imgtn.bdimg.com/it/u=1324113120,4149008103&fm=26&gp=0.jpg');
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-repeat:no-repeat; /** 不重复*/
+    background-position: center center;
+    background-size: cover;
+}
+
+.userinfo, .uploader, .tunnel {
+  margin-top: 40rpx;
+  height: 140rpx;
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: none;
+  border-right: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 300ms ease;
+}
+
+#userinfo{
+  background:none;
+  position: absolute;
+  top: 200rpx;
+  left:0;
+}
+
+#userinfo-avatar{
+
+}
+
+#userinfo-nickname{
+  background:none;
+  color: #fff;
+}
+
+#user_sex{
+  width: 40rpx;
+  height: 40rpx;
+  padding:0;
+ 
+}
+
+#userinfo-nickname>view:nth-child(1){
+  font-size: 38rpx
+}
+
+#userinfo-nickname>view:nth-child(2){
+  font-size: 25rpx
+}
+
+#data-adition{
+  position:absolute;
+  right: 0;
+  top:350rpx;
+}
+
+#data-adition>image{
+  width:90rpx;
+  height: 90rpx;
+
+}
+
+#information-content{
+  width: 100%;
+  text-align: left;
+  padding:30rpx;
+  padding-left: 100rpx;
+  font-size: 30rpx;
+  background-color: rgba(255, 255, 255, 1)
+}
+
+#information-content>view>view{
+  margin-bottom:20rpx;
+}
+
+#information-content>view>view:first-child{
+  color: rgba(92, 186, 173, 1)
+}
+
+#information-content>view>view:nth-child(2){
+  color: rgba(166, 166, 166, 1);
+  margin-bottom: 48rpx;
+  font-size: 26rpx;
+}
+
+.userinfo-avatar {
+  width: 144rpx;
+  height: 144rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: white;
+  margin-left: 35rpx
+}
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.userinfo-nickname {
+  font-size: 32rpx;
+  color: #007aff;
+  background-color: white;
+  background-size: cover;
+}
+
+.userinfo-nickname::after {
+  border: none;
+}
+
+.content-title{
+  width: 100%;
+}
+
+#sharing-content>view{
+ 
+}
+
+.sharing-article{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 22rpx;
+}
+
+.sharing-article>image{
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 30rpx;
+  background-image: url('https://f12.baidu.com/it/u=2438918904,3021139008&fm=72');
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.article-abstract>view:nth-child(1){
+  color: rgb(28, 28, 28);
+  font-size: 28rpx;
+  margin-top:10rpx;
+}
+
+.article-abstract >view{
+  margin-bottom: 12rpx;
+}
+
+/* 
+.uploader, .tunnel {
+  height: auto;
+  padding: 0 0 0 40rpx;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.uploader-text, .tunnel-text {
+  width: 100%;
+  line-height: 52px;
+  font-size: 34rpx;
+  color: #007aff;
+}
+
+.uploader-container {
+  width: 100%;
+  height: 400rpx;
+  padding: 20rpx 20rpx 20rpx 0;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.uploader-image {
+  width: 100%;
+  height: 360rpx;
+}
+
+.tunnel {
+  padding: 0 0 0 40rpx;
+}
+
+.tunnel-text {
+  position: relative;
+  color: #222;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tunnel-text:first-child {
+  border-top: none;
+}
+
+.tunnel-switch {
+  position: absolute;
+  right: 20rpx;
+  top: -2rpx;
+}
+
+.disable {
+  color: #888;
+}
+
+.service {
+  position: fixed;
+  right: 40rpx;
+  bottom: 40rpx;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background: linear-gradient(#007aff, #0063ce);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  transition: all 300ms ease;
+}
+
+.service-button {
+  position: absolute;
+  top: 40rpx;
+}
+
+.service:active {
+  box-shadow: none;
+}
+
+.request-text {
+  padding: 20rpx 0;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  word-break: break-all;
+} */

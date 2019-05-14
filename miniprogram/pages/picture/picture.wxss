@@ -1,35 +1,28 @@
 /* pages/picture/picture.wxss */
 /* 相机按钮 */
-.outside {
-  display: inline-block;
-  width: 175rpx;
-  height: 175rpx;
-  border: 1rpx solid #333333;
-  border-radius: 50%;
-}
-
-.inside {
-  display: inline-block;
-  margin: 10rpx;
-  width: 155rpx;
-  height: 155rpx;
-  border-radius: 50%;
-  background-color: #333333;
-}
-
 .page-bottom {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 120rpx 0;
+  padding: 60rpx 0;
 }
 
 .photograph {
   margin-left: 15%; 
   margin-top: 20rpx;
   color: #00baad;
+  font-size: 38rpx;
 }
 
 .photo-button {
-  margin-left: 15%;
+  margin: 0 15%;
+  width: 155rpx;
+  height: 155rpx;
+  background-color: #333;
+  border: 10rpx solid white;
+  box-shadow: 0 0 1rpx black;
+  border-radius: 50%;
+}
+.page-bottom image {
+  width: 100rpx;
 }

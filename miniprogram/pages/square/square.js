@@ -1,5 +1,6 @@
 // miniprogram/pages/square.js
 const app = getApp();
+const db = wx.cloud.database();
 Page({
 
   /**
@@ -51,7 +52,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(app.globalData)
-
+    this.loadData();
     app.editTabbar();
 
     if (app.globalData.userInfo) {
@@ -132,7 +133,61 @@ Page({
 
   },
 
+  // 展示菜单
   showMenu(){
     app.showMenu();
-  }
+  },
+
+  // 获取card数据
+  loadData: function() {
+    db.collection('card').where({
+      is_shared:1
+    }).get()
+    .then(res => {
+      console.log(res)
+    }).catch(res => {
+      console.log(res)
+    })
+  },
+
+  // 根据cardid获取对应图片
+  getImageByCard: function(cardId) {
+    db.collection('picture').where({
+      card_id:cardId
+    }).get()
+    .then(res => {
+      console.log(res)
+    }).catch( err => {
+      console.error(err)
+    })
+  },
+
+  //根据userid获取用户昵称和头像
+  getUserInfo: function(userId) {
+    db.collection('user').where({
+      user_id:userId
+    }).get()
+    .then( res => {
+      console.log(res)
+    }).catch( err => {
+      console.error(err)
+    })
+  },
+
+// 添加数据（我自己测试用的）by 林炜
+  addData: function() {
+    db.collection('card').add({
+      data: {
+        user_id:1,
+        content:'林炜',
+        like:0,
+        is_shared:1
+      }
+    }).then(res => {
+      console.log(res)
+    })
+    .catch(res => {
+      console.log(res)
+    })
+  },
 })

@@ -18,7 +18,7 @@
 
 
  <!-- 模版 -->
-  <template  name='view-item'>
+  <template name='view-item'>
     <navigator class='view-item' url='#'>
     <!-- 图片 -->
       <view class='view-image'>
@@ -27,7 +27,7 @@
       <!-- 内容 -->
       <view class='view-content'>
         <!-- 描述 -->
-        <view class='content-desc'>{{desc}}</view>
+        <view class='content-desc'>{{content}}</view>
         <!-- 用户信息 -->
         <view class='content-bottom'>
           <view class='content-user-info'>
@@ -36,7 +36,7 @@
           </view> 
           <view class='content-info'>
             <image src='../../assets/icons/like.png'></image>
-            <text>{{contentNumber}}</text>
+            <text>{{like}}</text>
           </view>
         </view>
       </view>

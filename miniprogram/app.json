@@ -1,8 +1,8 @@
-
 {
   "pages": [
   
     "pages/square/square",
+    "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
     "pages/analyse/analyse",
     "pages/index/index",
@@ -15,10 +15,9 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "2019-->wx_match-->火锅串串",
-    "navigationBarTextStyle": "black"
-    
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#38373d",
+    "navigationBarTitleText": "tabBar"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
@@ -38,7 +37,7 @@
         "selectedIconPath": "assets/icons/home.png"
       }
     ]
-  }
-
+  },
+  "sitemapLocation": "sitemap.json"
 }
 

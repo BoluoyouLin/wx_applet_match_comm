@@ -1,12 +1,12 @@
 /* miniprogram/pages/square.wxss */
 .all{
-  padding: 3%;
+  padding: 2%;
   background-color: whitesmoke;
 }
 
 .view-block{
   text-align: justify;
-  padding: 0 20rpx;
+  padding: 0 5rpx;
 }
 
 .view-left,.view-right{
@@ -35,6 +35,8 @@
 
 .view-image image{
   width: 100%;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
 }
 
 .view-content{
