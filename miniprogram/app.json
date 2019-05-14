@@ -1,5 +1,6 @@
 {
   "pages": [
+  
     "pages/square/square",
     "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
@@ -7,7 +8,9 @@
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
     "pages/userinfo/index/index",
-    "pages/sharing/sharingDetail/sharingDetail"
+    "pages/sharing/sharingDetail/sharingDetail", 
+    "cloudDemos/dbOperate/dbOperate"
+    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -6,7 +6,7 @@ Page({
    */
   data: {
     value: 0,
-    activeColor: 'rgba(0, 186, 173, 1)',
+    activeColor: '#000000',
     desc: '正在分析中，不要着急哦～～',
     animationData: ''
   },
@@ -16,7 +16,7 @@ Page({
   */
   changeColor() {
     let that = this;
-    that.setData({ desc: '分析成功!'})
+    that.setData({ activeColor: '#00baad',desc: '分析成功'})
   },
   
   /**
@@ -117,6 +117,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    
   }
 })
