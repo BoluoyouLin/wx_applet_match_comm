@@ -156,7 +156,8 @@
       
 </view>
 
-
+<template >
+</template>
   <!-- 上传图片
   <view class="uploader">
     <view class="uploader-text" bindtap="doUpload">

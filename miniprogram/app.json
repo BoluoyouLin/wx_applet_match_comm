@@ -2,7 +2,7 @@
   "pages": [
 
     "pages/square/square",
-"cloudDemos/dbOperate/dbOperate",
+    "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
     "pages/analyse/analyse",
     "pages/index/index",
