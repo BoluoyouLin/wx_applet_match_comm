@@ -9,8 +9,9 @@ Page({
    */
   data: {
     tabbar: {},
-    dataList: [],
-    cardList: []
+    cards: [],
+    page: 1,
+    pages: 0
   },
 
   /**
@@ -105,7 +106,7 @@ Page({
   },
 
   //  获取广场展示数据
-  async getSquareData() {
+  async getSquareData(pageNo) {
     let cardList = [] // 用于存储卡片数据
       ,
       userInfoList = [] // 用于存储用户信息
@@ -138,13 +139,14 @@ Page({
         userImage: cardImageList[i] === undefined ? errorImage : cardImageList[i],
         userName: userInfoList[i].name,
         content: cardList[i].content,
-        like: cardList[i].like,
+        like: cardList[i].like.length,
+        is_like: cardList[i].like.indexOf(userInfoList[i].user_id) === -1 ? 0 : 1,
         image: cardImageList[i] === undefined ? errorImage : cardImageList[i]
       })
     }
 
     that.setData({
-      dataList: results
+      cards: results
     })
   },
 
@@ -191,5 +193,15 @@ Page({
           console.error(err)
         })
     })
+  },
+
+  // 点赞和取消点赞
+  clickLike(card) {
+    let index = this.data.cards.indexOf(card)
+    let is_like = 1
+    if (this.data.cards[index].is_like === 1) is_like = 0
+    let tempCards = this.data.cards
+    tempCards[index].is_like = is_like
+    is_like === 1?tempCards[index].like++:tempCards[index].like--
   },
 })

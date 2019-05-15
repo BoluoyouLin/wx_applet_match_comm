@@ -19,7 +19,7 @@ Page({
     ctx.takePhoto({
       quality: 'high',
       success: (res) => {
-        console.log(res.tempImagePath, 'image')
+        console.log(res.tempImagePath, 'picture.js')
         that.setData({
           src: res.tempImagePath
         });

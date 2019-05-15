@@ -2,12 +2,12 @@
   <!-- 浏览模块 -->
   <view class='view-block'>
     <view class='view-left' >
-      <block wx:for='{{dataList}}' wx:key=''>
+      <block wx:for='{{cards}}' wx:key=''>
       <template is='view-item' data='{{...item}}' wx:if='{{index%2==0}}'></template>
       </block>
     </view>
     <view class='view-right' >
-    <block wx:for='{{dataList}}' wx:key=''>
+    <block wx:for='{{cards}}' wx:key=''>
       <template is='view-item' data='{{...item}}' wx:if='{{index%2==1}}'></template>
       </block>
     </view>
@@ -35,7 +35,8 @@
             <text>{{userName}}</text>
           </view> 
           <view class='content-info'>
-            <image src='../../assets/icons/like.png'></image>
+            <image src='../../assets/icons/like.png' wx:if="{{is_like === 0}}"></image>
+            <image src='../../assets/icons/likeAfter.png' wx:else></image>
             <text>{{like}}</text>
           </view>
         </view>
