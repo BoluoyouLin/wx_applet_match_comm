@@ -107,27 +107,45 @@ Page({
   //  获取广场展示数据
   async getSquareData() {
     let cardList = [] // 用于存储卡片数据
-      , userInfoList = [] // 用于存储用户信息
-      , cardImageList = [] // 用于存储卡片图片
- 
+      ,
+      userInfoList = [] // 用于存储用户信息
+      ,
+      cardImageList = [] // 用于存储卡片图片
+      ,
+      item // 存储临时数据
+
     // 获取卡片数据
     cardList = await this.getCardData()
-    // cardResult.then( res=>{
-    //   cardList = res.data
-    //   for (let i = 0; i < cardList.length; i++){
-    //     // 根据userId获取用户信息
-    //     userInfoResult = this.getUserInfo(cardList[i].user_id)
-    //     userInfoResult.then( res => {
-    //       userInfoList.push(res.data[0])
-    //     })
-    //     // 根据cardId获取相应图片
-    //     imageResult = this.getImageByCard(cardList[i]._id)
-    //     imageResult.then(res => {
-    //       cardImageList.push(res.data[0])
-    //     })
-    //   }
-    //   console.log('images', cardImageList,'userinfo',userInfoList)
-    // })
+    for (let i = 0; i < cardList.length; i++) {
+      // 根据userId获取用户信息
+      item = await this.getUserInfo(cardList[i].user_id)
+      userInfoList.push(item)
+      // 根据cardId获取相应图片
+      item = await this.getImageByCard(cardList[i]._id)
+      cardImageList.push(item)
+    }
+    this.displaySquareData(cardList, userInfoList, cardImageList)
+  },
+
+  // 生成页面所需要的数据对象
+  displaySquareData(cardList, userInfoList, cardImageList) {
+    let results = [],
+      errorImage = "../../assets/images/demo.jpg",
+      that = this
+
+    for (let i = 0; i < cardList.length; i++) {
+      results.push({
+        userImage: cardImageList[i] === undefined ? errorImage : cardImageList[i],
+        userName: userInfoList[i].name,
+        content: cardList[i].content,
+        like: cardList[i].like,
+        image: cardImageList[i] === undefined ? errorImage : cardImageList[i]
+      })
+    }
+
+    that.setData({
+      dataList: results
+    })
   },
 
   // 获取card数据
@@ -146,16 +164,32 @@ Page({
   },
 
   // 根据cardId获取对应图片
-  async getImageByCard(cardId) {
-    return await db.collection('picture').where({
-      card_id: cardId
-    }).get()
+  getImageByCard(cardId) {
+    return new Promise((resolve, reject) => {
+      db.collection('picture').where({
+          card_id: cardId
+        }).get()
+        .then(res => {
+          resolve(res.data[0])
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    })
   },
 
   // 根据userId获取用户信息
-  async getUserInfo(userId) {
-    return await db.collection('user').where({
-      user_id: userId
-    }).get()
+  getUserInfo(userId) {
+    return new Promise((resolve, reject) => {
+      db.collection('user').where({
+          user_id: userId
+        }).get()
+        .then(res => {
+          resolve(res.data[0])
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    })
   },
 })
