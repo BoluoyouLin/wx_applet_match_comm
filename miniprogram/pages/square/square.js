@@ -62,21 +62,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    let that = this
+    // 每隔10秒将当前状态更新到数据库
+    setInterval(function(){
+      that.updateLikeInDatabase()
+    }
+    , 10000) //循环时间 10秒  
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    // 将当前状态更新到数据库
+    this.updateLikeInDatabase()
   },
 
   /**
@@ -141,6 +146,7 @@ Page({
         content: cardList[i].content,
         like: cardList[i].like.length,
         is_like: cardList[i].like.indexOf(userInfoList[i].user_id) === -1 ? 0 : 1,
+        likeList: cardList[i].like,
         image: cardImageList[i] === undefined ? errorImage : cardImageList[i]
       })
     }
@@ -196,12 +202,46 @@ Page({
   },
 
   // 点赞和取消点赞
-  clickLike(card) {
-    let index = this.data.cards.indexOf(card)
-    let is_like = 1
-    if (this.data.cards[index].is_like === 1) is_like = 0
-    let tempCards = this.data.cards
-    tempCards[index].is_like = is_like
-    is_like === 1?tempCards[index].like++:tempCards[index].like--
+  // 0是未点赞 1是点赞
+  clickLike(e) {
+    let index = e.currentTarget.dataset.index,
+      tempCards = this.data.cards;
+    if (tempCards[index].is_like === 1) {
+      tempCards[index].is_like = 0;
+      if (tempCards[index].like > 0) {
+        tempCards[index].like--;
+      }
+      tempCards[index].likeList.push(app.globalData.weId.openid);
+    } else {
+      tempCards[index].is_like = 1;
+      tempCards[index].like++;
+      tempCards[index].likeList.push(app.globalData.weId.openid);
+    }
+    this.setData({
+      cards: tempCards
+    });
   },
+
+  // 将最新点赞数据更新到数据库
+  updateLikeInDatabase() {
+    console.log('updataLikeDatabase')
+    let that = this,
+    tempCards = that.data.cards
+    console.log(tempCards)
+    for (let i = 0; i < tempCards.length; i++) {
+      wx.collection('card').where({
+          _id: tempCards[i]._id
+        })
+        .update({
+          like: tempCards.likeList
+        })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log('shibai')
+          console.error(err)
+        })
+    }
+  }
 })
