@@ -196,12 +196,16 @@ Page({
   },
 
   // 点赞和取消点赞
-  clickLike(card) {
-    let index = this.data.cards.indexOf(card)
+  clickLike(e) {
+    let index = e.currentTarget.dataset.index
+    console.log(index)
     let is_like = 1
     if (this.data.cards[index].is_like === 1) is_like = 0
     let tempCards = this.data.cards
     tempCards[index].is_like = is_like
-    is_like === 1?tempCards[index].like++:tempCards[index].like--
+    is_like === 1 ? tempCards[index].like++ : tempCards[index].like--
+      this.setData({
+        cards: tempCards
+      })
   },
 })
