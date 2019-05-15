@@ -1,12 +1,11 @@
 
-import user_service from './assets/services/user_service.js'
+// import user_service from './assets/services/user_service.js'
 wx.cloud.init()
-
 const db = wx.cloud.database()
 //app.js
 App({
 
-  ...user_service.service, //解构
+  // ...user_service.service, //解构
 
   onLaunch: function () {
     
@@ -18,10 +17,9 @@ App({
       })
     }
 
-
-
     //隐藏系统tabbar
     wx.hideTabBar();
+
     //获取设备信息
     this.getSystemInfo();
 
@@ -128,20 +126,56 @@ App({
     //已经获取到了当前用户得用户信息
     console.log("这里", this.globalData.weId)
     if (this.globalData.userInfo) {
-      let box=this.getUserByOpenid(this.globalData.weId.openid)
-      if (box.data.length!=0){
-        console.log("已存在")
-      }else{
-        let user={
-          avatar:this.globalData.userInfo.avatar,
-          label:'',
-          name: this.globalData.userInfo.nickName,
-          resume:'',
-          sex:'-1',
-          user_id:this.globalData.weId.openid
-        }
-        this.insertNewUser(user)
+      // let box=
+
+      // db.collection("user").where({
+      //   user_id: this.globalData.weId.openid
+      // }).get().then(res => {
+      //   box=res
+            
+      // }).catch(err => {
+      //       console.error(err)
+ 
+      // })}
+      
+      try{
+          db.collection("user")
+          .where({
+            user_id: this.globalData.weId.openid
+          }).get().then(res => {
+
+            if (res.data.length != 0) {
+              console.log("已存在")
+            } else {
+              console.log("不存在")
+              let user = {
+                avatar: this.globalData.userInfo.avatar,
+                label: '',
+                name: this.globalData.userInfo.nickName,
+                resume: '',
+                sex: '-1',
+                user_id: this.globalData.weId.openid
+              }
+              db.collection('user').add({
+                data: user
+              }).then(res => {
+                console.log(res)
+              }).catch(err => {
+                console.error(err)
+              })
+            }
+           
+          }).catch(err => {
+            console.error(err)
+            
+          })
       }
+      catch(e){
+        console.error(e)
+      }
+
+
+      
        
       
     }
