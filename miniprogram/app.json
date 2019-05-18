@@ -10,7 +10,7 @@
     "pages/sharing/sharingDetail/sharingDetail"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#38373d",
     "backgroundTextStyle": "light",
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#38373d",

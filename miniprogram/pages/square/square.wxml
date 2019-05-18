@@ -32,7 +32,7 @@
       <view class='content-bottom'>
         <view class='content-user-info'>
           <image src='{{item.userImage}}'></image>
-          <text>{{userName}}</text>
+          <text>{{item.userName}}</text>
         </view>
         <view class='content-info'>
           <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/like.png' wx:if="{{item.is_like === 0}}"></image>
