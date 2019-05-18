@@ -64,17 +64,15 @@ Page({
   onShow: function() {
     let that = this
     // 每隔10秒将当前状态更新到数据库
-    setInterval(function(){
+    setInterval(function() {
       that.updateLikeInDatabase()
-    }
-    , 10000) //循环时间 10秒  
+    }, 10000) //循环时间 10秒  
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
-  },
+  onHide: function() {},
 
   /**
    * 生命周期函数--监听页面卸载
@@ -141,6 +139,7 @@ Page({
 
     for (let i = 0; i < cardList.length; i++) {
       results.push({
+        id: cardList[i]._id,
         userImage: cardImageList[i] === undefined ? errorImage : cardImageList[i],
         userName: userInfoList[i].name,
         content: cardList[i].content,
@@ -224,24 +223,16 @@ Page({
 
   // 将最新点赞数据更新到数据库
   updateLikeInDatabase() {
-    console.log('updataLikeDatabase')
-    let that = this,
-    tempCards = that.data.cards
-    console.log(tempCards)
-    for (let i = 0; i < tempCards.length; i++) {
-      wx.collection('card').where({
-          _id: tempCards[i]._id
-        })
-        .update({
-          like: tempCards.likeList
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log('shibai')
-          console.error(err)
-        })
-    }
+    // let that = this
+    wx.cloud.callFunction({
+      name: 'updateLikeInDatabase',
+      data: {
+        tempCards: this.data.cards
+      }
+    }).then(res => {
+      console.log('success', res)
+    }).catch(err => {
+      console.error('fail', err)
+    })
   }
 })
