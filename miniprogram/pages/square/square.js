@@ -123,13 +123,18 @@ Page({
   async getSquareData() {
     let cardList = [], // 用于存储卡片数据
       that = this,
-      tempCards = [],
-      temp = {},
       openId = await that.getOpenId()
 
     // 获取卡片数据
     cardList = await this.getCardData()
 
+    return this.packSquareData(cardList,openId);
+  },
+
+  // 包装广场显示数据
+  packSquareData(cardList,openId) {
+    let result = [],
+      temp = {}
     for (let i = 0; i < cardList.length; i++) {
       temp = {
         id: cardList[i]._id,
@@ -138,17 +143,17 @@ Page({
         like: cardList[i].like.length,
         likeList: cardList[i].like,
         is_shared: cardList[i].is_shared,
-        image: cardList[i].images[0],
+        image: cardList[i].images[0] === undefined ? '../../assets/images/demo1.JPG' : cardList[i].images[0],
         userName: cardList[i].userName,
-        userImage: cardList[i].userImage,
+        userImage: cardList[i].userImage === undefined ? '../../assets/images/demo1.JPG' : cardList[i].userImage,
         is_like: cardList[i].like.indexOf(openId) === -1 ? 0 : 1,
         create_at: cardList[i].create_at,
         publish_at: cardList[i].publish_at
       }
-      tempCards.push(temp)
+      result.push(temp)
     }
 
-    return tempCards;
+    return result;
   },
 
   // 获取card数据
@@ -188,42 +193,27 @@ Page({
   async onReachData() {
     wx.showToast({
       icon: 'loading',
-      title: '疯狂加载中～'
+      title: '疯狂加载中'
     })
     let that = this,
       cardList = that.data.cards,
-      result = await that.getReachData(that.data.cards[cardList.length-1].publish_at),
+      result = await that.getReachData(that.data.cards[cardList.length - 1].publish_at),
       tempCards = [],
-      openId = await that.getOpenId(),
-      temp = {}
-    if (result.length > 0){
-      for (let i = 0; i < result.length; i++) {
-        temp = {
-          id: result[i]._id,
-          user_id: result[i].user_id,
-          content: result[i].content,
-          like: result[i].like.length,
-          likeList: result[i].like,
-          is_shared: result[i].is_shared,
-          image: result[i].images[0],
-          userName: result[i].userName,
-          userImage: result[i].userImage,
-          is_like: result[i].like.indexOf(openId) === -1 ? 0 : 1,
-          create_at: result[i].create_at,
-          publish_at: result[i].publish_at
-        }
-        tempCards.push(temp)
-      }
+      openId = await that.getOpenId()
+    if (result.length > 0) {
+      tempCards = this.packSquareData(result,openId)
       cardList.push.apply(cardList, tempCards)
       that.setData({
         cards: cardList
       })
       wx.hideToast();
-    }else{
+    } else {
+      // 没有更多内容
       wx.hideToast();
       wx.showToast({
-        title: '到底啦',
-        duration: 3000
+        title: '居然没了',
+        duration: 3000,
+        image:'../../assets/icons/bottom.png'
       })
     }
   },
