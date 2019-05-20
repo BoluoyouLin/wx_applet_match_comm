@@ -99,16 +99,27 @@ page {
   background-color: rgba(255, 255, 255, 1)
 }
 
-#information-content>view>view{
-  margin-bottom:20rpx;
-}
-
 #information-content>view>view:first-child{
   color: rgba(0, 186, 173, 1);
   font-size: 36rpx;
 }
 
 #information-content>view>view:nth-child(2){
+  color: rgba(166, 166, 166, 1);
+  margin-bottom: 48rpx;
+  font-size: 30rpx;
+}
+
+#infor-tag>view>view{
+  margin-bottom:20rpx;
+}
+
+#infor-tag>view>view:first-child{
+  color: rgba(0, 186, 173, 1);
+  font-size: 36rpx;
+}
+
+#infor-tag>view>view:nth-child(2){
   color: rgba(166, 166, 166, 1);
   margin-bottom: 48rpx;
   font-size: 30rpx;

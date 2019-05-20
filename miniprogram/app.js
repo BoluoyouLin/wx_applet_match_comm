@@ -1,5 +1,5 @@
 
-// import user_service from './assets/services/user_service.js'
+import regeneratorRuntime from './regenerator-runtime/runtime.js';
 wx.cloud.init()
 const db = wx.cloud.database()
 //app.js
@@ -27,37 +27,144 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log("login",res)
+
+        // 获取用户信息
+        wx.getSetting({
+          success: res => {
+            if (res.authSetting['scope.userInfo']) {
+              console.log("自动登陆成功")
+              // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+              this.dataInit()
+            }
+            else{
+              console.log("自动登陆失败")
+            }
+          }
+        })
       }
     }) 
     //先登陆再获取用户信息，openid，等，不然会有弹出框
 
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+  },
 
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+  //必须要设置同步
+
+  dataInit:function(){
+    
+      wx.getUserInfo({
+        success: res => {
+          // 可以将 res 发送给后台解码出 unionId
+          this.globalData.userInfo = res.userInfo
+
+          // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+          // 所以此处加入 callback 以防止这种情况
+          if (this.userInfoReadyCallback) {
+            this.userInfoReadyCallback(res)
+          }
+
+          this.getIdColl()
+          resolve()
+        },
+        fail: err => {
+          cosnole.log(err)
+        }
+      })
+   
+  },
+
+  //获取id集合
+  getIdColl:function() {
+    console.log("===>getweId")
+    //获取id集合
+    
+      wx.cloud.callFunction({
+        name: 'login'
+      }).then(res => {
+        this.globalData.weId = res.result
+        this.suerInUserColl()
+        this.getUserDt()
+        resolve()
+        // this.getUserDt()
+      }).catch(err => {
+        console.log(err)
+      })
+   
+    
+  },
+
+  //判断当前用1 tg户是否已经在user集合中
+  //不再即添加
+  suerInUserColl() {
+    console.log("===>suerInUserColl")
+    //已经获取到了当前用户得用户信息
+    return new Promise((resolve, reject)=>{
+
+      if (this.globalData.userInfo) {
+        try {
+          db.collection("user")
+            .where({
+              user_id: this.globalData.weId.openid
+            }).get().then(res => {
+
+              if (res.data.length != 0) {
+                resolve("")
+                console.log("已存在")
+              } else {
+                console.log("不存在")
+                let user = {
+                  avatar: this.globalData.userInfo.avatar,
+                  label: '',
+                  name: this.globalData.userInfo.nickName,
+                  resume: '',
+                  sex: '-1',
+                  user_id: this.globalData.weId.openid
+                }
+                db.collection('user').add({
+                  data: user
+                }).then(res => {
+                 
+                  console.log(res)
+                }).catch(err => {
+                  console.error(err)
+                })
               }
-            },
-            fail:err=>{
-              cosnole.log(err)
-            }
+
+            }).catch(err => {
+              console.error(err)
+
+            })
+        }
+        catch (e) {
+          console.error(e)
+        }
+      }
+      else {
+        console.error("未登录")
+      }
+    })
+  },
+
+  //获取用户表信息
+  getUserDt: function () {
+    console.log("===>global-getUserDetail")
+    console.log(this.globalData.weId.openid)
+    return new Promise((resolve,reject)=>{
+      while (true) {
+        if (this.globalData.weId.openid != null) {
+          db.collection("user").where({
+            user_id: this.globalData.weId.openid
+          }).get().then(res => {
+            console.log(res)
+            this.globalData.userDetail = res.data[0]
+            resolve("")
+          }).catch(err => {
+            console.log(err)
           })
+          break;
         }
       }
     })
-
-    
-    this.getIdColl()
-    // this.suerInUserColl()
     
   },
 
@@ -104,87 +211,7 @@ App({
     })
   },
   
-  //获取id集合
-  getIdColl:function(){
-    //获取id集合
-    wx.cloud.callFunction({
-      name: 'login'
-    }).then(res => {
-      this.globalData.weId = res.result
-      console.log(res.result)
-      this.suerInUserColl()
-    }).catch(err => {
-      console.log(err)
-    })
-  },
-
-  //判断当前用1 tg户是否已经在user集合中
-  //不再即添加
-  suerInUserColl(){
-    
-    
-    //已经获取到了当前用户得用户信息
-    console.log("这里", this.globalData.weId)
-    if (this.globalData.userInfo) {
-      // let box=
-
-      // db.collection("user").where({
-      //   user_id: this.globalData.weId.openid
-      // }).get().then(res => {
-      //   box=res
-            
-      // }).catch(err => {
-      //       console.error(err)
- 
-      // })}
-      
-      try{
-          db.collection("user")
-          .where({
-            user_id: this.globalData.weId.openid
-          }).get().then(res => {
-
-            if (res.data.length != 0) {
-              console.log("已存在")
-            } else {
-              console.log("不存在")
-              let user = {
-                avatar: this.globalData.userInfo.avatar,
-                label: '',
-                name: this.globalData.userInfo.nickName,
-                resume: '',
-                sex: '-1',
-                user_id: this.globalData.weId.openid
-              }
-              db.collection('user').add({
-                data: user
-              }).then(res => {
-                console.log(res)
-              }).catch(err => {
-                console.error(err)
-              })
-            }
-           
-          }).catch(err => {
-            console.error(err)
-            
-          })
-      }
-      catch(e){
-        console.error(e)
-      }
-
-
-      
-       
-      
-    }
-    else {
-      console.error("未登录")
-    }
-    
-    
-  },
+  
   // --------------------------
 
   onShow: function () {
@@ -229,12 +256,18 @@ App({
       tabbar: tabbar
     });
   },
+
+  
+
+  
   
   globalData: {
+
     weId:null,
     systemInfo: null,//客户端设备信息
     userInfo: null,//用户信息-是否登陆
     userId:null,//用户id
+    userDetail: null,//用户表,
     tabBar: {
       "backgroundColor": "#ffffff",
       "color": "#979795",

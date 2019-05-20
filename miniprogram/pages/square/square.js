@@ -208,6 +208,10 @@ Page({
     if (tempCards[index].is_like === 1) {
       tempCards[index].is_like = 0;
       if (tempCards[index].like > 0) {
+
+        //openid
+
+
         tempCards[index].like--;
       }
       tempCards[index].likeList.push(app.globalData.weId.openid);
@@ -223,6 +227,7 @@ Page({
 
   // 将最新点赞数据更新到数据库
   updateLikeInDatabase() {
+  
     // let that = this
     wx.cloud.callFunction({
       name: 'updateLikeInDatabase',
@@ -234,5 +239,8 @@ Page({
     }).catch(err => {
       console.error('fail', err)
     })
+
   }
+
+ 
 })
