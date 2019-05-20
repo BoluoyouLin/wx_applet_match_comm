@@ -2,6 +2,7 @@
 import regeneratorRuntime from '../../regenerator-runtime/runtime.js';
 const app = getApp();
 const db = wx.cloud.database();
+let util = require('../../utils/util.js')
 Page({
 
   /**
@@ -19,10 +20,7 @@ Page({
    */
   onLoad: function(options) {
     console.log(app.globalData)
-    // 获取广场数据
-    this.getSquareData()
     app.editTabbar();
-
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -62,11 +60,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    let that = this
-    // 每隔10秒将当前状态更新到数据库
-    setInterval(function() {
-      that.updateLikeInDatabase()
-    }, 10000) //循环时间 10秒  
+    this.firstDisplay();
   },
 
   /**
@@ -77,23 +71,29 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-    // 将当前状态更新到数据库
-    this.updateLikeInDatabase()
-  },
+  onUnload: function() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    let that = this
+    wx.showLoading({
+      title: '疯狂加载中～'
+    })
+    that.getSquareData().then(res => {
+      that.setData({
+        cards: res
+      })
+      wx.hideLoading();
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    this.onReachData();
   },
 
   /**
@@ -108,59 +108,56 @@ Page({
     app.showMenu();
   },
 
-  //  获取广场展示数据
-  async getSquareData(pageNo) {
-    let cardList = [] // 用于存储卡片数据
-      ,
-      userInfoList = [] // 用于存储用户信息
-      ,
-      cardImageList = [] // 用于存储卡片图片
-      ,
-      item // 存储临时数据
-
-    // 获取卡片数据
-    cardList = await this.getCardData()
-    for (let i = 0; i < cardList.length; i++) {
-      // 根据userId获取用户信息
-      item = await this.getUserInfo(cardList[i].user_id)
-      userInfoList.push(item)
-      // 根据cardId获取相应图片
-      item = await this.getImageByCard(cardList[i]._id)
-      cardImageList.push(item)
-    }
-    this.displaySquareData(cardList, userInfoList, cardImageList)
-  },
-
-  // 生成页面所需要的数据对象
-  displaySquareData(cardList, userInfoList, cardImageList) {
-    let results = [],
-      errorImage = "../../assets/images/demo.jpg",
-      that = this
-
-    for (let i = 0; i < cardList.length; i++) {
-      results.push({
-        id: cardList[i]._id,
-        userImage: cardImageList[i] === undefined ? errorImage : cardImageList[i],
-        userName: userInfoList[i].name,
-        content: cardList[i].content,
-        like: cardList[i].like.length,
-        is_like: cardList[i].like.indexOf(userInfoList[i].user_id) === -1 ? 0 : 1,
-        likeList: cardList[i].like,
-        image: cardImageList[i] === undefined ? errorImage : cardImageList[i]
+  // 第一次渲染界面
+  firstDisplay() {
+    let that = this
+    // 获取广场数据
+    this.getSquareData().then(res => {
+      that.setData({
+        cards: res
       })
-    }
-
-    that.setData({
-      cards: results
     })
   },
 
+  //  获取广场展示数据
+  async getSquareData() {
+    let cardList = [], // 用于存储卡片数据
+      that = this,
+      tempCards = [],
+      temp = {},
+      openId = await that.getOpenId()
+
+    // 获取卡片数据
+    cardList = await this.getCardData()
+
+    for (let i = 0; i < cardList.length; i++) {
+      temp = {
+        id: cardList[i]._id,
+        user_id: cardList[i].user_id,
+        content: cardList[i].content,
+        like: cardList[i].like.length,
+        likeList: cardList[i].like,
+        is_shared: cardList[i].is_shared,
+        image: cardList[i].images[0],
+        userName: cardList[i].userName,
+        userImage: cardList[i].userImage,
+        is_like: cardList[i].like.indexOf(openId) === -1 ? 0 : 1,
+        create_at: cardList[i].create_at,
+        publish_at: cardList[i].publish_at
+      }
+      tempCards.push(temp)
+    }
+
+    return tempCards;
+  },
+
   // 获取card数据
-  getCardData() {
+  getCardData(dae) {
+    let comm = db.command
     return new Promise((resolve, reject) => {
       db.collection('card').where({
-          is_shared: 1
-        }).get()
+          is_shared: 1,
+        }).orderBy('publish_at', 'desc').get()
         .then(res => {
           resolve(res.data)
         })
@@ -170,14 +167,16 @@ Page({
     })
   },
 
-  // 根据cardId获取对应图片
-  getImageByCard(cardId) {
+  // 获取上拉加载数据
+  getReachData(date) {
+    let comm = db.command
     return new Promise((resolve, reject) => {
-      db.collection('picture').where({
-          card_id: cardId
-        }).get()
+      db.collection('card').where({
+          is_shared: 1,
+          publish_at: comm.lt(date)
+        }).orderBy('publish_at', 'desc').get()
         .then(res => {
-          resolve(res.data[0])
+          resolve(res.data)
         })
         .catch(err => {
           console.error(err)
@@ -185,19 +184,48 @@ Page({
     })
   },
 
-  // 根据userId获取用户信息
-  getUserInfo(userId) {
-    return new Promise((resolve, reject) => {
-      db.collection('user').where({
-          user_id: userId
-        }).get()
-        .then(res => {
-          resolve(res.data[0])
-        })
-        .catch(err => {
-          console.error(err)
-        })
+  // 上拉加载
+  async onReachData() {
+    wx.showToast({
+      icon: 'loading',
+      title: '疯狂加载中～'
     })
+    let that = this,
+      cardList = that.data.cards,
+      result = await that.getReachData(that.data.cards[cardList.length-1].publish_at),
+      tempCards = [],
+      openId = await that.getOpenId(),
+      temp = {}
+    if (result.length > 0){
+      for (let i = 0; i < result.length; i++) {
+        temp = {
+          id: result[i]._id,
+          user_id: result[i].user_id,
+          content: result[i].content,
+          like: result[i].like.length,
+          likeList: result[i].like,
+          is_shared: result[i].is_shared,
+          image: result[i].images[0],
+          userName: result[i].userName,
+          userImage: result[i].userImage,
+          is_like: result[i].like.indexOf(openId) === -1 ? 0 : 1,
+          create_at: result[i].create_at,
+          publish_at: result[i].publish_at
+        }
+        tempCards.push(temp)
+      }
+      cardList.push.apply(cardList, tempCards)
+      that.setData({
+        cards: cardList
+      })
+      wx.hideToast();
+    }else{
+      wx.hideToast();
+      wx.showToast({
+        title: '到底啦',
+        duration: 3000
+      })
+    }
   },
 
   // 点赞和取消点赞
@@ -210,29 +238,67 @@ Page({
       if (tempCards[index].like > 0) {
         tempCards[index].like--;
       }
-      tempCards[index].likeList.push(app.globalData.weId.openid);
+      let likeIndex = tempCards[index].likeList.indexOf(app.globalData.weId.openi);
+      tempCards[index].likeList.splice(likeIndex, 1)
+      this.updateLikeByCard(tempCards[index])
     } else {
       tempCards[index].is_like = 1;
       tempCards[index].like++;
       tempCards[index].likeList.push(app.globalData.weId.openid);
+      this.updateLikeByCard(tempCards[index])
     }
     this.setData({
       cards: tempCards
     });
   },
 
-  // 将最新点赞数据更新到数据库
-  updateLikeInDatabase() {
-    // let that = this
+  // 获取OpenID
+  getOpenId() {
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {
+          tempCards: this.data.cards
+        }
+      }).then(res => {
+        resolve(res.result.openid)
+
+      }).catch(err => {
+        console.error('fail', err)
+      })
+    })
+  },
+
+  // 更新点赞数据到云数据库
+  updateLikeByCard(card) {
     wx.cloud.callFunction({
-      name: 'updateLikeInDatabase',
+      name: 'updateLikeByCard',
       data: {
-        tempCards: this.data.cards
+        card: card
       }
-    }).then(res => {
-      console.log('success', res)
-    }).catch(err => {
+    }).then(res => {}).catch(err => {
       console.error('fail', err)
     })
-  }
+  },
+
+  // setAAData() {
+  //   db.collection('card').add({
+  //     data: {
+  //       user_id: 'ogXH-4wot-rrPkXrpWQxP4sEm2ns',
+  //       content: '坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流,坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流。',
+  //       like: [],
+  //       is_shared: 1,
+  //       images: [],
+  //       userName: '新一',
+  //       userImage: '#',
+  //       create_at: new Date(),
+  //       publish_at: new Date()
+  //     }
+  //   }).then(res => {
+  //     console.log(res, 'success')
+  //   }).catch(err => {
+  //     console.log(err, 'error')
+  //   })
+  // }
+
 })
