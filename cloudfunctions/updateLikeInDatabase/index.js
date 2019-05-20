@@ -8,6 +8,8 @@ const db = cloud.database();
 // 云函数入口函数
 exports.main = async(event, context) => {
   let tempCards = event.tempCards;
+  console.log(tempCards)
+  
   for (let i = 0; i < tempCards.length; i++) {
     return await db.collection('card').where({
         _id: tempCards[i].id
