@@ -1,0 +1,23 @@
+/* pages/cardDetails/cardDetails.wxss */
+.details-all {
+  margin: 0;
+  padding:0;
+  width: 100%
+}
+
+ /* 用户信息 */
+.title-bar{
+  height: 100rpx;
+  width: 100%;
+  display: flex
+}
+
+.avatar{
+  flex: 2
+}
+
+.title-bar image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%
+}

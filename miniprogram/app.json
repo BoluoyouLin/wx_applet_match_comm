@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/cardDetails/cardDetails",
     "pages/square/square",
     "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",

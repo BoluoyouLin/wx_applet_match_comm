@@ -1,0 +1,22 @@
+<!--pages/cardDetails/cardDetails.wxml-->
+<view class='details-all'>
+  <!--  用户信息-->
+  <view class='title-bar'>
+    <view class='avatar'>
+      <image src='../../assets/images/demo1.JPG'></image>
+    </view>
+    <text>菠萝油</text>
+  </view>
+  <!-- 文章主体 -->
+  <view class='details-body'>
+    <!-- 内容 -->
+    <view class='content'>
+      <!-- 段落 -->
+      <view></view>
+      <!-- 图片 -->
+      <view></view>
+    </view>
+    <!-- 分析表格 -->
+    <view class='table'></view>
+  </view>
+</view>
