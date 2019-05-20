@@ -10,9 +10,7 @@ Page({
    */
   data: {
     tabbar: {},
-    cards: [],
-    page: 1,
-    pages: 0
+    cards: []
   },
 
   /**
@@ -145,10 +143,10 @@ Page({
         is_shared: cardList[i].is_shared,
         image: cardList[i].images[0] === undefined ? '../../assets/images/demo1.JPG' : cardList[i].images[0],
         userName: cardList[i].userName,
-        userImage: cardList[i].userImage === undefined ? '../../assets/images/demo1.JPG' : cardList[i].userImage,
+        userImage: cardList[i].userImage === undefined ? '../../assets/icons/bottom.png' : cardList[i].userImage,
         is_like: cardList[i].like.indexOf(openId) === -1 ? 0 : 1,
-        // create_at: cardList[i].create_at,
-        // publish_at: cardList[i].publish_at
+        create_at: JSON.stringify(cardList[i].create_at),
+        publish_at: JSON.stringify(cardList[i].publish_at)
       }
       result.push(temp)
     }
@@ -178,7 +176,7 @@ Page({
     return new Promise((resolve, reject) => {
       db.collection('card').where({
           is_shared: 1,
-          publish_at: comm.lt(date)
+          publish_at: comm.lt(new Date(JSON.parse(date)))
         }).orderBy('publish_at', 'desc').get()
         .then(res => {
           resolve(res.data)
