@@ -28,7 +28,7 @@ page {
     width: 100%;
     height: 100%;
     background-image: url('http://img5.imgtn.bdimg.com/it/u=1324113120,4149008103&fm=26&gp=0.jpg');
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,7 +68,7 @@ page {
   width: 36rpx;
   height: 36rpx;
   padding:0;
-  
+
 }
 
 #user_sex >image{
@@ -99,16 +99,27 @@ page {
   background-color: rgba(255, 255, 255, 1)
 }
 
-#information-content>view>view{
-  margin-bottom:20rpx;
-}
-
 #information-content>view>view:first-child{
   color: rgba(0, 186, 173, 1);
   font-size: 36rpx;
 }
 
 #information-content>view>view:nth-child(2){
+  color: rgba(166, 166, 166, 1);
+  margin-bottom: 48rpx;
+  font-size: 30rpx;
+}
+
+#infor-tag>view>view{
+  margin-bottom:20rpx;
+}
+
+#infor-tag>view>view:first-child{
+  color: rgba(0, 186, 173, 1);
+  font-size: 36rpx;
+}
+
+#infor-tag>view>view:nth-child(2){
   color: rgba(166, 166, 166, 1);
   margin-bottom: 48rpx;
   font-size: 30rpx;
@@ -134,7 +145,7 @@ page {
 }
 
 #sharing-content>view{
- 
+
 }
 
 .sharing-article{
