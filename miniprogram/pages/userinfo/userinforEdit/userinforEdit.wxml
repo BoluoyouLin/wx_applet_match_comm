@@ -1,2 +1,52 @@
-<!--pages/userinfo/userinforEdit/userinforEdit.wxml-->
-<text>pages/userinfo/userinforEdit/userinforEdit.wxml</text>
+<view class="container" id="infor-edit">
+  <view id="edit-swrap">
+
+    <view id="edit-pictur">
+      <view class="edit-section" hover-class="change-color">
+        <view class="section-name" >
+            背景墙
+        </view>
+        <view class="section-value"></view>
+      </view>
+      <view class="edit-section"  hover-class="change-color">
+        <view class="section-name"> 
+            头像
+        </view>
+        <view class="section-value"></view>
+      </view>
+
+    </view>
+    <view  id="edit-name">
+      <!-- ====================== -->
+      <view class="edit-section" hover-class="change-color">
+        <view class="section-name"  >
+          昵称
+        </view>
+        <view class="section-value"  >
+        </view>
+      </view>
+
+    </view>
+
+    <view id="edit-infor">
+
+      <!-- ============================ -->
+      <view class="edit-section"  hover-class="change-color">
+        <view class="section-name"  >
+          个人简介
+        </view>
+        <view class="section-value"  >
+        </view>
+      </view>
+      <view class="edit-section"  hover-class="change-color">
+        <view class="section-name"  >
+          标签
+        </view>
+        <view class="section-value" >
+        </view>
+      </view>
+
+    </view>
+   
+  </view>
+</view>

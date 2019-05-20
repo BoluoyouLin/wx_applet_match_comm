@@ -187,8 +187,9 @@ page {
 
 .tag-title {
   position: relative;
-  min-height: 50rpx;
-  margin-bottom: 40rpx;
+  min-height: 100rpx;
+  margin-bottom: 10rpx;
+  line-height:100rpx;
 }
 
 .tag-name{
@@ -197,9 +198,13 @@ page {
   left:0;
 }
 
+.tag-tag{
+  line-height: 100rpx;
+}
+
 .tag-tag>image{
   position:absolute;
-  top:0;
+  top:30%;
   right:58rpx;
   width:40rpx;
   height:40rpx;
@@ -230,4 +235,8 @@ page {
 #bc-id{
   font-size: 30rpx;
   color:rgba(255, 255, 255, 1);
+}
+
+.change-color{
+  background-color: rgb(233, 232, 232)
 }

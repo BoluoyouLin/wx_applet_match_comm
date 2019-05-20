@@ -47,6 +47,7 @@ Page({
         }
       })
     }
+    // this.setAAData()
   },
 
   /**
@@ -282,23 +283,27 @@ Page({
   },
 
   // setAAData() {
-  //   db.collection('card').add({
-  //     data: {
-  //       user_id: 'ogXH-4wot-rrPkXrpWQxP4sEm2ns',
-  //       content: '坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流,坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流。',
-  //       like: [],
-  //       is_shared: 1,
-  //       images: [],
-  //       userName: '新一',
-  //       userImage: '#',
-  //       create_at: new Date(),
-  //       publish_at: new Date()
-  //     }
-  //   }).then(res => {
-  //     console.log(res, 'success')
-  //   }).catch(err => {
-  //     console.log(err, 'error')
-  //   })
+  //   console.log("setAAData")
+  //   for(let i=0;i<7;i++){
+  //     db.collection('card').add({
+  //       data: {
+  //         user_id: 'ogXH-4wndcGNNpEnHm6TPmw-uZpk',
+  //         content: '坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流,坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流。',
+  //         like: [],
+  //         is_shared: 1,
+  //         images: [],
+  //         userName: '"Tokie_Chen"',
+  //         userImage: '#',
+  //         create_at: new Date(),
+  //         publish_at: new Date()
+  //       }
+  //     }).then(res => {
+  //       console.log(res, 'success')
+  //     }).catch(err => {
+  //       console.log(err, 'error')
+  //     })
+  //   }
+    
   // }
 
 })

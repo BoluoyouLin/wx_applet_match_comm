@@ -1,1 +1,60 @@
 /* pages/userinfo/userinforEdit/userinforEdit.wxss */
+page{
+  height: 100%
+}
+
+#infor-edit{
+    padding-left:30rpx;
+    padding-right: 30rpx;
+    height: 100%;
+}
+
+#edit-pictur{
+    margin-bottom: 30rpx;
+    margin-top:30rpx;
+}
+
+#edit-name{
+    margin-bottom: 30rpx;
+}
+
+#edit-infor{
+    margin-bottom: 30rpx;
+}
+
+#edit-swrap{
+    padding:30rpx;
+    height: 100%;
+    width:100%;
+    background-color: rgb(247, 251, 240)
+}
+
+.edit-section{
+    display:flex;
+    flex-direction: row;
+    min-height: 100rpx;
+    background-color: rgb(255,255,255);
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.section-name{
+    border-width: 2rpx 0rpx 2rpx 0rpx;
+    border-color: rgb(222, 223, 222);
+    border-style: solid;
+    width:30%;
+    line-height:100rpx;
+    
+}
+
+.section-value{
+    border-width: 2rpx 0rpx 2rpx 0rpx;
+    border-color: rgb(222, 223, 222);
+    border-style: solid;
+    width:70%;
+  
+}
+
+.change-color{
+    background-color: rgb(233, 232, 232)
+}

@@ -96,7 +96,7 @@
     <!-- 默认是展开状态 -->
     <view>
       <block wx:if="{{isShard}}">
-        <view class="tag-title" bindtap='unfoldShard'>
+        <view class="tag-title" bindtap='unfoldShard' hover-class="change-color">
             <view class="tag-name">已分享</view>
             <view class="tag-tag">
               <image src='../../../assets/images/右.png'></image>
@@ -105,7 +105,7 @@
       </block>
 
       <block wx:else>
-        <view class="tag-title" bindtap='foldShard'>
+        <view class="tag-title" bindtap='foldShard' hover-class="change-color">
             <view class="tag-name">已分享</view>
             <view class="tag-tag">
               <image src='../../../assets/images/下.png'></image>
@@ -130,7 +130,7 @@
     <view>
       <view wx:if="{{isUnshard}}">
 
-        <view class="tag-title" bindtap='unfoldUnshard'>
+        <view class="tag-title" bindtap='unfoldUnshard' hover-class='change-color'>
 
           <view class="tag-name">未分享</view>
           <view class="tag-tag">

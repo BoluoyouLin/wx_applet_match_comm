@@ -5,7 +5,7 @@ const db = wx.cloud.database()
 Page({
   data: {
     // avatarUrl: './user-unlogin.png',
-    userInfo: {},
+    userInfo: null,
     logged: false,//是否登陆
     takeSession: false,
     requestResult: '',
@@ -14,7 +14,7 @@ Page({
     isShard:false,
     isUnshard: false,
     userDetail:null,//用户表
-
+    openid:null
   },
 
   onLoad: function() {
@@ -32,10 +32,8 @@ Page({
         avatarUrl: app.globalData.userInfo.avatarUrl,
         logged: true,
         userDetail: app.globalData.userDetail
-
       })
-
-
+      this.dataInit();
       // this.getUserDt()
     }
     //全局没登陆就重新调用用户登陆方法
@@ -43,16 +41,20 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       console.log("2")
+
       app.userInfoReadyCallback = res => {
+        console.log("2-1")
         this.setData({
-          userInfo: res.userInfo,
+          userInfo:  res.userInfo,
           avatarUrl: app.globalData.userInfo.avatarUrl,
           logged: true
-        
         })
-
+        this.dataInit();
+        console.log(this.data.userInfo)
 
       }
+
+      console.log("2-2")
     } else {
       console.log("3")
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -64,24 +66,80 @@ Page({
             avatarUrl: app.globalData.userInfo.avatarUrl,
             logged: true
           })
-          // this.getUserDt()
+          this.dataInit();
+          
         }
       })
     }
 
   },
 
-
   dataInit:function(){
-    // this.getUserDt()
-    //要等全局的
+    console.log("datainit")
+    //必须确保userDetail或者weid已经获取到了
+    if(app.globalData.userDetail!=null){
+      console.log("userDetail",app.globalData.userDetail)
+      this.getCards(app.globalData.userDetail.openid)
+      
+    }else if(app.globalData.weiId!=null){
+      console.log("weId",app.globalData.weId)
+      this.getCards(app.globalData.weId.openid)
+    }else{
+      console.log("没有-->获取")
+      //在这里胜请openid
+      wx.cloud.callFunction({
+        name: 'login'
+      }).then(res => {
+        console.log(res)
+        this.setData({
+          openid: res.result.openid
+        })
+        this.getCards(res.result.openid)
+      }).catch(err => {
+        console.log(err)
+      })
+
+    }
+    
+  },
+
+  
+  //获取当前用户的cards
+  getCards:function(opid) {
+
+    db.collection('card').where({
+      is_shared: 1,
+      user_id:opid,
+    }).get()
+    .then(res => {
+      console.log("--->getCrads--1")
+      console.log(res)
+    })
+    .catch(err => {
+      console.error(err)
+    })
+
+
+    db.collection('card').where({
+      is_shared: 0,
+      user_id:opid,
+    }).get()
+    .then(res => {
+      console.log("--->getCrads--0")
+      console.log(res)
+
+    })
+    .catch(err => {
+      console.error(err)
+    })
+
+    this.getUserDt(opid)
   },
 
 
-
+  //要调用全局的dataInit
   onGetUserInfo: function(e) {
-    // console.log("进来了",e)
-    // console.log(this.data.logged,this.data.canIUse)
+    console.log(e)
     console.log("手动登陆")
     if (!this.logged && e.detail.userInfo) {
       app.globalData.userInfo = e.detail.userInfo
@@ -91,16 +149,29 @@ Page({
         userInfo: e.detail.userInfo
       })
 
-      app.getIdColl()
-      app.suerInUserColl()
-      app.getUserDt()
-      this.getUserDt()
+      app.dataInit()
       console.log(">>>>>>>>>>",app.globalData)
       // console.log(this.data.userInfo)
     }else{
       console.log("用户信息获取失败")
     }
     // this.getUserDt()
+  },
+
+  
+  //获取
+  getUserDt: function (opid) {
+    console.log("进来了 -index- getUserDetail")
+    db.collection("user").where({
+      user_id: opid
+    }).get().then(res => {
+      console.log(res)
+      this.setData({
+        userDetail:res.data[0]
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   },
 
   onGetOpenid: function() {
@@ -205,32 +276,11 @@ Page({
 
   //跳转
   tureTo:function(){
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../userinforEdit/userinforEdit',
     })
   },
-
-  //获取
-  getUserDt: function () {
-    console.log("进来了 -index- getUserDetail")
-
-    while(true){
-      if (app.globalData.weId.openid != null) {
-
-        db.collection("user").where({
-          user_id: app.globalData.weId.openid
-        }).get().then(res => {
-          console.log(res)
-          this.setData({
-            userDetail:res.data[0]
-          })
-        }).catch(err => {
-          console.log(err)
-        })
-        break;
-      }
-    }
-  },
+  
 
 
 

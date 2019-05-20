@@ -1,12 +1,13 @@
 {
   "pages": [
+    "pages/userinfo/index/index",  
     "pages/square/square",
+    "pages/userinfo/userinforEdit/userinforEdit",
     "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
     "pages/analyse/analyse",
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
-    "pages/userinfo/index/index",
     "pages/sharing/sharingDetail/sharingDetail"
   ],
   "window": {
