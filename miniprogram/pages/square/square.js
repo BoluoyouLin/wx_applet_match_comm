@@ -147,8 +147,8 @@ Page({
         userName: cardList[i].userName,
         userImage: cardList[i].userImage === undefined ? '../../assets/images/demo1.JPG' : cardList[i].userImage,
         is_like: cardList[i].like.indexOf(openId) === -1 ? 0 : 1,
-        create_at: cardList[i].create_at,
-        publish_at: cardList[i].publish_at
+        // create_at: cardList[i].create_at,
+        // publish_at: cardList[i].publish_at
       }
       result.push(temp)
     }
@@ -193,7 +193,7 @@ Page({
   async onReachData() {
     wx.showToast({
       icon: 'loading',
-      title: '疯狂加载中'
+      title: '疯狂加载中...'
     })
     let that = this,
       cardList = that.data.cards,
