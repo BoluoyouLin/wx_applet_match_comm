@@ -75,15 +75,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    wx.showNavigationBarLoading()
     let that = this
-    wx.showLoading({
-      title: '疯狂加载中～'
-    })
     that.getSquareData().then(res => {
       that.setData({
         cards: res
       })
-      wx.hideLoading();
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
     })
   },
 
