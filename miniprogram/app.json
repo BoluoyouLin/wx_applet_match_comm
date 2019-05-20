@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/userinfo/index/index",  
+    "pages/userinfo/index/index",
     "pages/square/square",
+
     "pages/userinfo/userinforEdit/userinforEdit",
     "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
-    "pages/analyse/analyse",
+    "pages/analye/analyse",
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
     "pages/sharing/sharingDetail/sharingDetail"

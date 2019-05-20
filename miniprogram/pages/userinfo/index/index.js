@@ -14,7 +14,9 @@ Page({
     isShard:false,
     isUnshard: false,
     userDetail:null,//用户表
-    openid:null
+    openid:null,
+    shardCards:null,
+    unshardCards:null
   },
 
   onLoad: function() {
@@ -34,7 +36,7 @@ Page({
         userDetail: app.globalData.userDetail
       })
       this.dataInit();
-      // this.getUserDt()
+
     }
     //全局没登陆就重新调用用户登陆方法
     else if (this.data.canIUse) {
@@ -79,7 +81,7 @@ Page({
     //必须确保userDetail或者weid已经获取到了
     if(app.globalData.userDetail!=null){
       console.log("userDetail",app.globalData.userDetail)
-      this.getCards(app.globalData.userDetail.openid)
+      this.getCards(app.globalData.userDetail.user_id)
       
     }else if(app.globalData.weiId!=null){
       console.log("weId",app.globalData.weId)
@@ -114,6 +116,9 @@ Page({
     .then(res => {
       console.log("--->getCrads--1")
       console.log(res)
+      this.setData({
+        shardCards:res.data
+      })
     })
     .catch(err => {
       console.error(err)
@@ -127,13 +132,29 @@ Page({
     .then(res => {
       console.log("--->getCrads--0")
       console.log(res)
-
+      this.setData({
+        shardCards:res.data
+      })
     })
     .catch(err => {
       console.error(err)
     })
-
     this.getUserDt(opid)
+  },
+
+  //获取
+  getUserDt: function (opid) {
+    console.log("进来了 -index- getUserDetail", opid)
+    db.collection("user").where({
+      user_id: opid
+    }).get().then(res => {
+      console.log(res)
+      this.setData({
+        userDetail: res.data[0]
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   },
 
 
@@ -155,24 +176,10 @@ Page({
     }else{
       console.log("用户信息获取失败")
     }
-    // this.getUserDt()
   },
 
   
-  //获取
-  getUserDt: function (opid) {
-    console.log("进来了 -index- getUserDetail")
-    db.collection("user").where({
-      user_id: opid
-    }).get().then(res => {
-      console.log(res)
-      this.setData({
-        userDetail:res.data[0]
-      })
-    }).catch(err => {
-      console.log(err)
-    })
-  },
+ 
 
   onGetOpenid: function() {
     // 调用云函数
@@ -281,49 +288,16 @@ Page({
     })
   },
   
+  //跳转详情页
+  toDetail:function(event){
+    console.log("跳转")
+    console.log("card-id",event.currentTarget.dataset.id)
+  },
 
-
-
-
-  // onLoad(options) {
-  //   console.log("--->onLoad")
-  // },
-  // onReady() {
-  //   // Do something when page ready.
-  //   console.log("onReady")
-  // },
-  // onShow() {
-  //   // Do something when page show.
-  //   console.log("--->onShow")
-  // },
-  // onHide() {
-  //   // Do something when page hide.
-  //   console.log("--->onHide")
-  // },
-  // onUnload() {
-  //   // Do something when page close.
-  //   console.log("--->onUnload")
-  // },
-  // onPullDownRefresh() {
-  //   // Do something when pull down.
-  //   console.log("--->onPullDownRefresh")
-  // },
-  // onReachBottom() {
-  //   // Do something when page reach bottom.
-  //   console.log("--->")
-  // },
-  // onShareAppMessage() {
-  //   // return custom share data when user share.
-  //   console.log("--->")
-  // },
-  // onPageScroll() {
-  //   // Do something when page scroll
-  //   console.log("--->")
-  // },
-  // onResize() {
-  //   // Do something when page resize
-  //   console.log("--->")
-  // }
-
+  //删除
+  deleteCard:function(event){
+    console.log("删除")
+    console.log("card-id",event.currentTarget.dataset.id)
+  }
 
 })

@@ -29,7 +29,7 @@
         <view  wx:if="{{logged}}" >
           <view  id="bc-nameswrap">
             <view id="bc-name">
-              Yulia
+              {{userDetail.name}}
             </view>
             <view id="bc-sex">
               <image  src='../../../assets/images/女.png' ></image>
@@ -113,13 +113,8 @@
           </view>
 
         <view id="sharing-content">
-          <view class="sharing-article">
-            <image>图片</image>
-            <view class="article-abstract">
-              <view>天呐噜 | 这是什么神仙产品</view>
-              <view>没有想到他的成分居然有这些功效</view>
-              <view>点赞</view>
-            </view>
+          <view class="sharing-article" wx:for="{{shardCards}}" wx:for-item="item" wx:key="_id">
+            <template is="simplecard" data="{{...item}}"></template>
           </view>
         </view>
       </block>
@@ -129,62 +124,44 @@
 
     <view>
       <view wx:if="{{isUnshard}}">
-
         <view class="tag-title" bindtap='unfoldUnshard' hover-class='change-color'>
-
           <view class="tag-name">未分享</view>
           <view class="tag-tag">
             <image src='../../../assets/images/右.png' mode="aspectFit"></image>
           </view>
         </view>
-
       </view>
 
       <view wx:else>
 
-
         <view class="tag-title" bindtap='foldUnshard'>
-
           <view class="tag-name">未分享</view>
           <view class="tag-tag">
             <image src='../../../assets/images/下.png' mode="aspectFit"></image>
           </view>
         </view>
-
         <view id="sharing-content" bindtap='foldUnshard'>
-          <view class="sharing-article">
-            <image>图片</image>
-            <view class="article-abstract">
-              <view>天呐噜 | 这是什么神仙产品</view>
-              <view>没有想到他的成分居然有这些功效</view>
-              <view>点赞</view>
-            </view>
+          <view class="sharing-article" wx:for="{{unshardCards}}" wx:for-item="item" wx:key="_id">
+            <template is="simplecard" data="{{...item}}"></template>
           </view>
-          <view class="sharing-article">
-            <image>图片</image>
-            <view class="article-abstract">
-              <view>天呐噜 | 这是什么神仙产品</view>
-              <view>没有想到他的成分居然有这些功效</view>
-              <view>点赞</view>
-            </view>
-          </view>
-          <view class="sharing-article">
-            <image>图片</image>
-            <view class="article-abstract">
-              <view>天呐噜 | 这是什么神仙产品</view>
-              <view>没有想到他的成分居然有这些功效</view>
-              <view>点赞</view>
-            </view>
-          </view>
-
         </view>
-
       </view>
-
     </view>
   </view>
   <tabbar tabbar="{{tabbar}}"></tabbar>
 
 </view>
 
-
+<template name="simplecard" >
+  <view bindtap="toDetail" data-id="{{_id}}" class="simple-card">
+    <image>图片</image>
+    <view class="article-abstract">
+      <view>天呐噜 | 这是什么神仙产品</view>
+      <view class="ab-bar">
+        <image src='../../../assets/icons/like.png' mode='widthFix'></image>
+        <text>1999</text>       
+      </view>
+    </view>
+  </view>
+  <view class="simple-delete" data-id="{{_id}}" bindtap="deleteCard">删除</view>
+</template>
