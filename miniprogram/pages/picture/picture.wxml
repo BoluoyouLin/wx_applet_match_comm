@@ -8,7 +8,7 @@
     ></camera>
   </view>
   <view class='page-bottom'>
-    <view class='photograph'>相册</view>
+    <view class='photograph' bindtap='openAlbum'>相册</view>
     <view class='photo-button' bindtap='takePhoto'></view>
     <image src='../../assets/icons/camera.png' mode='widthFix' bindtap='changeCamera'></image>
   </view>

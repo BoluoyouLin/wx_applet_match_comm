@@ -3,58 +3,45 @@ page{
   height: 100%
 }
 
-#infor-edit{
-    padding-left:30rpx;
-    padding-right: 30rpx;
-    height: 100%;
+.edit-all{
+  width: 100%;
+  height: 100%;
+  background-color: gainsboro;
 }
 
-#edit-pictur{
-    margin-bottom: 30rpx;
-    margin-top:30rpx;
+.edit-item image{
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
 }
 
-#edit-name{
-    margin-bottom: 30rpx;
+.edit-item text{
+  flex: 8;
 }
 
-#edit-infor{
-    margin-bottom: 30rpx;
+.edit-item{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid whitesmoke;
+  background-color: #fff;
+  width: 99%;
+  height: 80rpx;
+  font-size: 35rpx;
+  padding-right:1%;
+  line-height: 80rpx;
 }
 
-#edit-swrap{
-    padding:30rpx;
-    height: 100%;
-    width:100%;
-    background-color: rgb(247, 251, 240)
+.edit-item::before{
+  display: inline-block;
+  content: '';
+  background-color: #00baad;
+  width: 5rpx;
+  height: 80%;
+  margin-right: 20rpx;
 }
 
-.edit-section{
-    display:flex;
-    flex-direction: row;
-    min-height: 100rpx;
-    background-color: rgb(255,255,255);
-    padding-left: 20rpx;
-    padding-right: 20rpx;
-}
-
-.section-name{
-    border-width: 2rpx 0rpx 2rpx 0rpx;
-    border-color: rgb(222, 223, 222);
-    border-style: solid;
-    width:30%;
-    line-height:100rpx;
-    
-}
-
-.section-value{
-    border-width: 2rpx 0rpx 2rpx 0rpx;
-    border-color: rgb(222, 223, 222);
-    border-style: solid;
-    width:70%;
-  
-}
-
-.change-color{
-    background-color: rgb(233, 232, 232)
+.content{
+  font-size:30rpx;
+  color:  darkgray;
+  overflow: hidden;
 }

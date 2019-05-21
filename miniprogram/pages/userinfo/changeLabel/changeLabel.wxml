@@ -1,0 +1,6 @@
+<view class='change-all'>
+  <view class='input-view'>
+    <input type='text' value='{{label}}' placeholder='请输入新标签' bindinput='getUserInput'></input>
+  </view>
+  <button type='primary' bindtap='changeLabel'>确认</button>
+</view>
