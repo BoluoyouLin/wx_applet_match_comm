@@ -15,8 +15,8 @@ page{
   vertical-align: middle;
 }
 
-.edit-item text{
-  flex: 8;
+.label{
+  flex: 2;
 }
 
 .edit-item{
@@ -41,6 +41,7 @@ page{
 }
 
 .content{
+  flex:6;
   font-size:30rpx;
   color:  darkgray;
   overflow: hidden;
