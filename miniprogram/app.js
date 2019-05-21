@@ -51,20 +51,20 @@ App({
   //必须要设置同步
 
   dataInit:function(){
-
+     
       wx.getUserInfo({
         success: res => {
+          console.log("===> dataInit")
           // 可以将 res 发送给后台解码出 unionId
           this.globalData.userInfo = res.userInfo
-
           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
           // 所以此处加入 callback 以防止这种情况
           if (this.userInfoReadyCallback) {
             this.userInfoReadyCallback(res)
           }
-
+          
           this.getIdColl()
-          resolve()
+
         },
         fail: err => {
           cosnole.log(err)
@@ -84,8 +84,7 @@ App({
         this.globalData.weId = res.result
         this.suerInUserColl()
         this.getUserDt()
-        resolve()
-        // this.getUserDt()
+      
       }).catch(err => {
         console.log(err)
       })

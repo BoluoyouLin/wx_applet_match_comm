@@ -10,7 +10,9 @@ page {
 
 #userinfo_swrap{
   text-align: left;
-  font-family: Microsoft YaHei
+  font-family: Microsoft YaHei;
+  padding-bottom:70rpx;
+
 }
 
 #business-card{
@@ -148,13 +150,14 @@ page {
 
 }
 
-.sharing-article{
+.simple-card{
   display: flex;
   flex-direction: row;
   margin-bottom: 22rpx;
+  width:80%;
 }
 
-.sharing-article>image{
+.simple-card>image{
   width: 150rpx;
   height: 150rpx;
   margin-right: 30rpx;
@@ -163,32 +166,63 @@ page {
   background-size: 100% 100%;
 }
 
+.article-abstract{
+  width:calc( 100% - 180rpx )
+}
+
 .article-abstract>view:nth-child(1){
   color: rgba(80, 80, 80, 1);
   font-size: 30rpx;
   margin-top:10rpx;
+
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  color: #505050;
 }
 
 .article-abstract>view:nth-child(2){
-  color: rgba(166, 166, 166, 1);
-  font-size: 28rpx;
-
-}
-
-.article-abstract>view:nth-child(3){
   color: rgba(129, 129, 129, 1);
-  font-size: 20rpx;
-  margin-top:4rpx;
+  font-size: 26rpx;
+  margin-top:40rpx;
+
+
 }
 
-/* .article-abstract >view{
-  margin-bottom: 12rpx;
-} */
+.ab-bar{
+  display:flex;
+  align-items:center;
+
+}
+
+.ab-bar>image{
+  width:35rpx;
+  height: 35rpx;
+
+} 
+
+.ab-bar>text{
+
+} 
+
+.simple-delete{
+  display: inline-block;
+  float: right;
+  font-weight: 700;
+  color: rgb(250, 169, 132);
+  margin:20rpx;
+}
+
+.sharing-article{
+  display:flex;
+
+}
 
 .tag-title {
   position: relative;
-  min-height: 50rpx;
-  margin-bottom: 40rpx;
+  min-height: 100rpx;
+  margin-bottom: 10rpx;
+  line-height:100rpx;
 }
 
 .tag-name{
@@ -197,9 +231,13 @@ page {
   left:0;
 }
 
+.tag-tag{
+  line-height: 100rpx;
+}
+
 .tag-tag>image{
   position:absolute;
-  top:0;
+  top:30%;
   right:58rpx;
   width:40rpx;
   height:40rpx;
@@ -230,4 +268,8 @@ page {
 #bc-id{
   font-size: 30rpx;
   color:rgba(255, 255, 255, 1);
+}
+
+.change-color{
+  background-color: rgb(233, 232, 232)
 }
