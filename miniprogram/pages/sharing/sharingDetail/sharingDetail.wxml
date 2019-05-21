@@ -1,29 +1,37 @@
-<view>
-  <view>
-    <view>
+<view class='container' id="ad-container">
+  <view id="ad-swrap">
+    <view id="ad-navigation">
 
       <!-- 用户title -->
-      <view>
+      <view id="ad-avatar">
         <!-- 头像 -->
-        <!-- 名字 -->
+        <image src="{{avatarurl}}"></image>
       </view>
-      <view>
-        <!-- 关注 -->
+      <view id="ad-info">
+        <view >
+          名字
+        </view>
+        <view >
+          标签
+        </view>
+        
       </view>
     </view>
 
-    <view>
+    <view id="ad-content">
         
-      <!-- 内容content -->
-      <textarea>
+      <view id="conetent-article">
+        据人民日报客户端报道，习近平总书记20日赴江西考察调研。
+        此行第一站，习近平就来到位于赣州市的江西金力永磁科技股份有限公司，了解考察企业生产经营和赣州市稀土产业发展情况。
 
-      </textarea>
-
+　　1992年南巡到江西时，邓小平也说过:"中东有石油，中国有稀土"。
+      </view>
       <!-- 照片 -->
-      <view>
-        <image></image>
-        <image></image>
-        <image></image>
+      <view id="content-images">
+        <view calss="content-image" wx:for="{{imageurls}}" wx:for-item="item" wx:key="index">
+          <image class="ct-image" src="{{item}}"></image>
+        </view>
+        
       </view>
 
       <!-- 分析结果 -->
@@ -39,11 +47,26 @@
   
 </view>
 
-<template name="sd-footer">
-  <view>
-    <!-- 点赞 -->
-    <!-- 分享 -->
-    <!-- 收藏 -->
-    <!-- 评论 -->
+
+
+<template name='sd-footer'>
+  <view class="sd-footer">
+    <view class="sd-footer-swrap">
+      <view class="sd-footer-left">
+        <image src="../../../assets/icons/like.png">
+        </image>
+        <text>
+          1990
+        </text>
+      </view>
+      <view class="sd-footer-right">
+        <image src="../../../assets/images/评论.png">
+        </image>
+        <text>
+          评论
+        </text>
+      </view>
+    </view>
   </view>
+
 </template>

@@ -1,15 +1,16 @@
 {
   "pages": [
-    "pages/userinfo/index/index",
+    "pages/sharing/sharingDetail/sharingDetail",
     "pages/square/square",
+
+    "pages/userinfo/index/index",
 
     "pages/userinfo/userinforEdit/userinforEdit",
     "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
     "pages/analye/analyse",
     "pages/index/index",
-    "pages/sharing/analyzeResult/analyzeResult",
-    "pages/sharing/sharingDetail/sharingDetail"
+    "pages/sharing/analyzeResult/analyzeResult"
   ],
   "window": {
     "backgroundColor": "#38373d",

@@ -5,7 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    avatarurl:"../../../assets/images/background.png",
+    imageurls:[
+      "../../../assets/img/book2.jpg",
+      "../../../assets/img/book5.jpg",
+      "../../../assets/img/book7.jpg",
+      "../../../assets/img/book8.jpg",
+    ]
   },
 
   /**
