@@ -156,7 +156,7 @@
   <view bindtap="toDetail" data-id="{{_id}}" class="simple-card">
     <image>图片</image>
     <view class="article-abstract">
-      <view>天呐噜 | 这是什么神仙产品</view>
+      <view>{{content}}</view>
       <view class="ab-bar">
         <image src='../../../assets/icons/like.png' mode='widthFix'></image>
         <text>1999</text>       

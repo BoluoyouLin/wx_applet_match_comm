@@ -133,7 +133,7 @@ Page({
       console.log("--->getCrads--0")
       console.log(res)
       this.setData({
-        shardCards:res.data
+        unshardCards:res.data
       })
     })
     .catch(err => {
@@ -298,6 +298,70 @@ Page({
   deleteCard:function(event){
     console.log("删除")
     console.log("card-id",event.currentTarget.dataset.id)
-  }
+    this.showMenu(event.currentTarget.dataset.id)
+  },
+
+  /**
+   * 显示操作菜单
+   */
+  showMenu: function (id) {
+    let that = this;
+    wx.showActionSheet({
+      itemList: ['删除', '取消'],
+      itemColor: '#00baad',
+      success(res) {
+          //删除
+        db.collection("card")
+        .doc(id)
+        .remove()
+        .then(res=>{
+            console.log(res)
+            //更新表
+          for (let i = 0; i < that.data.shardCards.length;i++){
+            if (that.data.shardCards[i]._id==id){
+              console.log("shared", that.data.shardCards[i],i)
+              let box = that.data.shardCards
+              box.splice(i, 1)
+              that.setData({
+                shardCards: box
+              })
+              return;
+            }
+          }
+          for (let i = 0; i < that.data.unshardCards.length; i++) {
+            if (that.data.unshardCards[i]._id == id) {
+              console.log("unshared", that.data.unshardCards[i], i)
+              let box = that.data.unshardCards
+              console.log(box)
+              box.splice(i,1)
+              console.log(box)
+              that.setData({
+                unshardCards: box,
+                isUnshard:false
+              })
+              return;
+            }
+          }
+          // for (let i = 0; i < that.data.unshardCards.length; i++) {
+          //   if (that.data.unshardCards[i]._id == id) {
+          //       console.log("unshared", that.data.shardCards[i],i)
+          //       let box= that.data.unshardCards
+          //       box.splice(i,1)
+          //       that.setData({
+          //         unshardCards: box
+          //       })
+          //       return;
+          //     }
+          // }
+
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
+      fail(res) {
+        console.log('取消')
+      }
+    })
+  },
 
 })

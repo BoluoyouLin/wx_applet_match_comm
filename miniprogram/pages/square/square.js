@@ -280,7 +280,7 @@ Page({
   //         user_id: 'ogXH-4wndcGNNpEnHm6TPmw-uZpk',
   //         content: '坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流,坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流。',
   //         like: [],
-  //         is_shared: 1,
+  //         is_shared: 0,
   //         images: [],
   //         userName: '"Tokie_Chen"',
   //         userImage: '#',
