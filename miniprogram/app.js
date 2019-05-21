@@ -1,4 +1,3 @@
-
 import regeneratorRuntime from './regenerator-runtime/runtime.js';
 wx.cloud.init()
 const db = wx.cloud.database()
@@ -7,7 +6,7 @@ App({
 
   // ...user_service.service, //解构
 
-  onLaunch: function () {
+  onLaunch: function() {
 
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -27,7 +26,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log("login",res)
+        console.log("login", res)
 
         // 获取用户信息
         wx.getSetting({
@@ -36,8 +35,7 @@ App({
               console.log("自动登陆成功")
               // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
               this.dataInit()
-            }
-            else{
+            } else {
               console.log("自动登陆失败")
             }
           }
@@ -50,44 +48,44 @@ App({
 
   //必须要设置同步
 
-  dataInit:function(){
-     
-      wx.getUserInfo({
-        success: res => {
-          console.log("===> dataInit")
-          // 可以将 res 发送给后台解码出 unionId
-          this.globalData.userInfo = res.userInfo
-          // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-          // 所以此处加入 callback 以防止这种情况
-          if (this.userInfoReadyCallback) {
-            this.userInfoReadyCallback(res)
-          }
-          
-          this.getIdColl()
+  dataInit: function() {
 
-        },
-        fail: err => {
-          cosnole.log(err)
+    wx.getUserInfo({
+      success: res => {
+        console.log("===> dataInit")
+        // 可以将 res 发送给后台解码出 unionId
+        this.globalData.userInfo = res.userInfo
+        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+        // 所以此处加入 callback 以防止这种情况
+        if (this.userInfoReadyCallback) {
+          this.userInfoReadyCallback(res)
         }
-      })
+
+        this.getIdColl()
+
+      },
+      fail: err => {
+        cosnole.log(err)
+      }
+    })
 
   },
 
   //获取id集合
-  getIdColl:function() {
+  getIdColl: function() {
     console.log("===>getweId")
     //获取id集合
 
-      wx.cloud.callFunction({
-        name: 'login'
-      }).then(res => {
-        this.globalData.weId = res.result
-        this.suerInUserColl()
-        this.getUserDt()
-      
-      }).catch(err => {
-        console.log(err)
-      })
+    wx.cloud.callFunction({
+      name: 'login'
+    }).then(res => {
+      this.globalData.weId = res.result
+      this.suerInUserColl()
+      this.getUserDt()
+
+    }).catch(err => {
+      console.log(err)
+    })
 
 
   },
@@ -97,7 +95,7 @@ App({
   suerInUserColl() {
     console.log("===>suerInUserColl")
     //已经获取到了当前用户得用户信息
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
 
       if (this.globalData.userInfo) {
         try {
@@ -133,22 +131,20 @@ App({
               console.error(err)
 
             })
-        }
-        catch (e) {
+        } catch (e) {
           console.error(e)
         }
-      }
-      else {
+      } else {
         console.error("未登录")
       }
     })
   },
 
   //获取用户表信息
-  getUserDt: function () {
+  getUserDt: function() {
     console.log("===>global-getUserDetail")
     console.log(this.globalData.weId.openid)
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       while (true) {
         if (this.globalData.weId.openid != null) {
           db.collection("user").where({
@@ -173,8 +169,12 @@ App({
    */
   pagePath: function(index) {
     switch (index) {
-      case 0: return '../picture/picture'; break;
-      case 1: return '../sharing/analyzeResult/analyzeResult'; break;
+      case 0:
+        return '../picture/picture';
+        break;
+      case 1:
+        return '../sharing/analyzeResult/analyzeResult';
+        break;
     }
   },
   /**
@@ -185,8 +185,7 @@ App({
     let path = that.pagePath(index);
     wx.navigateTo({
       url: path,
-      success(res) {
-      },
+      success(res) {},
       fail(res) {
         console.log("fail")
       }
@@ -213,7 +212,7 @@ App({
 
   // --------------------------
 
-  onShow: function () {
+  onShow: function() {
     //隐藏系统tabbar
     wx.hideTabBar();
 
@@ -223,7 +222,7 @@ App({
 
     let t = this;
     wx.getSystemInfo({
-      success:  (res)=> {
+      success: (res) => {
         console.log(res)
         t.globalData.systemInfo = res;
         return res;
@@ -232,7 +231,7 @@ App({
         }
         console.log(this.globalData.systemInfo)
       },
-      fail(res){
+      fail(res) {
         console.log("error")
         console.log(res)
       }
@@ -240,7 +239,7 @@ App({
     console.log(this.globalData.systemInfo)
   },
 
-  editTabbar: function () {
+  editTabbar: function() {
 
     let tabbar = this.globalData.tabBar;
     let currentPages = getCurrentPages();
@@ -256,23 +255,34 @@ App({
     });
   },
 
-
-
-
+  // 图片转base64
+  imageToBase64: function(file) {
+    return new Promise((resolve, reject) => {
+      wx.getFileSystemManager().readFile({
+        filePath: file, //选择图片返回的相对路径
+        encoding: 'base64', //编码格式
+        success: res => { //成功的回调
+          resolve('data:image/png;base64,' + res.data)
+        },
+        fail: err => {
+          console.error(err)
+        }
+      })
+    })
+  },
 
   globalData: {
 
-    weId:null,
-    systemInfo: null,//客户端设备信息
-    userInfo: null,//用户信息-是否登陆
-    userId:null,//用户id
-    userDetail: null,//用户表,
+    weId: null,
+    systemInfo: null, //客户端设备信息
+    userInfo: null, //用户信息-是否登陆
+    userId: null, //用户id
+    userDetail: null, //用户表,
     tabBar: {
       "backgroundColor": "#ffffff",
       "color": "#979795",
       "selectedColor": "#1c1c1b",
-      "list": [
-        {
+      "list": [{
           "pagePath": "/pages/square/square",
           "iconPath": "icon/icon_home.png",
           "selectedIconPath": "icon/icon_home_HL.png",

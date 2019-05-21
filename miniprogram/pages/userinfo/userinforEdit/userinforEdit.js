@@ -1,6 +1,7 @@
 // pages/userinfo/userinforEdit/userinforEdit.js
 import regeneratorRuntime from '../../../regenerator-runtime/runtime.js';
 const db = wx.cloud.database()
+const app = getApp()
 Page({
 
   /**
@@ -8,11 +9,13 @@ Page({
    */
   data: {
     backgroundImage: '',
+    backgroundImageBase64: '',
     avatar: '',
+    avatarBase64: '',
     nickName: '',
     resume: '',
     label: '',
-    userId:''
+    userId: ''
   },
 
   // 获取OpenID
@@ -30,22 +33,22 @@ Page({
   },
 
   // 获取页面数据
-  async getPageData(){
+  async getPageData() {
     let that = this,
-    userId = await that.getOpenId();
+      userId = await that.getOpenId();
 
     db.collection('user').where({
-      user_id:userId
-    }).get()
-    .then(res=>{
-      that.setData({
-        userId:userId,
-        nickName: res.data[0].name,
-        resume: res.data[0].resume,
-        label: res.data[0].label,
+        user_id: userId
+      }).get()
+      .then(res => {
+        that.setData({
+          userId: userId,
+          nickName: res.data[0].name,
+          resume: res.data[0].resume,
+          label: res.data[0].label,
+        })
       })
-    })
-    
+
   },
 
   //  选择图片来源
@@ -69,8 +72,11 @@ Page({
   async changeBackgroundImage() {
     let that = this
     let path = await that.choosePictrue()
-    that.setData({
-      backgroundImage: path
+    app.imageToBase64(path[0]).then(res => {
+      that.setData({
+        backgroundImage: path[0],
+        backgroundImageBase64: res
+      })
     })
   },
 
@@ -78,13 +84,16 @@ Page({
   async changeAvatar() {
     let that = this
     let path = await that.choosePictrue()
-    that.setData({
-      avatar: path
+    app.imageToBase64(path[0]).then(res => {
+      that.setData({
+        avatar: path[0],
+        avatarBase64: res
+      })
     })
   },
-  
+
   // 打开修改昵称界面
-  goChangeNickname(){
+  goChangeNickname() {
     wx.navigateTo({
       url: '../changeNickname/changeNickname',
     })
@@ -96,7 +105,7 @@ Page({
       url: '../changeResume/changeResume',
     })
   },
-  
+
   // 打开修改标签界面
   goChangeLabel() {
     wx.navigateTo({
@@ -124,7 +133,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getPageData()
   },
 
   /**
