@@ -262,7 +262,7 @@ App({
         filePath: file, //选择图片返回的相对路径
         encoding: 'base64', //编码格式
         success: res => { //成功的回调
-          resolve('data:image/png;base64,' + res.data)
+          resolve(res.data)
         },
         fail: err => {
           console.error(err)
