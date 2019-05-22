@@ -155,7 +155,7 @@ Page({
   },
 
   // 获取card数据
-  getCardData(dae) {
+  getCardData() {
     let comm = db.command
     return new Promise((resolve, reject) => {
       db.collection('card').where({
@@ -274,13 +274,13 @@ Page({
   //   for(let i=0;i<7;i++){
   //     db.collection('card').add({
   //       data: {
-  //         user_id: 'ogXH-4wndcGNNpEnHm6TPmw-uZpk',
-  //         content: '坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流,坚持总结工作中遇到的技术问题，坚持记录工作中所所思所见，欢迎大家加入群聊，一起探讨交流。',
+  //         user_id: 'ogXH-4wot-rrPkXrpWQxP4sEm2ns',
+  //         content: '测试数据1121212212222222222222',
   //         like: [],
-  //         is_shared: 0,
+  //         is_shared: 1,
   //         images: [],
-  //         userName: '"Tokie_Chen"',
-  //         userImage: '#',
+  //         userName: '"菠萝油"',
+  //         userImage: "#",
   //         create_at: new Date(),
   //         publish_at: new Date()
   //       }

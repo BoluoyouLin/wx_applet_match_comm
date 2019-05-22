@@ -1,52 +1,25 @@
-<view class="container" id="infor-edit">
-  <view id="edit-swrap">
-
-    <view id="edit-pictur">
-      <view class="edit-section" hover-class="change-color">
-        <view class="section-name" >
-            背景墙
-        </view>
-        <view class="section-value"></view>
-      </view>
-      <view class="edit-section"  hover-class="change-color">
-        <view class="section-name"> 
-            头像
-        </view>
-        <view class="section-value"></view>
-      </view>
-
-    </view>
-    <view  id="edit-name">
-      <!-- ====================== -->
-      <view class="edit-section" hover-class="change-color">
-        <view class="section-name"  >
-          昵称
-        </view>
-        <view class="section-value"  >
-        </view>
-      </view>
-
-    </view>
-
-    <view id="edit-infor">
-
-      <!-- ============================ -->
-      <view class="edit-section"  hover-class="change-color">
-        <view class="section-name"  >
-          个人简介
-        </view>
-        <view class="section-value"  >
-        </view>
-      </view>
-      <view class="edit-section"  hover-class="change-color">
-        <view class="section-name"  >
-          标签
-        </view>
-        <view class="section-value" >
-        </view>
-      </view>
-
-    </view>
-   
+<view class='edit-all'>
+  <view class='edit-item' bindtap='changeBackgroundImage'>
+    <text>背景墙</text>
+    <image src='../../../assets/icons/right.png'></image>
+  </view>
+  <view class='edit-item' bindtap='changeAvatar'>
+    <text>头像</text>
+    <image src='../../../assets/icons/right.png'></image>
+  </view>
+  <view class='edit-item' bindtap='goChangeNickname'>
+    <text>昵称</text>
+    <text class='content'>{{nickName}}</text>
+    <image src='../../../assets/icons/right.png'></image>
+  </view>
+  <view class='edit-item' bindtap='goChangeResume'>
+    <text>个人简介</text>
+    <text class='content'>{{resume}}</text>
+    <image src='../../../assets/icons/right.png'></image>
+  </view>
+  <view class='edit-item' bindtap='goChangeLabel'>
+    <text>标签</text>
+    <text class='content'>{{label}}</text>
+    <image src='../../../assets/icons/right.png'></image>
   </view>
 </view>
