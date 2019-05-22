@@ -1,7 +1,9 @@
 <view class="tabbar_box {{isIphoneX?'iphoneX-height':''}}" style="background-color:{{tabbar.backgroundColor}}">
  
   <block wx:for="{{tabbar.list}}" wx:key="{{item.pagePath}}">
-    <li wx:if="{{item.isSpecial}}" class="tabbar_nav" hover-class="none"  style="color:{{tabbar.selectedColor}}" open-type="navigate" bindtap='showMenu'>
+    <li wx:if="{{item.isSpecial}}" class="tabbar_nav" hover-class="none"  style="color:{{tabbar.selectedColor}}" open-type="navigate" bindtap='goAnalyze'>
+    <!-- 不显示菜单，直接进入选图/拍照 -> 分析页面
+        <li wx:if="{{item.isSpecial}}" class="tabbar_nav" hover-class="none"  style="color:{{tabbar.selectedColor}}" open-type="navigate" bindtap='showMenu'>  -->
       <view class='special-wrapper'><image class="tabbar_icon" src="{{item.iconPath}}"></image></view>
       <image class='special-text-wrapper'></image>
       <text>{{item.text}}</text>
