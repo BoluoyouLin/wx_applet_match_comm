@@ -8,4 +8,11 @@
      bindactiveend='changeColor'
     ></progress>
   </view>
+
+      <!-- 测试， 显示文本，方便真机调试 --> 
+        <view class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
+        <text>{{text}}</text>
+      </view>
+       <!-- 测试， 显示文本，方便真机调试 --> 
+      
 </view>
