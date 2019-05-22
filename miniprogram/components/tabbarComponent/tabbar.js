@@ -49,7 +49,12 @@ Component({
   methods: {
     showMenu: function () {
       app.showMenu();
+    },
+    /* 不显示菜单，直接进入选图/拍照 -> 分析页面 */
+    goAnalyze: function() {
+      app.goAnalyze();
+  
     }
-  },
+  }
 
 })

@@ -209,7 +209,21 @@ App({
     })
   },
 
+/*
+  直接点加号进分析页面
+*/
+  goAnalyze: function() {
+    let that = this;
+    wx.navigateTo({
+      url: "../sharing/analyzeResult/analyzeResult",
+      success(res) { },
+      fail(res) {
+        console.log("fail")
+      }
+    })
 
+
+  },
   // --------------------------
 
   onShow: function() {
