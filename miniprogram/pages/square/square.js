@@ -19,6 +19,10 @@ Page({
   onLoad: function(options) {
     console.log(app.globalData)
     app.editTabbar();
+    wx.showLoading({
+      title:"疯狂加载中"
+    })
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -150,7 +154,7 @@ Page({
       }
       result.push(temp)
     }
-
+    wx.hideLoading()
     return result;
   },
 
@@ -179,6 +183,7 @@ Page({
           publish_at: comm.lt(new Date(JSON.parse(date)))
         }).orderBy('publish_at', 'desc').get()
         .then(res => {
+          
           resolve(res.data)
         })
         .catch(err => {
@@ -267,6 +272,16 @@ Page({
     }).then(res => {}).catch(err => {
       console.error('fail', err)
     })
+  },
+
+  //跳转详情页
+  toDetail:function(event){
+    console.log("跳转",event)
+    1 // 此处是A页面
+    wx.navigateTo({
+      url: '../sharing/sharingDetail/sharingDetail?id='+event.currentTarget.dataset.id
+    })
+    console.log("card-id",event.currentTarget.dataset.id)
   },
 
   // setAAData() {

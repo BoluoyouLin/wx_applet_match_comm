@@ -9,10 +9,10 @@
       </view>
       <view id="ad-info">
         <view >
-          名字
+          {{userDetail.name}}
         </view>
         <view >
-          标签
+          {{userDetail.resume}}
         </view>
         
       </view>
@@ -21,10 +21,7 @@
     <view id="ad-content">
         
       <view id="conetent-article">
-        据人民日报客户端报道，习近平总书记20日赴江西考察调研。
-        此行第一站，习近平就来到位于赣州市的江西金力永磁科技股份有限公司，了解考察企业生产经营和赣州市稀土产业发展情况。
-
-　　1992年南巡到江西时，邓小平也说过:"中东有石油，中国有稀土"。
+        {{cardDetail.content}}
       </view>
       <!-- 照片 -->
       <view id="content-images">

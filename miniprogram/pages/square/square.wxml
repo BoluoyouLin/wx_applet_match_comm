@@ -19,7 +19,7 @@
 
 <!-- 模版 -->
 <template name='view-item'>
-  <view class='view-item' url='#'>
+  <view class='view-item' url='#' data-id='{{item.id}}' bindtap="toDetail">
     <!-- 图片 -->
     <view class='view-image'>
       <image src='{{item.image}}' mode='widthFix'></image>

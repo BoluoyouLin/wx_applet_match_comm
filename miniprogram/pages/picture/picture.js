@@ -1,4 +1,7 @@
 // pages/picture/picture.js
+import regeneratorRuntime from '../../regenerator-runtime/runtime.js';
+
+const app = getApp();
 Page({
 
   /**
@@ -6,6 +9,7 @@ Page({
    */
   data: {
     src: '',
+    imageBase64: '',
     device: 'back',
   },
    
@@ -23,23 +27,53 @@ Page({
     })
   },
 
+  // 打开相册
+  openAlbum() {
+    let that = this,
+      url = ''
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album'],
+      success: function(res) {
+        url = res.tempFilePaths[0]
+        app.imageToBase64(res.tempFilePaths[0]).then(res => {
+          that.setData({
+            src: url,
+            imageBase64: res
+          })
+        })
+      }
+    })
+  },
+
 
   /**
    * 拍照
    */
   takePhoto() {
-    let that = this;
+    console.log("===> takePhoto")
+    let that = this,
+      url = '';
     const ctx = wx.createCameraContext()
     ctx.takePhoto({
       quality: 'high',
       success: (res) => {
-        console.log(res.tempImagePath, 'picture.js')
-        that.setData({
-          src: res.tempImagePath
-        });
-        wx.redirectTo({
-          url: '../analyse/analyse',
+        url = res.tempImagePath
+        app.imageToBase64(res.tempImagePath).then(res => {
+          that.setData({
+            src: url,
+            imageBase64: res
+          })
+          console.log("开始跳转")
+          wx.navigateTo({
+            url: '../analyze/analyze?bs64='+res
+          })
+          // wx.redirectTo({
+          //   url: 'pages/analyze/analyze?bs64='+res
+          // })
         })
+       
       },
       error: (err) => {
         console.error(err)

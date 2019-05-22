@@ -1,24 +1,24 @@
 <view class='edit-all'>
   <view class='edit-item' bindtap='changeBackgroundImage'>
-    <text>背景墙</text>
+    <text class='label'>背景墙</text>
     <image src='../../../assets/icons/right.png'></image>
   </view>
   <view class='edit-item' bindtap='changeAvatar'>
-    <text>头像</text>
+    <text class='label'>头像</text>
     <image src='../../../assets/icons/right.png'></image>
   </view>
   <view class='edit-item' bindtap='goChangeNickname'>
-    <text>昵称</text>
+    <text class='label'>昵称</text>
     <text class='content'>{{nickName}}</text>
     <image src='../../../assets/icons/right.png'></image>
   </view>
   <view class='edit-item' bindtap='goChangeResume'>
-    <text>个人简介</text>
+    <text class='label'>个人简介</text>
     <text class='content'>{{resume}}</text>
     <image src='../../../assets/icons/right.png'></image>
   </view>
   <view class='edit-item' bindtap='goChangeLabel'>
-    <text>标签</text>
+    <text class='label'>标签</text>
     <text class='content'>{{label}}</text>
     <image src='../../../assets/icons/right.png'></image>
   </view>

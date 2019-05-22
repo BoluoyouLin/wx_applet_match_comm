@@ -13,8 +13,12 @@
 	"appid": "wx8842d940f2a6abe1",
 	"projectname": "wx_applet_match_comm",
 	"libVersion": "2.7.0",
+
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+
 	"condition": {
 		"search": {
 			"current": -1,

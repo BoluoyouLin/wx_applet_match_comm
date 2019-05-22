@@ -8,7 +8,7 @@
     "pages/userinfo/changeLabel/changeLabel",
     "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
-    "pages/analye/analyse",
+    "pages/analyze/analyze",
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult"
   ],

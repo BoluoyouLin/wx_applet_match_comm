@@ -291,6 +291,10 @@ Page({
   //跳转详情页
   toDetail:function(event){
     console.log("跳转")
+    1 // 此处是A页面
+    wx.navigateTo({
+      url: '../../sharing/sharingDetail/sharingDetail?id='+event.currentTarget.dataset.id
+    })
     console.log("card-id",event.currentTarget.dataset.id)
   },
 
