@@ -1,24 +1,24 @@
-
 {
   "pages": [
-  
     "pages/square/square",
+    "pages/userinfo/index/index",
+    "pages/userinfo/userinforEdit/userinforEdit",
+    "pages/userinfo/changeNickname/changeNickname",
+    "pages/userinfo/changeResume/changeResume",
+    "pages/userinfo/changeLabel/changeLabel",
+    "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
-    "pages/analyse/analyse",
+    "pages/analye/analyse",
     "pages/index/index",
     "pages/sharing/analyzeResult/analyzeResult",
-    "pages/userinfo/index/index",
-    "pages/sharing/sharingDetail/sharingDetail", 
-    "cloudDemos/dbOperate/dbOperate"
-    
+    "pages/sharing/sharingDetail/sharingDetail"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#38373d",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "2019-->wx_match-->火锅串串",
-    "navigationBarTextStyle": "black"
-    
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#38373d",
+    "navigationBarTitleText": "tabBar"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
@@ -38,7 +38,6 @@
         "selectedIconPath": "assets/icons/home.png"
       }
     ]
-  }
-
+  },
+  "sitemapLocation": "sitemap.json"
 }
-

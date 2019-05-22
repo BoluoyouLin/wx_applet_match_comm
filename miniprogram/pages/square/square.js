@@ -1,59 +1,24 @@
 // miniprogram/pages/square.js
+import regeneratorRuntime from '../../regenerator-runtime/runtime.js';
 const app = getApp();
+const db = wx.cloud.database();
+let util = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tabbar:{},
-    dataList:[
-      {
-        image: '../../assets/images/demo2.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo3.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo1.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo1.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo3.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo2.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo2.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo3.jpg',
-        contentNumber: 1300
-      },
-      {
-        image: '../../assets/images/demo3.jpg',
-        desc: '天了噜，这什么神仙颜值！！！眼睛闪瞎了！',
-        userName: '菠萝油',
-        userImage: '../../assets/images/demo2.jpg',
-        contentNumber: 1300
-      }
-    ]
+    tabbar: {},
+    cards: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(app.globalData)
-
     app.editTabbar();
-
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -80,59 +45,252 @@ Page({
         }
       })
     }
+    // this.setAAData()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
     console.log(app.globalData)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
+    this.firstDisplay();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
+  onHide: function() {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
-  },
+  onUnload: function() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  onPullDownRefresh: function() {
+    wx.showNavigationBarLoading()
+    let that = this
+    that.getSquareData().then(res => {
+      that.setData({
+        cards: res
+      })
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
+  onReachBottom: function() {
+    this.onReachData();
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
-  showMenu(){
+  // 展示菜单
+  showMenu() {
     app.showMenu();
-  }
+  },
+
+  // 第一次渲染界面
+  firstDisplay() {
+    let that = this
+    // 获取广场数据
+    this.getSquareData().then(res => {
+      that.setData({
+        cards: res
+      })
+    })
+  },
+
+  //  获取广场展示数据
+  async getSquareData() {
+    let cardList = [], // 用于存储卡片数据
+      that = this,
+      openId = await that.getOpenId()
+
+    // 获取卡片数据
+    cardList = await this.getCardData()
+
+    return this.packSquareData(cardList,openId);
+  },
+
+  // 包装广场显示数据
+  packSquareData(cardList,openId) {
+    let result = [],
+      temp = {}
+    for (let i = 0; i < cardList.length; i++) {
+      temp = {
+        id: cardList[i]._id,
+        user_id: cardList[i].user_id,
+        content: cardList[i].content,
+        like: cardList[i].like.length,
+        likeList: cardList[i].like,
+        is_shared: cardList[i].is_shared,
+        image: cardList[i].images[0] === undefined ? '../../assets/images/demo1.JPG' : cardList[i].images[0],
+        userName: cardList[i].userName,
+        userImage: cardList[i].userImage === undefined ? '../../assets/icons/bottom.png' : cardList[i].userImage,
+        is_like: cardList[i].like.indexOf(openId) === -1 ? 0 : 1,
+        create_at: JSON.stringify(cardList[i].create_at),
+        publish_at: JSON.stringify(cardList[i].publish_at)
+      }
+      result.push(temp)
+    }
+
+    return result;
+  },
+
+  // 获取card数据
+  getCardData() {
+    let comm = db.command
+    return new Promise((resolve, reject) => {
+      db.collection('card').where({
+          is_shared: 1,
+        }).orderBy('publish_at', 'desc').get()
+        .then(res => {
+          resolve(res.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    })
+  },
+
+  // 获取上拉加载数据
+  getReachData(date) {
+    let comm = db.command
+    return new Promise((resolve, reject) => {
+      db.collection('card').where({
+          is_shared: 1,
+          publish_at: comm.lt(new Date(JSON.parse(date)))
+        }).orderBy('publish_at', 'desc').get()
+        .then(res => {
+          resolve(res.data)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    })
+  },
+
+  // 上拉加载
+  async onReachData() {
+    wx.showToast({
+      icon: 'loading',
+      title: '疯狂加载中...'
+    })
+    let that = this,
+      cardList = that.data.cards,
+      result = await that.getReachData(that.data.cards[cardList.length - 1].publish_at),
+      tempCards = [],
+      openId = await that.getOpenId()
+    if (result.length > 0) {
+      tempCards = this.packSquareData(result,openId)
+      cardList.push.apply(cardList, tempCards)
+      that.setData({
+        cards: cardList
+      })
+      wx.hideToast();
+    } else {
+      // 没有更多内容
+      wx.hideToast();
+      wx.showToast({
+        title: '居然没了',
+        duration: 3000,
+        image:'../../assets/icons/bottom.png'
+      })
+    }
+  },
+
+  // 点赞和取消点赞
+  // 0是未点赞 1是点赞
+  clickLike(e) {
+    let index = e.currentTarget.dataset.index,
+      tempCards = this.data.cards;
+    if (tempCards[index].is_like === 1) {
+      tempCards[index].is_like = 0;
+      if (tempCards[index].like > 0) {
+        tempCards[index].like--;
+      }
+      let likeIndex = tempCards[index].likeList.indexOf(app.globalData.weId.openi);
+      tempCards[index].likeList.splice(likeIndex, 1)
+      this.updateLikeByCard(tempCards[index])
+    } else {
+      tempCards[index].is_like = 1;
+      tempCards[index].like++;
+      tempCards[index].likeList.push(app.globalData.weId.openid);
+      this.updateLikeByCard(tempCards[index])
+    }
+    this.setData({
+      cards: tempCards
+    });
+  },
+
+  // 获取OpenID
+  getOpenId() {
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {
+          tempCards: this.data.cards
+        }
+      }).then(res => {
+        resolve(res.result.openid)
+
+      }).catch(err => {
+        console.error('fail', err)
+      })
+    })
+  },
+
+  // 更新点赞数据到云数据库
+  updateLikeByCard(card) {
+    wx.cloud.callFunction({
+      name: 'updateLikeByCard',
+      data: {
+        card: card
+      }
+    }).then(res => {}).catch(err => {
+      console.error('fail', err)
+    })
+  },
+
+  // setAAData() {
+  //   console.log("setAAData")
+  //   for(let i=0;i<7;i++){
+  //     db.collection('card').add({
+  //       data: {
+  //         user_id: 'ogXH-4wot-rrPkXrpWQxP4sEm2ns',
+  //         content: '测试数据1121212212222222222222',
+  //         like: [],
+  //         is_shared: 1,
+  //         images: [],
+  //         userName: '"菠萝油"',
+  //         userImage: "#",
+  //         create_at: new Date(),
+  //         publish_at: new Date()
+  //       }
+  //     }).then(res => {
+  //       console.log(res, 'success')
+  //     }).catch(err => {
+  //       console.log(err, 'error')
+  //     })
+  //   }
+    
+  // }
+
 })

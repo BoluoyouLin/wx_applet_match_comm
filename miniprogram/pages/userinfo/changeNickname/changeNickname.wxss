@@ -1,0 +1,21 @@
+/* pages/userinfo/changeNickname/changeNickname.wxss */
+.change-all{
+  width: 100%;
+  height: 100%;
+}
+
+.input-view{
+  width: 100%;
+  height: 80rpx;
+  border-top: 1px solid whitesmoke;
+  border-bottom: 1px solid whitesmoke;
+  margin: 40rpx 0;
+  background-color: white;
+}
+
+.input-view input{
+  width: 96%;
+  height: 100%;
+  text-indent: 10rpx;
+  padding: 0 2%;
+}

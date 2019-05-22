@@ -1,14 +1,14 @@
 <view class='all'>
   <!-- 浏览模块 -->
   <view class='view-block'>
-    <view class='view-left' >
-      <block wx:for='{{dataList}}' wx:key=''>
-      <template is='view-item' data='{{...item}}' wx:if='{{index%2==0}}'></template>
+    <view class='view-left'>
+      <block wx:for='{{cards}}' wx:key=''>
+        <template is='view-item' data='{{item,index:index}}' wx:if='{{index%2==0}}'></template>
       </block>
     </view>
-    <view class='view-right' >
-    <block wx:for='{{dataList}}' wx:key=''>
-      <template is='view-item' data='{{...item}}' wx:if='{{index%2==1}}'></template>
+    <view class='view-right'>
+      <block wx:for='{{cards}}' wx:key=''>
+        <template is='view-item' data='{{item,index:index}}' wx:if='{{index%2==1}}'></template>
       </block>
     </view>
   </view>
@@ -17,28 +17,29 @@
 </view>
 
 
- <!-- 模版 -->
-  <template  name='view-item'>
-    <navigator class='view-item' url='#'>
+<!-- 模版 -->
+<template name='view-item'>
+  <view class='view-item' url='#'>
     <!-- 图片 -->
-      <view class='view-image'>
-        <image src='{{image}}' mode='widthFix'></image>
-      </view>
-      <!-- 内容 -->
-      <view class='view-content'>
-        <!-- 描述 -->
-        <view class='content-desc'>{{desc}}</view>
-        <!-- 用户信息 -->
-        <view class='content-bottom'>
-          <view class='content-user-info'>
-            <image src='{{userImage}}'></image>
-            <text>{{userName}}</text>
-          </view> 
-          <view class='content-info'>
-            <image src='../../assets/icons/like.png'></image>
-            <text>{{contentNumber}}</text>
-          </view>
+    <view class='view-image'>
+      <image src='{{item.image}}' mode='widthFix'></image>
+    </view>
+    <!-- 内容 -->
+    <view class='view-content'>
+      <!-- 描述 -->
+      <view class='content-desc'>{{item.content}}</view>
+      <!-- 用户信息 -->
+      <view class='content-bottom'>
+        <view class='content-user-info'>
+          <image src='{{item.userImage}}'></image>
+          <text>{{item.userName}}</text>
+        </view>
+        <view class='content-info'>
+          <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/like.png' wx:if="{{item.is_like === 0}}"></image>
+          <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/likeAfter.png' wx:else></image>
+          <text>{{item.like}}</text>
         </view>
       </view>
-    </navigator>
-  </template>
+    </view>
+  </view>
+</template>
