@@ -57,9 +57,8 @@ Page({
    */
   onLoad: function(options) {
     let timer, that = this;
-    console.log("analyse--base64",options.bs64)
-
-
+    // console.log("analyse--base64",options.bs64)
+  
     wx.cloud.callFunction({
       name: 'get_tokens',
       data: {
@@ -67,8 +66,16 @@ Page({
       }
     }).then(
     (tokens) => {
+      
       console.log("=====》》》》token结果")
       console.log(tokens.result);
+      console.log(tokens);
+      
+      // 测试， 显示文本，方便真机调试 
+      this.setData({
+        text: JSON.stringify(tokens.result)
+      })
+      // 测试， 显示文本，方便真机调试 
     })
 
 
