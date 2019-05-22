@@ -57,6 +57,22 @@ Page({
    */
   onLoad: function(options) {
     let timer, that = this;
+    console.log("analyse--base64",options.bs64)
+
+
+    wx.cloud.callFunction({
+      name: 'get_tokens',
+      data: {
+        imgbase64: options.bs64
+      }
+    }).then(
+    (tokens) => {
+      console.log("=====》》》》token结果")
+      console.log(tokens.result);
+    })
+
+
+
     timer = () => {
       setTimeout(() => {
         const val = that.data.value;

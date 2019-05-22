@@ -108,9 +108,9 @@ App({
                 resolve("")
                 console.log("已存在")
               } else {
-                console.log("不存在")
+                console.log("不存在", this.globalData.userInfo)
                 let user = {
-                  avatar: this.globalData.userInfo.avatar,
+                  avatar: this.globalData.userInfo.avatarUrl,
                   label: '',
                   name: this.globalData.userInfo.nickName,
                   resume: '',

@@ -8,10 +8,9 @@
     "pages/userinfo/changeLabel/changeLabel",
     "cloudDemos/dbOperate/dbOperate",
     "pages/picture/picture",
-    "pages/analye/analyse",
+    "pages/analyze/analyze",
     "pages/index/index",
-    "pages/sharing/analyzeResult/analyzeResult",
-    "pages/sharing/sharingDetail/sharingDetail"
+    "pages/sharing/analyzeResult/analyzeResult"
   ],
   "window": {
     "backgroundColor": "#38373d",

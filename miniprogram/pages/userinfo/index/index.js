@@ -291,6 +291,10 @@ Page({
   //跳转详情页
   toDetail:function(event){
     console.log("跳转")
+    1 // 此处是A页面
+    wx.navigateTo({
+      url: '../../sharing/sharingDetail/sharingDetail?id='+event.currentTarget.dataset.id
+    })
     console.log("card-id",event.currentTarget.dataset.id)
   },
 
@@ -332,9 +336,9 @@ Page({
             if (that.data.unshardCards[i]._id == id) {
               console.log("unshared", that.data.unshardCards[i], i)
               let box = that.data.unshardCards
-              console.log(box)
+
               box.splice(i,1)
-              console.log(box)
+
               that.setData({
                 unshardCards: box,
                 isUnshard:false
@@ -342,17 +346,7 @@ Page({
               return;
             }
           }
-          // for (let i = 0; i < that.data.unshardCards.length; i++) {
-          //   if (that.data.unshardCards[i]._id == id) {
-          //       console.log("unshared", that.data.shardCards[i],i)
-          //       let box= that.data.unshardCards
-          //       box.splice(i,1)
-          //       that.setData({
-          //         unshardCards: box
-          //       })
-          //       return;
-          //     }
-          // }
+          
 
         }).catch(err=>{
           console.log(err)

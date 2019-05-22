@@ -1,29 +1,34 @@
-<view>
-  <view>
-    <view>
+<view class='container' id="ad-container">
+  <view id="ad-swrap">
+    <view id="ad-navigation">
 
       <!-- 用户title -->
-      <view>
+      <view id="ad-avatar">
         <!-- 头像 -->
-        <!-- 名字 -->
+        <image src="{{avatarurl}}"></image>
       </view>
-      <view>
-        <!-- 关注 -->
+      <view id="ad-info">
+        <view >
+          {{userDetail.name}}
+        </view>
+        <view >
+          {{userDetail.resume}}
+        </view>
+        
       </view>
     </view>
 
-    <view>
+    <view id="ad-content">
         
-      <!-- 内容content -->
-      <textarea>
-
-      </textarea>
-
+      <view id="conetent-article">
+        {{cardDetail.content}}
+      </view>
       <!-- 照片 -->
-      <view>
-        <image></image>
-        <image></image>
-        <image></image>
+      <view id="content-images">
+        <view calss="content-image" wx:for="{{imageurls}}" wx:for-item="item" wx:key="index">
+          <image class="ct-image" src="{{item}}"></image>
+        </view>
+        
       </view>
 
       <!-- 分析结果 -->
@@ -39,11 +44,26 @@
   
 </view>
 
-<template name="sd-footer">
-  <view>
-    <!-- 点赞 -->
-    <!-- 分享 -->
-    <!-- 收藏 -->
-    <!-- 评论 -->
+
+
+<template name='sd-footer'>
+  <view class="sd-footer">
+    <view class="sd-footer-swrap">
+      <view class="sd-footer-left">
+        <image src="../../../assets/icons/like.png">
+        </image>
+        <text>
+          1990
+        </text>
+      </view>
+      <view class="sd-footer-right">
+        <image src="../../../assets/images/评论.png">
+        </image>
+        <text>
+          评论
+        </text>
+      </view>
+    </view>
   </view>
+
 </template>

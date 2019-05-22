@@ -1,5 +1,6 @@
 // pages/picture/picture.js
 import regeneratorRuntime from '../../regenerator-runtime/runtime.js';
+
 const app = getApp();
 Page({
 
@@ -10,6 +11,20 @@ Page({
     src: '',
     imageBase64: '',
     device: 'back',
+  },
+   
+  // 打开相册
+  openAlbum() {
+    let that = this
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片     
+        that.setData({ src: res.tempFilePaths})
+      }
+    })
   },
 
   // 打开相册
@@ -37,6 +52,7 @@ Page({
    * 拍照
    */
   takePhoto() {
+    console.log("===> takePhoto")
     let that = this,
       url = '';
     const ctx = wx.createCameraContext()
@@ -49,10 +65,15 @@ Page({
             src: url,
             imageBase64: res
           })
+          console.log("开始跳转")
+          wx.navigateTo({
+            url: '../analyze/analyze?bs64='+res
+          })
+          // wx.redirectTo({
+          //   url: 'pages/analyze/analyze?bs64='+res
+          // })
         })
-        wx.redirectTo({
-          url: '../analyse/analyse',
-        })
+       
       },
       error: (err) => {
         console.error(err)

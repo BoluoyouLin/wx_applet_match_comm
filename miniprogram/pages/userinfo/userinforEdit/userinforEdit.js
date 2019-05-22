@@ -48,7 +48,15 @@ Page({
           label: res.data[0].label,
         })
       })
-
+  },
+  
+  // 改变背景图片
+  async changeBackgroundImage() {
+    let that = this
+    let path = await that.choosePictrue()
+    that.setData({
+      backgroundImage: path
+    })
   },
 
   //  选择图片来源
@@ -105,7 +113,6 @@ Page({
       url: '../changeResume/changeResume',
     })
   },
-
   // 打开修改标签界面
   goChangeLabel() {
     wx.navigateTo({
