@@ -12,7 +12,7 @@
 
       <view class="ar-cell" id="ar-content"> 
         <view  class="ar-cell-bd">
-          <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+          <textarea id="az-textarea" class="weui-textarea" placeholder="请输入文本" rows="3" bindinput="contentInput"></textarea>
         </view>
       </view>
 
@@ -31,7 +31,7 @@
                   <view class="weui-uploader__files">
                   <!-- 分析的图片只能有一张  -->
                   <!-- 对应唯一结果 -->
-                    <block wx:for="{{imageList}}" wx:for-item="image" wx:for-index="index">
+                    <block wx:for="{{imageList}}" wx:for-item="image" wx:for-index="index" wx:key="index">
 
                       <view wx:if="{{index==0&&flag_analyzed==1}}">
                         <view class="weui-uploader__file_a"  bindlongpress="deleteImage" data-index="{{index}}">
@@ -67,17 +67,23 @@
           </view>
         </view>
 
-        <!-- 测试 显示 tokens-->
-        <view class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
-          <text>{{tokenResult}}</text>
-        </view>
-
-
-        <view class="weui-uploader__hd">
+        <view class="weui-uploader__hd"  bindtap="isDisplay">
           <view class="weui-uploader__title" style="font-size: 30rpx;color:#BABBBB">(此部分不会在发布中)点击查看或隐藏完整结果</view>
+          <image src="../../../assets/images/日志更多.png" id="weui-uploader_pl"/>
         </view>
 
         
+        <!-- isShowTotalResult 为true 显示 tokens-->
+        <view  class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
+    
+          <textarea wx:if="{{isShowTotalResult&&tokenResult!=null}}">{{tokenResult}}</textarea>
+          <textarea wx:if="{{isShowTotalResult&&tokenResult==null}}">还没选择图片哟</textarea>
+          <textarea wx:else></textarea>
+        </view>
+
+
+        
+
         <!-- 测试 显示 tokens-->
 
 
@@ -120,12 +126,15 @@
 </view>
 
 <template name='ar-footer'>
+
+
+
   <view class="ar-footer">
     <view class="ar-footer-swrap">
-      <view class="ar-footer-left">
+      <view class="ar-footer-left" hover-class="ar-footer-left-cancel" bindtap="cancelSharing">
         取消分享
       </view>
-      <view class="ar-footer-right">
+      <view class="ar-footer-right" hover-class="ar-footer-left-sure" bindtap="suerSharing">
         分享至广场
       </view>
     </view>

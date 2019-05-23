@@ -51,7 +51,7 @@
    /* padding-left: 20rpx;
   padding-right: 20rpx; */
   padding:10rpx 25rpx 10rpx 25rpx;
-  height: 50rpx;
+  height: 100rpx;
   font-size: 32rpx;
 }
 
@@ -287,6 +287,28 @@
   color: rgba(255, 255, 255, 1);
 	background-color: rgba(0, 186, 173, 1);
   padding-top:30rpx;
+
+}
+
+.ar-footer-left-cancel{
+  background-color: rgb(230, 227, 227)
+}
+
+.ar-footer-left-sure{
+  background-color: rgb(1, 167, 155)
+}
+
+#weui-uploader_pl{
+  width: 24rpx;
+  height: 24rpx;
+}
+.weui-cells{
+  position:static
+}
+
+.weui-cell{
+ 
+  padding:40px 0px;
 
 }
 

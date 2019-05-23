@@ -2,6 +2,10 @@
 const sourceType = [['camera'], ['album'], ['camera', 'album']]
 const sizeType = [['compressed'], ['original'], ['compressed', 'original']]
 let flag_analyzed = 0;
+let contentBox=null;
+wx.cloud.init()
+const db = wx.cloud.database()
+const app=getApp()
 
 Page({
 
@@ -19,7 +23,10 @@ Page({
     sizeType: ['压缩', '原图', '压缩或原图'],
     countIndex: 8,
     count: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    flag_analyzed:0
+    flag_analyzed:0,
+    isShowTotalResult:false,
+    tokenResult:null,
+    content:null
   },
 
   sourceTypeChange(e) {
@@ -162,7 +169,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      flag_analyzed:0
+      flag_analyzed:0,
+      isShowTotalResult:false
     })
 
     //不知道怎么直接调用 chooseImage(), 先复制 chooseImage()的代码了
@@ -220,7 +228,8 @@ Page({
 
           // flag_analyzed=0;//并把之前的数据删掉
           that.setData({
-            flag_analyzed:0
+            flag_analyzed:0,
+            tokenResult:null
           })
           imageList.splice(index, 1);
 
@@ -241,7 +250,150 @@ Page({
       
      }
     })
-   },
+  },
+
+  contentInput:function(e){
+    console.log(e)
+    this.setData({
+      content:e.detail.value
+    })
+  },
+
+  //全部结果展示
+  isDisplay:function(){
+    let that=this
+    if(that.data.isShowTotalResult){
+      that.setData({
+        isShowTotalResult:false
+      })
+    }else{
+      that.setData({
+        isShowTotalResult:true
+      })
+    }
+  },
+
+  cancelSharing: function () {
+    let that=this
+    wx.showModal({
+        title: '取消或者保存分享',
+        content: '保存到未分享可在个人信息页查看',
+        confirmText: "保存分享",
+        cancelText: "取消分享",
+        success: function (res) {
+            console.log(res);
+            if (res.confirm) {
+                console.log('保存到未分享')
+                that.saveSharing(0)
+            }else{
+                console.log('取消分享')
+                //返回主页
+            }
+        }
+    });
+  },
+
+  suerSharing:function(){
+    console.log("--->sureSharing")
+    this.saveSharing(1)
+  },  
+  
+  saveSharing:function(flag){
+    let data=this.data
+    
+    //什么都没有写
+    if(data.imageList.length==0&&data.tokenResult==null){
+      wx.showModal({
+        content: '没有内容哟',
+        showCancel: false,
+        success: function (res) {
+            if (res.confirm) {
+                console.log('用户点击确定')
+            }
+        }
+      });
+    }
+
+    let card={
+      creat_at:new Date(),
+      images:data.imageList,
+      is_sharing:flag,
+      like:[],
+      openid:null,
+      publish_at:null,
+      user_image:null,
+      user_name:null,
+      content:data.content
+    }
+
+
+
+    if(app.globalData.userDetail!=null){
+  
+      console.log("1")
+      card.openid=app.globalData.userDetail.user_id
+      card.user_image=app.globalData.userDetail.avatar
+      card.user_name=app.globalData.userDetail.name
+      this.savedb(card)
+
+     
+    }
+    else if(app.globalData.weId!=null){
+      console.log("2")
+
+      //获取用户信息
+      db.collection("user").where({
+        user_id:app.globalData.weId.openid
+      }).get().then(res=>{
+        card.openid=res.data.user_id
+        card.user_image=res.data.avatar
+        card.user_name=res.data.name
+        this.savedb(card)
+      })
+      
+
+    }else{
+      console.log("3")
+      //请求openid
+      //请求用户信息
+
+      wx.cloud.callFunction({
+        name: 'login'
+      }).then(res => {
+        let weId = res.result
+
+        db.collection("user").where({
+          user_id:weId.openid
+        }).get().then(res=>{
+
+          card.openid=res.data.user_id
+          card.user_image=res.data.avatar
+          card.user_name=res.data.name
+          this.savedb(card)
+        })
+      })
+      
+    }
+ 
+  },
+
+  savedb:function(card){
+    console.log("--->save",card)
+    db.collection("card").add({
+      data:card
+    }).then(res=>{
+      console.log("成功", res)
+      wx.showToast({
+        title: '分享成功',
+        icon: 'success',
+        duration: 3000
+      });
+
+    }).catch(err=>{
+      console.log(err)
+      
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
