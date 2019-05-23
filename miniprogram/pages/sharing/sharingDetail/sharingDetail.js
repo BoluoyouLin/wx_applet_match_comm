@@ -132,8 +132,8 @@ Page({
       likeList: card.like,
       is_shared: card.is_shared,
       image: card.images[0] === undefined ? '../../assets/images/demo1.JPG' : card.images[0],
-      userName: card.userName,
-      userImage: card.userImage === undefined ? '../../assets/icons/bottom.png' : card.userImage,
+      user_name: card.user_name,
+      user_image: card.user_image === undefined ? '../../assets/icons/bottom.png' : card.user_image,
       is_like: card.like.indexOf(openId) === -1 ? 0 : 1,
       create_at: card.create_at.toLocaleDateString(),
       publish_at: card.publish_at.toLocaleDateString()

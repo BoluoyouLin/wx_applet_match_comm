@@ -31,8 +31,8 @@
       <!-- 用户信息 -->
       <view class='content-bottom'>
         <view class='content-user-info'>
-          <image src='{{item.userImage}}'></image>
-          <text>{{item.userName}}</text>
+          <image src='{{item.user_image}}'></image>
+          <text>{{item.user_name}}</text>
         </view>
         <view class='content-info'>
           <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/like.png' wx:if="{{item.is_like === 0}}"></image>

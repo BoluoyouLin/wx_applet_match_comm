@@ -288,6 +288,18 @@ Page({
             }else{
                 console.log('取消分享')
                 //返回主页
+                wx.redirectTo({
+                  url: '../../square/square',
+                  success: function(res){
+                    // success
+                  },
+                  fail: function() {
+                    // fail
+                  },
+                  complete: function() {
+                    // complete
+                  }
+                })
             }
         }
     });
@@ -314,17 +326,35 @@ Page({
       });
     }
 
-    let card={
-      creat_at:new Date(),
-      images:data.imageList,
-      is_sharing:flag,
-      like:[],
-      openid:null,
-      publish_at:null,
-      user_image:null,
-      user_name:null,
-      content:data.content
+    let card=null;
+
+    if(flag==1){
+      card={
+        create_at:new Date(),
+        images:this.uploadImages(data.imageList),
+        is_shared:flag,
+        like:[],
+        openid:null,
+        publish_at:new Date(),
+        user_image:null,
+        user_name:null,
+        content:data.content
+      }
+    }else{
+      card={
+        create_at:new Date(),
+        images:this.uploadImages(data.imageList),
+        is_shared:flag,
+        like:[],
+        openid:null,
+        publish_at:null,
+        user_image:null,
+        user_name:null,
+        content:data.content
+      }
     }
+
+    
 
 
 
@@ -348,6 +378,7 @@ Page({
         card.openid=res.data.user_id
         card.user_image=res.data.avatar
         card.user_name=res.data.name
+        
         this.savedb(card)
       })
       
@@ -384,15 +415,49 @@ Page({
     }).then(res=>{
       console.log("成功", res)
       wx.showToast({
-        title: '分享成功',
+        title: '操作成功',
         icon: 'success',
         duration: 3000
       });
+
+      //返回首页
+      wx.redirectTo({
+        url: '../../square/square',
+        success: function(res){
+          // success
+        },
+        fail: function() {
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
 
     }).catch(err=>{
       console.log(err)
       
     })
+  },
+
+  uploadImages:function(tempImages){
+    console.log("--->uploadImages")
+    let len=tempImages.length
+    Promise.all(tempImages.map((item) => {
+      return wx.cloud.uploadFile({
+          cloudPath: 'cardImages/' +app.globalData.userDetail.name+"_"+ app.globalData.userDetail.user_id+"/" + item.match(/\.[^.]+?$/)[0], // 文件名称 
+          filePath: item, 
+      })
+    })).then((resCloud)=>{
+      
+      // t 是page this filse是提交数据，showfiles是回显的路径，
+      // 要是自己服务器的话不用，云开发 图片加载的太慢了 用temp临时文件 回显
+      return resCloud.map((item) => {
+        return item.fileID
+      })
+    })
+
+
   },
 
   /**

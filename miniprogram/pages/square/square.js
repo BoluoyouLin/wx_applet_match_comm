@@ -146,8 +146,8 @@ Page({
         likeList: cardList[i].like,
         is_shared: cardList[i].is_shared,
         image: cardList[i].images[0] === undefined ? '../../assets/images/demo1.JPG' : cardList[i].images[0],
-        userName: cardList[i].userName,
-        userImage: cardList[i].userImage === undefined ? '../../assets/icons/bottom.png' : cardList[i].userImage,
+        user_name: cardList[i].user_name,
+        user_image: cardList[i].user_image === undefined ? '../../assets/icons/bottom.png' : cardList[i].user_image,
         is_like: cardList[i].like.indexOf(openId) === -1 ? 0 : 1,
         create_at: JSON.stringify(cardList[i].create_at),
         publish_at: JSON.stringify(cardList[i].publish_at)
@@ -294,8 +294,8 @@ Page({
   //         like: [],
   //         is_shared: 1,
   //         images: [],
-  //         userName: '"菠萝油"',
-  //         userImage: "#",
+  //         user_name: '"菠萝油"',
+  //         user_image: "#",
   //         create_at: new Date(),
   //         publish_at: new Date()
   //       }

@@ -358,4 +358,7 @@ Page({
     })
   },
 
+  onShow:function(){
+    //重新拉取数据
+  }
 })
