@@ -1,4 +1,6 @@
 /* pages/userinfo/changeNickname/changeNickname.wxss */
+@import '../../../styles/weui.wxss';
+
 .change-all{
   width: 100%;
   height: 100%;

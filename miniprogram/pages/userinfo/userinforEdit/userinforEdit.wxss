@@ -1,25 +1,27 @@
 /* pages/userinfo/userinforEdit/userinforEdit.wxss */
-page{
-  height: 100%
+@import '../../../styles/weui.wxss';
+
+page {
+  height: 100%;
 }
 
-.edit-all{
+.edit-all {
   width: 100%;
   height: 100%;
   background-color: gainsboro;
 }
 
-.edit-item image{
+.edit-item image {
   width: 40rpx;
   height: 40rpx;
   vertical-align: middle;
 }
 
-.label{
+.label {
   flex: 2;
 }
 
-.edit-item{
+.edit-item {
   display: flex;
   align-items: center;
   border-bottom: 1px solid whitesmoke;
@@ -27,11 +29,11 @@ page{
   width: 99%;
   height: 80rpx;
   font-size: 35rpx;
-  padding-right:1%;
+  padding-right: 1%;
   line-height: 80rpx;
 }
 
-.edit-item::before{
+.edit-item::before {
   display: inline-block;
   content: '';
   background-color: #00baad;
@@ -40,9 +42,27 @@ page{
   margin-right: 20rpx;
 }
 
-.content{
-  flex:6;
-  font-size:30rpx;
-  color:  darkgray;
+.content {
+  flex: 6;
+  font-size: 30rpx;
+  color: darkgray;
   overflow: hidden;
 }
+
+.avatar {
+  width: 100%;
+  height: 180rpx;
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+ .avatar image {
+  display: inline-block;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-color: white;
+}
+
+
