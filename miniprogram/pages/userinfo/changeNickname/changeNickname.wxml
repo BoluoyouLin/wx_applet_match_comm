@@ -2,5 +2,5 @@
   <view class='input-view'>
     <input type='text' value='{{nickName}}' placeholder='请输入新昵称' bindinput='getUserInput'></input>
   </view>
-  <button type='primary' bindtap='changeNickName'>确认</button>
+  <button class="weui-btn" type='primary' bindtap='changeNickName'>确认</button>
 </view>

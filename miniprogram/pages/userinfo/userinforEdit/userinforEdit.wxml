@@ -1,25 +1,24 @@
 <view class='edit-all'>
-  <view class='edit-item' bindtap='changeBackgroundImage'>
-    <text class='label'>背景墙</text>
-    <image src='../../../assets/icons/right.png'></image>
+  <view class='avatar' bindtap='changeAvatar'>
+    <image src='../../../assets/icons/bottom.png'></image>
   </view>
-  <view class='edit-item' bindtap='changeAvatar'>
-    <text class='label'>头像</text>
-    <image src='../../../assets/icons/right.png'></image>
+  <view class="weui-cells weui-cells_after-title">
+    <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='changeBackgroundImage'>
+      <view class="weui-cell__bd">背景墙</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </view>
+    <navigator url="../changeNickname/changeNickname" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">昵称</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">{{nickName}}</view>
+    </navigator>
+    <navigator url="../changeResume/changeResume" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">个人简介</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">{{resume}}</view>
+    </navigator>
+    <navigator url="../changeResume/changeResume" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell__bd">标签</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">{{label}}</view>
+    </navigator>
   </view>
-  <view class='edit-item' bindtap='goChangeNickname'>
-    <text class='label'>昵称</text>
-    <text class='content'>{{nickName}}</text>
-    <image src='../../../assets/icons/right.png'></image>
-  </view>
-  <view class='edit-item' bindtap='goChangeResume'>
-    <text class='label'>个人简介</text>
-    <text class='content'>{{resume}}</text>
-    <image src='../../../assets/icons/right.png'></image>
-  </view>
-  <view class='edit-item' bindtap='goChangeLabel'>
-    <text class='label'>标签</text>
-    <text class='content'>{{label}}</text>
-    <image src='../../../assets/icons/right.png'></image>
-  </view>
+
 </view>

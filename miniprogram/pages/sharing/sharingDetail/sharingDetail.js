@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatarurl:"../../../assets/images/background.png",
+    avatarurl:"../../../assets/img/book2.jpg",
     imageurls:[
       "../../../assets/img/book2.jpg",
       "../../../assets/img/book5.jpg",
@@ -39,15 +39,13 @@ Page({
 
       //设置用户信息
       if(app.globalData.userDetail!=null){
-        console.log(res)
-        console.log("1")
         console.log(app.globalData.userDetail)
         //直接赋值
         that.setData({
           userDetail:app.globalData.userDetail,
           cardDetail:cardDetail,
           cardId:options.id,
-          avatarurl:app.globalData.userDetail.avatar,
+          avatarurl: app.globalData.userDetail.avatar === undefined ? 'userDetail.userName' : userDetail.userName,
           imageurls:cardDetail.images
         })
         wx.hideLoading()

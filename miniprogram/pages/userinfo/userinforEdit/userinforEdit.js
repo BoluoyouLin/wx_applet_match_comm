@@ -46,18 +46,11 @@ Page({
           nickName: res.data[0].name,
           resume: res.data[0].resume,
           label: res.data[0].label,
+          avatar: res.data[0].avatar
         })
       })
   },
   
-  // 改变背景图片
-  async changeBackgroundImage() {
-    let that = this
-    let path = await that.choosePictrue()
-    that.setData({
-      backgroundImage: path
-    })
-  },
 
   //  选择图片来源
   choosePictrue(options) {
@@ -99,27 +92,6 @@ Page({
       })
     })
   },
-
-  // 打开修改昵称界面
-  goChangeNickname() {
-    wx.navigateTo({
-      url: '../changeNickname/changeNickname',
-    })
-  },
-
-  // 打开修改个人简介界面 
-  goChangeResume() {
-    wx.navigateTo({
-      url: '../changeResume/changeResume',
-    })
-  },
-  // 打开修改标签界面
-  goChangeLabel() {
-    wx.navigateTo({
-      url: '../changeLabel/changeLabel',
-    })
-  },
-
 
   /**
    * 生命周期函数--监听页面加载

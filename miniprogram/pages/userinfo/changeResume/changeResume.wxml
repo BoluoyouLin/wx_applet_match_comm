@@ -2,5 +2,5 @@
   <view class='input-view'>
     <textarea type='text' value='{{resume}}' placeholder='请输入个人简介' bindinput='getUserInput'></textarea>
   </view>
-  <button type='primary' bindtap='changeResume'>确认</button>
+  <button class="weui-btn" type="primary" bindtap='changeResume'>确认</button>
 </view>
