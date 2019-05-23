@@ -1,6 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-const rp = require('request-promise') 
+const rp = require('request-promise')
 // npm install request-promise --production
 // npm install wx-server-sdk --production
 // 上传并部署：所有文件
@@ -30,12 +30,12 @@ exports.main = async (event, context) => {
   ).then(
     (rawdata) => {
       var length = rawdata.words_result_num;
-      var text = ""; 
+      var text = "";
       for (var i = 0; i < length; i++) {
         text += rawdata.words_result[i].words;
       }
       // 将所有识别出的 words 合并成一个 text, 然后将 text 分割为 tokens.
-      tokens = text.split(/[\s,.·、丶:：∶;；]+|(?:\(.*\))/);  // 正则
+      tokens = text.split(/[\s,.。·、丶:：∶;；]+|(?:\(.*\))/);  // 正则
       //console.log(tokens);
     })
     .catch(
