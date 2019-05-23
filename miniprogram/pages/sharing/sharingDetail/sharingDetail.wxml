@@ -70,7 +70,29 @@
 <view class='page'>
   <view class="page__hd">
     <image src='{{avatarurl}}'></image>
-    <view class="page__title">{{userDetail.name}}</view>
-    <view class="page__desc">{{userDetail.resume}}</view>
+    <view>
+      <view class="page__title">{{userDetail.name}}</view>
+      <view class="page__desc">{{userDetail.resume}}</view>
+    </view>
+  </view>
+  <view class='page__bd'>
+    <view class='swiper-wrap'>
+      <swiper indicator-dots="{{true}}" circular>
+        <swiper-item wx:for="{{imageurls}}" wx:key="{{index}}">
+          <image mode="widthFix" src='{{item}}'></image>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class='weui-article bottom_line'>
+      <view class="weui-article__p">{{cardDetail.content}}</view>
+    </view>
+    <view class='weui-article bottom_line'>
+      <view class='content-info'>
+        <image bindtap='clickLike' data-index='{{index}}' src='../../../assets/icons/like.png' wx:if="{{cardDetail.is_like === 0}}"></image>
+        <image bindtap='clickLike' data-index='{{index}}' src='../../../assets/icons/likeAfter.png' wx:else></image>
+        <text>{{cardDetail.like}}</text>
+        <view class='publish_at'>更新于{{cardDetail.publish_at}}</view>
+      </view>
+    </view>
   </view>
 </view>
