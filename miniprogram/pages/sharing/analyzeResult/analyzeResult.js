@@ -136,7 +136,7 @@ Page({
                 // show (tokens)
                 console.log(tokens.result);
                 this.setData({
-                  text: JSON.stringify(tokens.result) //方便真机调试，显示在界面上
+                  tokenResult: JSON.stringify(tokens.result) //方便真机调试，显示在界面上
                 })
             })
           }

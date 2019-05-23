@@ -69,8 +69,15 @@
 
         <!-- 测试 显示 tokens-->
         <view class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
-          <text>{{text}}</text>
+          <text>{{tokenResult}}</text>
         </view>
+
+
+        <view class="weui-uploader__hd">
+          <view class="weui-uploader__title" style="font-size: 30rpx;color:#BABBBB">(此部分不会在发布中)点击查看或隐藏完整结果</view>
+        </view>
+
+        
         <!-- 测试 显示 tokens-->
 
 
