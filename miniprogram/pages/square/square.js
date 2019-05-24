@@ -10,7 +10,11 @@ Page({
    */
   data: {
     tabbar: {},
-    cards: []
+    cards: [],
+    maxHeightRpx: 450,
+    maxHeightPx: 240,
+    minHeightRpx: 250,
+    minHeightPx: 180,
   },
 
   /**
@@ -20,9 +24,9 @@ Page({
     console.log(app.globalData)
     app.editTabbar();
     wx.showLoading({
-      title:"疯狂加载中"
+      title: "疯狂加载中"
     })
-    
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -130,32 +134,56 @@ Page({
     // 获取卡片数据
     cardList = await this.getCardData()
 
-    return this.packSquareData(cardList,openId);
+    return this.packSquareData(cardList, openId);
   },
 
   // 包装广场显示数据
-  packSquareData(cardList,openId) {
+  packSquareData(cardList, openId) {
     let result = [],
       temp = {}
     for (let i = 0; i < cardList.length; i++) {
       temp = {
         id: cardList[i]._id,
-        user_id: cardList[i].user_id,
+        user_id: cardList[i]._openid,
         content: cardList[i].content,
         like: cardList[i].like.length,
         likeList: cardList[i].like,
         is_shared: cardList[i].is_shared,
-        image: cardList[i].images[0] === undefined ? '../../assets/images/demo1.JPG' : cardList[i].images[0],
+        image: cardList[i].images[0] === undefined ? '../../assets/images/demo2.JPG' : cardList[i].images[0],
         user_name: cardList[i].user_name,
         user_image: cardList[i].user_image === undefined ? '../../assets/icons/bottom.png' : cardList[i].user_image,
         is_like: cardList[i].like.indexOf(openId) === -1 ? 0 : 1,
         create_at: JSON.stringify(cardList[i].create_at),
-        publish_at: JSON.stringify(cardList[i].publish_at)
+        publish_at: JSON.stringify(cardList[i].publish_at),
+        mode: 'widthFix',
+        height: ''
       }
       result.push(temp)
     }
     wx.hideLoading()
     return result;
+  },
+
+  // 获取图片高度
+  imageHeight(e) {
+    let that = this,
+      cardList = that.data.cards,
+      index = e.currentTarget.dataset.index,
+      height = e.detail.height / 8; //获取图片真实高度
+    console.log(height, index)
+    if (height > that.data.maxHeightPx) {
+      cardList[index].mode = 'aspectFill'
+      cardList[index].height = that.data.maxHeightRpx
+      that.setData({
+        cards: cardList
+      })
+    } else if (height < that.data.minHeightPx){
+      cardList[index].mode = 'aspectFill'
+      cardList[index].height = that.data.minHeightRpx
+      that.setData({
+        cards: cardList
+      })
+    }
   },
 
   // 获取card数据
@@ -183,7 +211,7 @@ Page({
           publish_at: comm.lt(new Date(JSON.parse(date)))
         }).orderBy('publish_at', 'desc').get()
         .then(res => {
-          
+
           resolve(res.data)
         })
         .catch(err => {
@@ -204,7 +232,7 @@ Page({
       tempCards = [],
       openId = await that.getOpenId()
     if (result.length > 0) {
-      tempCards = this.packSquareData(result,openId)
+      tempCards = this.packSquareData(result, openId)
       cardList.push.apply(cardList, tempCards)
       that.setData({
         cards: cardList
@@ -216,7 +244,7 @@ Page({
       wx.showToast({
         title: '居然没了',
         duration: 3000,
-        image:'../../assets/icons/bottom.png'
+        image: '../../assets/icons/bottom.png'
       })
     }
   },
@@ -275,13 +303,13 @@ Page({
   },
 
   //跳转详情页
-  toDetail:function(event){
-    console.log("跳转",event)
+  toDetail: function(event) {
+    console.log("跳转", event)
     1 // 此处是A页面
     wx.navigateTo({
-      url: '../sharing/sharingDetail/sharingDetail?id='+event.currentTarget.dataset.id
+      url: '../sharing/sharingDetail/sharingDetail?id=' + event.currentTarget.dataset.id
     })
-    console.log("card-id",event.currentTarget.dataset.id)
+    console.log("card-id", event.currentTarget.dataset.id)
   },
 
   // setAAData() {
@@ -305,7 +333,7 @@ Page({
   //       console.log(err, 'error')
   //     })
   //   }
-    
+
   // }
 
 })
