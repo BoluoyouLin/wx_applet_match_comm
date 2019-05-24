@@ -35,8 +35,8 @@
           <text>{{item.user_name}}</text>
         </view>
         <view class='content-info'>
-          <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/like.png' wx:if="{{item.is_like === 0}}"></image>
-          <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/likeAfter.png' wx:else></image>
+          <image catchtap='clickLike' data-index='{{index}}' src='../../assets/icons/like.png' wx:if="{{item.is_like === 0}}"></image>
+          <image catchtap='clickLike' data-index='{{index}}' src='../../assets/icons/likeAfter.png' wx:else></image>
           <text>{{item.like}}</text>
         </view>
       </view>
