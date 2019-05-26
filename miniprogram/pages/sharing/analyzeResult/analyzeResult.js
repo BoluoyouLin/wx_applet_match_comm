@@ -1,4 +1,5 @@
-// pages/sharing/analyzeResult/analyzeResult.js
+import regeneratorRuntime from '../../../regenerator-runtime/runtime.js';
+
 const sourceType = [['camera'], ['album'], ['camera', 'album']]
 const sizeType = [['compressed'], ['original'], ['compressed', 'original']]
 let flag_analyzed = 0;
@@ -307,10 +308,13 @@ Page({
 
   suerSharing:function(){
     console.log("--->sureSharing")
+    wx.showLoading({
+      title:"正在分享中呢..."
+    })
     this.saveSharing(1)
   },  
   
-  saveSharing:function(flag){
+  async saveSharing(flag){
     let data=this.data
     
     //什么都没有写
@@ -327,28 +331,32 @@ Page({
     }
 
     let card=null;
+    let imagesBox=await this.uploadImages(data.imageList)
+    console.log("--->savaSharing",imagesBox)
 
     if(flag==1){
       card={
         create_at:new Date(),
-        images:this.uploadImages(data.imageList),
+        images:imagesBox,
         is_shared:flag,
         like:[],
         openid:null,
         publish_at:new Date(),
         user_image:null,
         user_name:null,
+        user_id:null,
         content:data.content
       }
     }else{
       card={
         create_at:new Date(),
-        images:this.uploadImages(data.imageList),
+        images:imagesBox,
         is_shared:flag,
         like:[],
         openid:null,
         publish_at:null,
         user_image:null,
+        user_id:null,
         user_name:null,
         content:data.content
       }
@@ -361,7 +369,7 @@ Page({
     if(app.globalData.userDetail!=null){
   
       console.log("1")
-      card.openid=app.globalData.userDetail.user_id
+      card.user_id=app.globalData.userDetail.user_id
       card.user_image=app.globalData.userDetail.avatar
       card.user_name=app.globalData.userDetail.name
       this.savedb(card)
@@ -375,7 +383,7 @@ Page({
       db.collection("user").where({
         user_id:app.globalData.weId.openid
       }).get().then(res=>{
-        card.openid=res.data.user_id
+        card.user_id=res.data.user_id
         card.user_image=res.data.avatar
         card.user_name=res.data.name
         
@@ -397,7 +405,7 @@ Page({
           user_id:weId.openid
         }).get().then(res=>{
 
-          card.openid=res.data.user_id
+          card.user_id=res.data.user_id
           card.user_image=res.data.avatar
           card.user_name=res.data.name
           this.savedb(card)
@@ -414,6 +422,7 @@ Page({
       data:card
     }).then(res=>{
       console.log("成功", res)
+      wx.hideLoading()
       wx.showToast({
         title: '操作成功',
         icon: 'success',
@@ -423,15 +432,7 @@ Page({
       //返回首页
       wx.redirectTo({
         url: '../../square/square',
-        success: function(res){
-          // success
-        },
-        fail: function() {
-          // fail
-        },
-        complete: function() {
-          // complete
-        }
+        
       })
 
     }).catch(err=>{
@@ -440,23 +441,49 @@ Page({
     })
   },
 
+  //需要同步
   uploadImages:function(tempImages){
-    console.log("--->uploadImages")
-    let len=tempImages.length
-    Promise.all(tempImages.map((item) => {
+    console.log("--->uploadImages",tempImages)
+
+    let boxurl=[]
+    let i=0
+    for(i;i<tempImages.length;i++){
+      boxurl.push('cardImages/' +app.globalData.userDetail.name+"_"+ app.globalData.userDetail.user_id+"/" + tempImages[i].match(/\.[^.]+?$/))
+    }
+
+    let prolist=tempImages.map((item) => {
+      console.log("----->")
+      let box1=item.split('/')
+      let box2=box1[box1.length-1]
+      let box3=box2.split('.')
+      let path="";
+      for(i=0;i<box3.length-1;i++){
+        path+=box3[i]
+      }
+      console.log(path)
       return wx.cloud.uploadFile({
-          cloudPath: 'cardImages/' +app.globalData.userDetail.name+"_"+ app.globalData.userDetail.user_id+"/" + item.match(/\.[^.]+?$/)[0], // 文件名称 
+          cloudPath: 'cardImages/' +app.globalData.userDetail.name+"_"+ app.globalData.userDetail.user_id+"/" + path +item.match(/\.[^.]+?$/), // 文件名称 
           filePath: item, 
       })
-    })).then((resCloud)=>{
+    })
+   
+    return new Promise((resolve, reject) => {
+      Promise.all(prolist).then((resCloud)=>{
+        
+        // t 是page this filse是提交数据，showfiles是回显的路径，
+        // 要是自己服务器的话不用，云开发 图片加载的太慢了 用temp临时文件 回显
+        let result= resCloud.map((item) => {
+          return item.fileID
+        })
+        console.log("res list",result)
+        resolve(result)
+        return result
       
-      // t 是page this filse是提交数据，showfiles是回显的路径，
-      // 要是自己服务器的话不用，云开发 图片加载的太慢了 用temp临时文件 回显
-      return resCloud.map((item) => {
-        return item.fileID
+      }).catch(err=>{   
+        console.error(err)
+        return []
       })
     })
-
 
   },
 

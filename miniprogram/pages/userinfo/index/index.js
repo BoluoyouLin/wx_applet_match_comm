@@ -359,6 +359,24 @@ Page({
   },
 
   onShow:function(){
+    let that=this
+    let opid=null
     //重新拉取数据
+    if(that.data.openid!=null){
+      opid=that.data.openid
+    }
+    else if(app.globalData.userDetail!=null){
+      opid=app.globalData.userDetail.user_id
+    }else if(app.globalData.weId!=null){
+      opid=app.globalData.weId.openid
+    }
+
+    else{
+      return
+    }
+
+    that.getCards(opid)
+    that.getUserDt(opid)
+
   }
 })

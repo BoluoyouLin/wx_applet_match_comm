@@ -76,9 +76,9 @@
         <!-- isShowTotalResult 为true 显示 tokens-->
         <view  class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
     
-          <textarea wx:if="{{isShowTotalResult&&tokenResult!=null}}">{{tokenResult}}</textarea>
-          <textarea wx:if="{{isShowTotalResult&&tokenResult==null}}">还没选择图片哟</textarea>
-          <textarea wx:else></textarea>
+          <text wx:if="{{isShowTotalResult&&tokenResult!=null}}">{{tokenResult}}</text>
+          <text wx:if="{{isShowTotalResult&&tokenResult==null}}">还没选择图片哟</text>
+          <text wx:else></text>
         </view>
 
 

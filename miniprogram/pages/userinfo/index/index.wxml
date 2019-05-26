@@ -36,9 +36,9 @@
             </view>
           </view>
           <view  id="bc-id">
-            <text>微光号：777777</text>
+            <!-- <text>微光号：777777</text> -->
           </view>
-        </view>
+        </view> 
 
         <!-- 未登录显示信息 -->
         <view wx:else>
@@ -154,12 +154,12 @@
 
 <template name="simplecard" >
   <view bindtap="toDetail" data-id="{{_id}}" class="simple-card">
-    <image>图片</image>
+    <image src="{{images[0]}}"></image>
     <view class="article-abstract">
       <view>{{content}}</view>
       <view class="ab-bar">
         <image src='../../../assets/icons/like.png' mode='widthFix'></image>
-        <text>1999</text>       
+        <text>{{like.length}}</text>       
       </view>
     </view>
   </view>

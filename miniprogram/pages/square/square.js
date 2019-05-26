@@ -178,6 +178,7 @@ Page({
         cards: cardList
       })
     } else if (height < that.data.minHeightPx){
+      console.log("--->cardList",cardList)
       cardList[index].mode = 'aspectFill'
       cardList[index].height = that.data.minHeightRpx
       that.setData({
@@ -306,6 +307,9 @@ Page({
   toDetail: function(event) {
     console.log("跳转", event)
     1 // 此处是A页面
+    wx.showLoading({
+      title:"在跳转拉..."
+    })
     wx.navigateTo({
       url: '../sharing/sharingDetail/sharingDetail?id=' + event.currentTarget.dataset.id
     })

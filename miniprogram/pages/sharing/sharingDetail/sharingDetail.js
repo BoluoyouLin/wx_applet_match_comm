@@ -8,12 +8,7 @@ Page({
    */
   data: {
     avatarurl: "../../../assets/img/book2.jpg",
-    imageurls: [
-      "../../../assets/img/book2.jpg",
-      "../../../assets/img/book5.jpg",
-      "../../../assets/img/book7.jpg",
-      "../../../assets/img/book8.jpg",
-    ],
+    imageurls: [],
     cardId: undefined, //卡片od
     userDetail: undefined, //用户信息
     cardDetail: undefined //
@@ -24,7 +19,7 @@ Page({
    */
   onLoad: function(options) {
     let that = this
-    console.log("进来了", options.id)
+    
     wx.showLoading({
       title: "疯狂加载中"
     })
@@ -34,26 +29,29 @@ Page({
       _id: options.id
     }).get().then(res => {
 
-      let cardDetail = this.packSquareData(res.data[0], app.globalData.userDetail.user_id)
+     
+      let cardDetail =null
 
-      console.log(cardDetail)
-
+      console.log("--->cardDetail",res.data[0])
+      
       //设置用户信息
       if (app.globalData.userDetail != null) {
-        console.log(app.globalData.userDetail)
+        cardDetail= this.packSquareData(res.data[0], app.globalData.userDetail.user_id)
+        console.log("--->cardDetail：res",cardDetail)
         //直接赋值
         that.setData({
           userDetail: app.globalData.userDetail,
           cardDetail: cardDetail,
           cardId: options.id,
-          // avatarurl: app.globalData.userDetail.avatar === undefined ? '../../../assets/img/book2.jpg' : app.globalData.userDetail.avatar,
-          // imageurls: cardDetail.images
+          avatarurl: cardDetail.user_image,
+          imageurls: cardDetail.images
         })
         wx.hideLoading()
       } else if (app.globalData.weId != null) {
         console.log("2")
         //获取用户信息
-
+        cardDetail= this.packSquareData(res.data[0], app.globalData.weId)
+        console.log("--->cardDetail：res",cardDetail)
         db.collection("user").where({
           user_id: app.globalData.weId.openid
         }).get().then(res => {
@@ -67,7 +65,7 @@ Page({
             userDetail: userDetail,
             cardDetail: cardDetail,
             cardId: options.id,
-            avatarurl: userDetail.avatar,
+            avatarurl: cardDetail.user_image,
             imageurls: cardDetail.images
           })
           wx.hideLoading()
@@ -84,10 +82,11 @@ Page({
         }).then(res => {
           let weId = res.result
 
-
+          cardDetail= this.packSquareData(res.data[0], weId.openid)
+          console.log("--->cardDetail：res",cardDetail)
           db.collection("user").where({
             user_id: weId.openid
-          }).get().then(res => {
+          }).get().then(res => {  
 
 
             let userDetail = res.data
@@ -99,7 +98,7 @@ Page({
               userDetail: userDetail,
               cardDetail: cardDetail,
               cardId: options.id,
-              avatarurl: userDetail.avatar,
+              avatarurl: cardDetail.user_image,
               imageurls: cardDetail.images
             })
             wx.hideLoading()
@@ -131,7 +130,7 @@ Page({
       like: card.like.length,
       likeList: card.like,
       is_shared: card.is_shared,
-      image: card.images[0] === undefined ? '../../assets/images/demo1.JPG' : card.images[0],
+      images: card.images,
       user_name: card.user_name,
       user_image: card.user_image === undefined ? '../../assets/icons/bottom.png' : card.user_image,
       is_like: card.like.indexOf(openId) === -1 ? 0 : 1,
