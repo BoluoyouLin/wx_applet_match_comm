@@ -1,6 +1,6 @@
 <view class='edit-all'>
   <view class='avatar' bindtap='changeAvatar'>
-    <image src='../../../assets/icons/bottom.png'></image>
+    <image src='{{avatar}}'></image>
   </view>
   <view class="weui-cells weui-cells_after-title">
     <view url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap='changeBackgroundImage'>

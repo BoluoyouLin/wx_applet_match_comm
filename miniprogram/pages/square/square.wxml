@@ -22,7 +22,7 @@
   <view class='view-item' url='#' data-id='{{item.id}}' bindtap="toDetail">
     <!-- 图片 -->
     <view class='view-image'>
-      <image src='{{item.image}}' mode='widthFix'></image>
+      <image src='{{item.image}}' lazy-load='{{true}}' mode='{{item.mode}}' data-index='{{index}}' style='height:{{item.height}}rpx' bindload='imageHeight'></image>
     </view>
     <!-- 内容 -->
     <view class='view-content'>
@@ -35,8 +35,8 @@
           <text>{{item.user_name}}</text>
         </view>
         <view class='content-info'>
-          <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/like.png' wx:if="{{item.is_like === 0}}"></image>
-          <image bindtap='clickLike' data-index='{{index}}' src='../../assets/icons/likeAfter.png' wx:else></image>
+          <image catchtap='clickLike' data-index='{{index}}' src='../../assets/icons/like.png' wx:if="{{item.is_like === 0}}"></image>
+          <image catchtap='clickLike' data-index='{{index}}' src='../../assets/icons/likeAfter.png' wx:else></image>
           <text>{{item.like}}</text>
         </view>
       </view>
