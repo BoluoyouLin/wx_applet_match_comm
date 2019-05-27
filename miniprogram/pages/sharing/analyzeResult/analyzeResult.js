@@ -196,7 +196,7 @@ Page({
              
           }else{
             result.push({
-              use:item.data[0].use,
+              use: item.data[0].use + ";"+item.data[0].comment,
               name:item.data[0].name
             })
           }
