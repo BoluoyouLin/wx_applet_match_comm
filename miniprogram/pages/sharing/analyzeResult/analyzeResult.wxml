@@ -5,7 +5,7 @@
       <!-- <view class="ar-cell" id="ar-title">
         <view  class="ar-cell-bd">
           <textarea placeholder='起个好听的名字'/>
-          
+
         </view>
       
       </view> -->
@@ -75,7 +75,9 @@
             <view id="ar-table-title">
               识别出{{analyzeResult.length}}种成分
             </view>
-
+            <view wx:if="{{(analyzeResult.length/tokenResult.length)<0.5}}">
+              <view class="weui-uploader__title" style="font-size: 30rpx;color:#BABBBB;text-align:center;">分析结果不佳？试试上传更清晰的图片哦~</view>
+            </view>
             <view class="ar-table-tr" style=" background-color: rgb(255, 255, 255)">
               <view class="ar-table-th">成分名称</view>
               <view class="ar-table-th">使用功效</view>

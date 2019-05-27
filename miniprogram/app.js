@@ -268,6 +268,13 @@ App({
       tabbar: tabbar
     });
   },
+  
+  //分析数据集录入
+  dataEetEntry:function(){
+    
+
+
+  },
 
   // 图片转base64
   imageToBase64: function(file) {
