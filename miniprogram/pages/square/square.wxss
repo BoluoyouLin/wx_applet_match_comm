@@ -106,4 +106,7 @@ page{
   color: #818181;
 }
 
+.view-card{
+  background-color: #f0f0f0
+}
 

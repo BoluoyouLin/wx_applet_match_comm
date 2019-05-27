@@ -1,10 +1,12 @@
 <view class='all'>
+  
   <!-- 浏览模块 -->
   <view class='view-block'>
     <view class='view-left'>
       <block wx:for='{{cards}}' wx:key=''>
         <template is='view-item' data='{{item,index:index}}' wx:if='{{index%2==0}}'></template>
       </block>
+      
     </view>
     <view class='view-right'>
       <block wx:for='{{cards}}' wx:key=''>
@@ -19,11 +21,13 @@
 
 <!-- 模版 -->
 <template name='view-item'>
-  <view class='view-item' url='#' data-id='{{item.id}}' bindtap="toDetail">
+  <view class='view-item' url='#' data-id='{{item.id}}' bindtap="toDetail" hover-class="view-card">
     <!-- 图片 -->
     <view class='view-image'>
+      
       <image src='{{item.image}}' lazy-load='{{true}}' mode='{{item.mode}}' data-index='{{index}}' ></image>
-      <!-- style='height:{{item.height}}rpx' bindload='imageHeight' -->
+      
+      
     </view>
     <!-- 内容 -->
     <view class='view-content'>

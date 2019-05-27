@@ -27,7 +27,8 @@ Page({
     flag_analyzed:0,
     isShowTotalResult:false,
     tokenResult:null,
-    content:null
+    content:null,
+    analyzeResult:null
   },
 
   sourceTypeChange(e) {
@@ -143,9 +144,12 @@ Page({
               (tokens) => {
                 // show (tokens)
                 console.log(tokens.result);
+                //转换为字符串
+                let resToken=JSON.stringify(tokens.result)
                 this.setData({
-                  tokenResult: JSON.stringify(tokens.result) //方便真机调试，显示在界面上
+                  tokenResult: resToken //方便真机调试，显示在界面上
                 })
+                that.resultAnalyze(tokens.result)
             })
           }
         })
@@ -156,14 +160,76 @@ Page({
     })
   },
 
+  resultAnalyze:function(tokenResout){
+    console.log("--->resultAnalyze",tokenResout)
+    let that =this
+    // tokenResout=["乳糖醇","麦芽糖醇","焦亚硫酸钾","D-山梨糖醇(液)","硝酸钾","十二烷基苯磺酸钙"]
+
+    // gather=tokenResout.forEach(function(item){  
+    //   return db.collection("card").where({
+    //     name:item
+    //   }).get()
+    // });
+    // db.collection("test")
+    // .where({
+    //   name:'chenjy3'
+    // })
+    // .get()
+   // 请求集
+    let reqGather=tokenResout.map((item)=>{
+      console.log(item)
+      //模糊查询
+      return db.collection("cfc").where({
+        //模糊查询
+        name: item
+      }).get()
+    })
+    return new Promise((resolve, reject) => {
+      Promise.all(reqGather).then((res)=>{
+          
+        console.log("--->analyze result",res)
+
+        let result=[]
+        res.map((item) => {
+          console.log("---iten",item)
+          if(item.data.length==0){
+             
+          }else{
+            result.push({
+              use:item.data[0].use,
+              name:item.data[0].name
+            })
+          }
+         
+          
+        })
+
+        console.log("--->analyze result",result)
+
+        that.setData({
+          analyzeResult:result
+        })
+
+        resolve(result)
+        return result
+      
+      }).catch(err=>{   
+        console.error(err)
+        return []
+      })
+    })
+  
+  },
+
   previewImage(e) {
+
     const current = e.target.dataset.src
     wx.previewImage({
       current,
       urls: this.data.imageList
     })
+
   },
-  
 
   /**
    * 生命周期函数--监听页面加载
@@ -230,7 +296,8 @@ Page({
           // flag_analyzed=0;//并把之前的数据删掉
           that.setData({
             flag_analyzed:0,
-            tokenResult:null
+            tokenResult:null,
+            analyzeResult:null
           })
           imageList.splice(index, 1);
 
@@ -345,7 +412,8 @@ Page({
         user_image:null,
         user_name:null,
         user_id:null,
-        content:data.content
+        content:data.content,
+        analyze_result:data.analyzeResult
       }
     }else{
       card={
@@ -358,7 +426,8 @@ Page({
         user_image:null,
         user_id:null,
         user_name:null,
-        content:data.content
+        content:data.content,
+        analyze_result:data.analyzeResult
       }
     }
 
@@ -471,7 +540,7 @@ Page({
       Promise.all(prolist).then((resCloud)=>{
         
         // t 是page this filse是提交数据，showfiles是回显的路径，
-        // 要是自己服务器的话不用，云开发 图片加载的太慢了 用temp临时文件 回显
+
         let result= resCloud.map((item) => {
           return item.fileID
         })

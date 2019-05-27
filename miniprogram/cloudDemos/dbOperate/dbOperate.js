@@ -67,6 +67,7 @@ Page({
   },
 
   deleteData:function(){
+    
     testDB.collection('test')
     .doc('988c1b1b5cd693050ffafe2c1c9b59cf')
     .remove()
@@ -76,6 +77,7 @@ Page({
     .catch(err=>{
       console.log(err)
     })
+
   },
 
   sum:function(){

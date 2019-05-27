@@ -14,13 +14,34 @@
     <!-- 照片 -->
     <view id="content-images">
       <view calss="content-image" wx:for="{{imageurls}}" wx:for-item="item" wx:key="index">
-        <image lazy-load='{{true}}'  class="ct-image" src="{{item}}"></image>
+        <image lazy-load='{{true}}'  class="ct-image" src="{{item}}" data-src="{{item}}" bindtap="previewImage"></image>
       </view>
       
     </view>
 
     <!-- 分析结果 -->
-    <view>
+    <view id="ar-table">
+
+      <view wx:if="{{analyzeResult}}">
+      
+      
+        <view id="ar-table-title">
+          识别出{{analyzeResult.length}}种成分
+        </view>
+
+        <view class="ar-table-tr" style=" background-color: rgb(255, 255, 255)">
+          <view class="ar-table-th">成分名称</view>
+          <view class="ar-table-th">使用功效</view>
+        </view>
+
+        <view class="ar-table-tr" style="background-color: rgb(244, 255, 251)" wx:for="{{analyzeResult}}" wx:key="index" wx:for-item="item">
+          <view class="ar-table-th">{{item.name}}</view>
+          <view class="ar-table-th">{{item.use}}</view>
+        </view>
+      </view>
+      <view wx:else>
+
+      </view>
       
     </view>
 

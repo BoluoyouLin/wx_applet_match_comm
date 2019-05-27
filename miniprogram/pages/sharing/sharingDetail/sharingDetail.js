@@ -11,7 +11,8 @@ Page({
     imageurls: [],
     cardId: undefined, //卡片od
     userDetail: undefined, //用户信息
-    cardDetail: undefined //
+    cardDetail: undefined, //
+    analyze_result:null//分析结果
   },
 
   /**
@@ -44,7 +45,8 @@ Page({
           cardDetail: cardDetail,
           cardId: options.id,
           avatarurl: cardDetail.user_image,
-          imageurls: cardDetail.images
+          imageurls: cardDetail.images,
+          analyzeResult:cardDetail.analyzeResult
         })
         wx.hideLoading()
       } else if (app.globalData.weId != null) {
@@ -66,7 +68,8 @@ Page({
             cardDetail: cardDetail,
             cardId: options.id,
             avatarurl: cardDetail.user_image,
-            imageurls: cardDetail.images
+            imageurls: cardDetail.images,
+            analyzeResult:cardDetail.analyzeResult
           })
           wx.hideLoading()
         }).catch(err => {
@@ -99,7 +102,8 @@ Page({
               cardDetail: cardDetail,
               cardId: options.id,
               avatarurl: cardDetail.user_image,
-              imageurls: cardDetail.images
+              imageurls: cardDetail.images,
+              analyzeResult:cardDetail.analyzeResult
             })
             wx.hideLoading()
 
@@ -135,7 +139,8 @@ Page({
       user_image: card.user_image === undefined ? '../../assets/icons/bottom.png' : card.user_image,
       is_like: card.like.indexOf(openId) === -1 ? 0 : 1,
       create_at: card.create_at.toLocaleDateString(),
-      publish_at: card.publish_at.toLocaleDateString()
+      publish_at: card.publish_at.toLocaleDateString(),
+      analyzeResult:card.analyze_result
     }
     return temp;
   },
@@ -175,6 +180,17 @@ Page({
       console.error('fail', err)
     })
   },
+
+  //图片预览
+  previewImage(e) {
+
+    const current = e.target.dataset.src
+    wx.previewImage({
+      current,
+      urls: this.data.imageurls
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

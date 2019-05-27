@@ -204,3 +204,41 @@ page{
   align-items: center
 }
 
+
+#ar-table{
+  margin-top: 60rpx;
+
+}
+
+#ar-table-title{
+ text-align: center;
+ font-size: 30rpx;
+ color: rgb(80, 80, 80);
+ margin-bottom: 20rpx;
+}
+
+.ar-table-tr{
+ display: flex;
+ flex-direction:row;
+ width:95%;
+ margin:auto auto;
+}
+
+.ar-table-tr  :nth-child(1){
+ width: 40%;
+ 
+}
+
+.ar-table-tr  :nth-child(2){
+ width: 60%;
+
+}
+
+
+.ar-table-th{
+ font-size: 26rpx;
+ padding: 20rpx 10rpx 20rpx 10rpx;
+ text-align: center;
+ border:1rpx solid rgb(238, 238, 238);
+ color: rgb(122, 150, 140)
+}
