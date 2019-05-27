@@ -5,7 +5,7 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  //需要传 content 和 tblRoot
+  //需要传 content（照片识别得到的内容） 和 tblRoot（云函数build_tree返回的结果）
   var tblCur,
     p_star = 0,
     n = event.content.length,

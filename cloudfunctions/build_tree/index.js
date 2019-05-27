@@ -5,6 +5,7 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async(event, context) => {
+  // 需要传入数据库中所有成分的名字Array类型 keywords[]
   var tblCur = {},
     key, str_key, Length, j, i;
   var tblRoot = tblCur;
