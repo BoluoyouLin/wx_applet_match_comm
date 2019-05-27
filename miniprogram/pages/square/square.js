@@ -10,11 +10,7 @@ Page({
    */
   data: {
     tabbar: {},
-    cards: [],
-    maxHeightRpx: 450,
-    maxHeightPx: 240,
-    minHeightRpx: 250,
-    minHeightPx: 180,
+    cards: []
   },
 
   /**
@@ -162,29 +158,6 @@ Page({
     }
     wx.hideLoading()
     return result;
-  },
-
-  // 获取图片高度
-  imageHeight(e) {
-    let that = this,
-      cardList = that.data.cards,
-      index = e.currentTarget.dataset.index,
-      height = e.detail.height / 8; //获取图片真实高度
-    console.log(height, index)
-    if (height > that.data.maxHeightPx) {
-      cardList[index].mode = 'aspectFill'
-      cardList[index].height = that.data.maxHeightRpx
-      that.setData({
-        cards: cardList
-      })
-    } else if (height < that.data.minHeightPx){
-      console.log("--->cardList",cardList)
-      cardList[index].mode = 'aspectFill'
-      cardList[index].height = that.data.minHeightRpx
-      that.setData({
-        cards: cardList
-      })
-    }
   },
 
   // 获取card数据

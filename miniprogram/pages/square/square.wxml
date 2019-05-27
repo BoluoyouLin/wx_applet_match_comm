@@ -25,7 +25,7 @@
     <!-- 图片 -->
     <view class='view-image'>
       
-      <image src='{{item.image}}' lazy-load='{{true}}' mode='{{item.mode}}' data-index='{{index}}' ></image>
+      <image src='{{item.image}}' lazy-load='{{true}}' mode='widthFix'></image>
       
       
     </view>
