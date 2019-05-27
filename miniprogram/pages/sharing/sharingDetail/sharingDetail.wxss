@@ -10,6 +10,7 @@ page {
 .page__hd {
   padding: 40rpx;
   display: flex;
+  align-items: center;
 }
 
 .page__hd image {

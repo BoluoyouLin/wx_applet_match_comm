@@ -2,8 +2,7 @@
   <view class="page__hd">
     <image src='{{avatarurl}}'></image>
     <view>
-      <view class="page__title">{{userDetail.name}}</view>
-      <view class="page__desc">{{userDetail.resume}}</view>
+      <view class="page__title">{{cardDetail.user_name}}</view>
     </view>
   </view>
   <view id="ad-content">

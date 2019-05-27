@@ -15,7 +15,7 @@
       <view class="weui-cell__bd">个人简介</view>
       <view class="weui-cell__ft weui-cell__ft_in-access">{{resume}}</view>
     </navigator>
-    <navigator url="../changeResume/changeResume" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+    <navigator url="../changeLabel/changeLabel" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__bd">标签</view>
       <view class="weui-cell__ft weui-cell__ft_in-access">{{label}}</view>
     </navigator>
