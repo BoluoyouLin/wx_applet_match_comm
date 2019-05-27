@@ -10,7 +10,8 @@
     "pages/picture/picture",
     "pages/analyze/analyze",
     "pages/index/index",
-    "pages/sharing/analyzeResult/analyzeResult"
+    "pages/sharing/analyzeResult/analyzeResult",
+    "pages/sharing/sharingDetail/sharingDetail"
   ],
   "window": {
     "backgroundColor": "#38373d",
