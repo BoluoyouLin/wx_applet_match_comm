@@ -2,5 +2,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "tabbar": "../../components/tabbarComponent/tabbar"
-  }
+  },
+  "navigationBarTitleText": "首页",
+  "navigationBarTextStyle": "white"
 }
