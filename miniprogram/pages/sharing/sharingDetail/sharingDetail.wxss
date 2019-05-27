@@ -226,7 +226,7 @@ page{
 
 .ar-table-tr  :nth-child(1){
  width: 40%;
- 
+
 }
 
 .ar-table-tr  :nth-child(2){
