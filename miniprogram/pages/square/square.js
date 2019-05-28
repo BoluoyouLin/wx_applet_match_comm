@@ -51,7 +51,9 @@ Page({
       })
     }
     // this.setAAData()
-    
+    // wx.cloud.callFunction({
+    //   name:'data_set_entry'
+    // })
   },
 
   /**
