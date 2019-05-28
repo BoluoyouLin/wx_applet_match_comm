@@ -99,7 +99,7 @@
         <view class="tag-title" bindtap='unfoldShard' hover-class="change-color">
             <view class="tag-name">已分享</view>
             <view class="tag-tag">
-              <image src='../../../assets/images/右.png'></image>
+              <image src='../../../assets/images/right.png'></image>
             </view>
         </view>
       </block>
@@ -108,7 +108,7 @@
         <view class="tag-title" bindtap='foldShard' hover-class="change-color">
             <view class="tag-name">已分享</view>
             <view class="tag-tag">
-              <image src='../../../assets/images/下.png'></image>
+              <image src='../../../assets/images/down.png'></image>
             </view>
           </view>
 
@@ -123,11 +123,14 @@
 
 
     <view>
+
+   
+
       <view wx:if="{{isUnshard}}">
         <view class="tag-title" bindtap='unfoldUnshard' hover-class='change-color'>
           <view class="tag-name">未分享</view>
           <view class="tag-tag">
-            <image src='../../../assets/images/右.png' mode="aspectFit"></image>
+            <image src='../../../assets/images/right.png' mode="aspectFit"></image>
           </view>
         </view>
       </view>
@@ -137,9 +140,10 @@
         <view class="tag-title" bindtap='foldUnshard'>
           <view class="tag-name">未分享</view>
           <view class="tag-tag">
-            <image src='../../../assets/images/下.png' mode="aspectFit"></image>
+            <image src='../../../assets/images/down.png' mode="aspectFit"></image>
           </view>
         </view>
+
         <view id="sharing-content" bindtap='foldUnshard'>
           <view class="sharing-article" wx:for="{{unshardCards}}" wx:for-item="item" wx:key="_id">
             <template is="simplecard" data="{{...item}}"></template>

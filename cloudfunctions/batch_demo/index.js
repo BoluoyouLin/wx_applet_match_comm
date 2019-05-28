@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 
-const db = wx.cloud.database()
+const db = cloud.database()
 
 // 云函数入口函数
 //对数据库的批量操作
